@@ -1,4 +1,5 @@
 from tkinter import *
+from mema_constants import *
 
 class button_frame(Frame):
 
@@ -30,7 +31,12 @@ class button_frame(Frame):
             callback: str
             button, callback = button_tuple
 
+            # Setup callback command
             button.configure(command = lambda callback_str = callback : self.callback(callback_str))
+
+            # Setup colour to maintain consistency
+            button.configure(bg = MEMA_BUTTON_COLOURS[row])
+
             button.grid(column = 0, row = row, sticky = NSEW)
             self.buttons[row] = button
 
