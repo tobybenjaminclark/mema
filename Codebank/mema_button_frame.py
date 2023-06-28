@@ -37,6 +37,7 @@ class button_frame(Frame):
             # Setup colour to maintain consistency
             button.configure(bg = MEMA_BUTTON_COLOURS[row])
 
+            # Grid button
             button.grid(column = 0, row = row, sticky = NSEW)
             self.buttons[row] = button
 

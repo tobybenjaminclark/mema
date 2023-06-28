@@ -5,6 +5,6 @@ class content_frame(Frame):
 
     def __init__(self, *args, **kwargs) -> None:
 
-        Frame.__init__(self, *args, **kwargs)
+        Frame.__init__(self, *args, **kwargs, bg = "light blue")
 
         
