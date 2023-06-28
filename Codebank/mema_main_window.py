@@ -19,12 +19,16 @@ class main_window(Tk):
         # Sets the window geometry to the mema3 physical screen
         self.geometry(MEMA_SCREEN_DIMENSIONS)
 
+        # Sets the window name
+        self.title("MeMa 3.1")
+
         # Configures the row and column weightings
         self.grid_rowconfigure(0, weight = 1)
         self.grid_columnconfigure(0, weight = 3)
         self.grid_columnconfigure(1, weight = 1)
 
 
+        # Setting up content & button frames
         self.content_frame: content_frame = content_frame(self)
         self.content_frame.grid(row=0, column=0, sticky=NSEW)
 

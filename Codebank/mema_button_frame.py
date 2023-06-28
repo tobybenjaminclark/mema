@@ -20,7 +20,7 @@ class button_frame(Frame):
 
         # Creating Buttons
         self.buttons: list[Button]
-        self.buttons = [Button(self, text = str(i), command = print("test")) for i in range(0, 4)]
+        self.buttons = [Button(self, text = str(i), command = lambda i=i: print(f"test %d", i)) for i in range(0, 4)]
 
     def grid_buttons(self) -> None:
 
