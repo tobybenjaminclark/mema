@@ -1,21 +1,25 @@
 from tkinter import *
 from mema_constants import *
+from mema_button_frame import *
 
-class main_window():
+class main_window(Tk):
 
-    def __init__(self) -> None:
+    def __init__(self, *args, **kwargs) -> None:
         
-        # Variables
-        self.master: Tk
+        # Call Superclass Constructor & setup
+        Tk.__init__(self, *args, **kwargs)
+        self.configure_tk_instance()
 
-        # Setup
-        self.initialize_tk_instance()
+        # Add in frame
+        x: button_frame = button_frame(self, bg = "green")
+        x.pack()
 
-        self.master.mainloop()
+        # Mainloop
+        self.mainloop()
     
-    def initialize_tk_instance(self) -> None:
+    def configure_tk_instance(self) -> None:
         
-        self.master = Tk()
-        self.master.geometry(MEMA_SCREEN_DIMENSIONS)
+        # Sets the window geometry to the mema3 physical screen
+        self.geometry(MEMA_SCREEN_DIMENSIONS)
 
 x = main_window()
