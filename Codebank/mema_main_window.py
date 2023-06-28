@@ -27,7 +27,6 @@ class main_window(Tk):
         self.grid_columnconfigure(0, weight = 3)
         self.grid_columnconfigure(1, weight = 1)
 
-
         # Setting up content & button frames
         self.content_frame: content_frame = content_frame(self)
         self.content_frame.grid(row=0, column=0, sticky=NSEW)
