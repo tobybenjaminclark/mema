@@ -11,8 +11,10 @@ class main_window(Tk):
         self.configure_tk_instance()
 
         # Add in frame
-        x: button_frame = button_frame(self, bg = "green")
-        x.pack()
+        self.grid_rowconfigure(0, weight = 1)
+        self.grid_columnconfigure(0, weight = 1)
+        x: button_frame = button_frame(self, height = 800, width = 300)
+        x.grid(row=0,column=0, sticky=NSEW)
 
         # Mainloop
         self.mainloop()
