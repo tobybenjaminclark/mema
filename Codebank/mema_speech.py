@@ -25,7 +25,7 @@ def speak_thread(text) -> None:
 
     return None
 
-def speak(text):
+def speak(text) -> None:
     
     # This has to be run asynchronously on it's own thread.
     Thread(target=speak_thread, args=(text,), daemon=True).start()
