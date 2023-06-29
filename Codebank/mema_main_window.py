@@ -14,7 +14,12 @@ class main_window(Tk):
 
         # Mainloop
         self.mainloop()
-    
+
+    def set_buttons(self, button_callback: list[(str, str)]) -> None:
+
+        # Proxys to self.button_frame.set_buttons()
+        self.button_frame.set_buttons(button_callback)
+
     def configure_tk_instance(self) -> None:
     
         # Sets the window geometry to the mema3 physical screen
@@ -29,10 +34,15 @@ class main_window(Tk):
         self.grid_columnconfigure(1, weight = MEMA_BUTTON_WIDTH)
 
         # Setting up content & button frames
+        # Note: Always setup the button frame first, as generally the content frame will communicate to
+        # set the currently displayed buttons.
+        self.button_frame: button_frame = button_frame(self)
+        self.button_frame.grid(row=0,column=1, sticky=NSEW)
+
         self.content_frame: content_frame = content_login(self)
         self.content_frame.grid(row=0, column=0, sticky=NSEW)
 
-        self.button_frame: button_frame = button_frame(self)
-        self.button_frame.grid(row=0,column=1, sticky=NSEW)
+    def callback(self, callback_str: str) -> None:
+        self.content_frame.callback(callback_str)
 
 x = main_window()

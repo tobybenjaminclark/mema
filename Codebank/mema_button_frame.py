@@ -19,28 +19,32 @@ class button_frame(Frame):
         
     def create_buttons(self) -> None:
 
-        # Creating Buttons
-        self.buttons = [(Button(self, text = str(i)), str(i)) for i in range(0, 4)]
-        self.set_buttons(self.buttons)
+        # Creating & Placing Buttons
+        self.buttons = [Button(self, text = str(i)) for i in range(0, 4)]
+        for row, button in enumerate(self.buttons): button.grid(column = 0, row = row, sticky = NSEW)
 
-    def set_buttons(self, button_callback: list[(Button, str)]) -> None:
+        # Setting the text and callback of the buttons
+        self.set_buttons([(str(i), str(i)) for i in range(0,4)])
+
+    def set_buttons(self, button_callback: list[(str, str)]) -> None:
 
         for row, button_tuple in enumerate(button_callback):
 
-            button: Button
-            callback: str
-            button, callback = button_tuple
+            button_label: str
+            callback_str: str
+            button_label, callback_str = button_tuple
 
             # Setup callback command
-            button.configure(command = lambda callback_str = callback : self.callback(callback_str))
+            self.buttons[row].configure(command = lambda callback_str = callback_str : self.callback(callback_str))
+
+            # Setup Label
+            self.buttons[row].configure(text = button_label)
 
             # Setup colour to maintain consistency
-            button.configure(bg = MEMA_BUTTON_COLOURS[row])
+            self.buttons[row].configure(bg = MEMA_BUTTON_COLOURS[row])
 
-            # Grid button
-            button.grid(column = 0, row = row, sticky = NSEW)
-            self.buttons[row] = button
+        # Update Frame to reflect changes
+        self.update()
 
     def callback(self, callback_str:str):
-
-        print(callback_str)
+        self.parent.callback(callback_str)

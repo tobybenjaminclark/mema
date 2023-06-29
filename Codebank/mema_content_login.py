@@ -6,15 +6,28 @@ import cv2
 
 class content_login(content_frame):
 
-    def __init__(self, *args, **kwargs)-> None:
+    def __init__(self, parent, *args, **kwargs)-> None:
         content_frame.__init__(self, *args, **kwargs)
 
+        # Configure parent
+        self.parent = parent
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Login", "LOGIN_LOGIN")
+        buttons[1] = ("New", "LOGIN_NEW")
+        buttons[2] = ("Languages", "LOGIN_LANGUAGES")
+        buttons[3] = ("Exit", "LOGIN_EXIT")
+        self.parent.set_buttons(buttons)
+
         # Setup webcam frame
-        facial_recognition_frame = facial_recognition(self, self.recieve_name)
+        facial_recognition_frame = facial_recognition(self, self.callback)
         facial_recognition_frame.pack()
 
-    def recieve_name(self, name:str):
-        print(name)
+    def update_buttons():
+        pass
+
+    def callback(self, callback_str:str):
+        print(callback_str)
 
 
 
