@@ -10,11 +10,11 @@ class content_login(content_frame):
 
         # Setup webcam frame
         self.label: Label
-        self.label = Label(self, width = 500, height = 200)
+        self.label = Label(self, width = 800, height = 500)
         self.label.grid(row=0, column=0)
 
         # Using open-cv2 video capture
-        self.cap: cv2.VideoCapture = cv2.VideoCapture(0)
+        self.cap: cv2.VideoCapture = cv2.VideoCapture("/dev/video0")
         self.show_frames()
 
     def show_frames(self) -> None:

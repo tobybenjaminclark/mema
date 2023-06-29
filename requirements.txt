@@ -2,3 +2,5 @@ pillow
 opencv-python
 gTTS
 playsound
+dlib
+face_recognition
