@@ -26,7 +26,7 @@ class main_window(Tk):
         self.geometry(MEMA_SCREEN_DIMENSIONS)
 
         # Sets the window name
-        self.title("MeMa 3.1")
+        self.title(MEMA_WINDOW_NAME)
 
         # Configures the row and column weightings
         self.grid_rowconfigure(0, weight = 1)

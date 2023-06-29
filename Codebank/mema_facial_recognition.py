@@ -62,7 +62,7 @@ class facial_recognition(Frame):
         frame = self.process_frame()
 
         # Manipulates the frame image, adding nametags for the detected faces, this will be displayed if FACIAL_RECOGNITION_DEBUG_MODE is True
-        self.render_nametags(frame)
+        if(MEMA_FACIAL_RECOGNITION_DEBUG_MODE): self.render_nametags(frame)
         
         # Displays the updated frame in the Tk Frame instance and schedules another scan
         self.display_and_reschedule(frame)
@@ -140,6 +140,7 @@ class facial_recognition(Frame):
             self.callback(name)
 
     def render_nametags(self, frame) -> None:
+
         # Display the results
         for (top, right, bottom, left), name in zip(self.face_locations, self.face_names):
             # Scale back up face locations since the frame we detected in was scaled to 1/4 size
@@ -147,13 +148,11 @@ class facial_recognition(Frame):
             right *= 4
             bottom *= 4
             left *= 4
-
-
-            if(FACIAL_RECOGNITION_DEBUG_MODE):
-                font = cv2.FONT_HERSHEY_DUPLEX
-                cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
-                cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-                cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+            
+            font = cv2.FONT_HERSHEY_DUPLEX
+            cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
+            cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+            cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
     def display_and_reschedule(self, frame) -> None:
         # Convert the frame to an image and display it in the Tkinter label
