@@ -7,10 +7,14 @@ from mema_constants import *
 
 class facial_recognition(Frame):
 
-    def __init__(self, parent, *args, **kwargs) -> None:
+    def __init__(self, parent, callback, *args, **kwargs) -> None:
 
         # Call Superclass Constructor
         Frame.__init__(self, parent, *args, **kwargs)
+
+        # Sets the callback function
+        self.callback: function(str)
+        self.callback = callback
 
         # Create Label to Display
         self.video_label = Label(self)
@@ -127,10 +131,13 @@ class facial_recognition(Frame):
             best_match_index = np.argmin(face_distances)
 
             # If a match is found in known_faces, assign the corresponding name to the recognized face
-            if matches[best_match_index]: name = self.known_names[best_match_index]
-
+            if matches[best_match_index]:
+                name = self.known_names[best_match_index]
+                
             # Append the recognized name to the list of face names
             self.face_names.append(name)
+
+            self.callback(name)
 
     def render_nametags(self, frame) -> None:
         # Display the results

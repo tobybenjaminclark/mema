@@ -10,8 +10,11 @@ class content_login(content_frame):
         content_frame.__init__(self, *args, **kwargs)
 
         # Setup webcam frame
-        facial_recognition_frame = facial_recognition(self)
+        facial_recognition_frame = facial_recognition(self, self.recieve_name)
         facial_recognition_frame.pack()
+
+    def recieve_name(self, name:str):
+        print(name)
 
 
 
