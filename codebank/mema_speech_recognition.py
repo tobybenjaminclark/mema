@@ -1,6 +1,7 @@
 import speech_recognition as sr
 from mema_constants import *
 from threading import Thread
+from typing import Callable
 
 def recognize_speech_internal() -> str:
 
@@ -43,7 +44,7 @@ def recognize_speech_internal() -> str:
         print(f"recognize_speech_internal() error: could not request results from gTTS, error: {e}")
         return "None"
 
-def recognize_speech_thread(callback: callable[[str], None]) -> None:
+def recognize_speech_thread(callback: Callable[[str], None]) -> None:
     # Perform speech recognition on a separate thread and pass the result to the callback function
     # This function takes a callback function as an argument
 
@@ -53,7 +54,7 @@ def recognize_speech_thread(callback: callable[[str], None]) -> None:
     # Pass the recognized text to the callback function
     callback(s)
 
-def listen(callback: callable[[str], None]) -> None:
+def listen(callback: Callable[[str], None]) -> None:
     # Start a new thread to perform speech recognition and invoke the callback function
 
     # Start a new thread using the Thread class from the threading module
