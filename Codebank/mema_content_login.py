@@ -19,6 +19,8 @@ class content_login(content_frame):
         buttons[3] = ("Exit", "LOGIN_EXIT")
         self.parent.set_buttons(buttons)
 
+        self.previous_callback = "a"
+
         # Setup webcam frame
         facial_recognition_frame = facial_recognition(self, self.callback)
         facial_recognition_frame.pack()
@@ -27,7 +29,11 @@ class content_login(content_frame):
         pass
 
     def callback(self, callback_str:str):
-        print(callback_str)
+        if(self.previous_callback == callback_str):
+            return
+        else:
+            print(callback_str)
+            self.previous_callback = callback_str
 
 
 

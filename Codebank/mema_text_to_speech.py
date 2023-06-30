@@ -2,7 +2,7 @@ from gtts import gTTS
 from os import remove
 from playsound import playsound
 from threading import *
-from time import time
+import time
  
 def speak_thread(text) -> None:
 
@@ -28,5 +28,11 @@ def speak_thread(text) -> None:
 def speak(text) -> None:
     
     # This has to be run asynchronously on it's own thread.
-    Thread(target=speak_thread, args=(text,), daemon=True).start()
+    Thread(target=speak_thread, args=(text,), daemon=False).start()
     return None
+
+if __name__ == "__main__":
+    speak("Test 1")
+    time.sleep(1)
+    speak("Test 2")
+    speak("Test 3")

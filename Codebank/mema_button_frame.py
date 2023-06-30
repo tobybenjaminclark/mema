@@ -1,5 +1,6 @@
 from tkinter import *
 from mema_constants import *
+from mema_speech_recognition import *
 
 class button_frame(Frame):
 
@@ -8,7 +9,8 @@ class button_frame(Frame):
         # Superclass Initialization
         Frame.__init__(self, *args, **kwargs)
         self.parent = _parent
-        self.buttons: list[Button]
+        self.buttons: list[Button] = []
+        self.recognized_speech_string: str = ""
 
         # Setup grid weightings
         self.grid_columnconfigure(0, weight=1)
@@ -16,6 +18,9 @@ class button_frame(Frame):
 
         # Button Setup
         self.create_buttons()
+
+        # Start Listening
+        self.listen(None)
         
     def create_buttons(self) -> None:
 
@@ -48,3 +53,8 @@ class button_frame(Frame):
 
     def callback(self, callback_str:str):
         self.parent.callback(callback_str)
+
+    def listen(self, recognized_string):
+        print("\n\n\n", recognized_string, "\n\n\n")
+        listen(self.listen)
+
