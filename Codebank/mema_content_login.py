@@ -1,8 +1,6 @@
 from tkinter import *
 from mema_content_frame import *
 from mema_facial_recognition import *
-from PIL import Image, ImageTk
-import cv2
 
 class content_login(content_frame):
 
@@ -11,22 +9,23 @@ class content_login(content_frame):
 
         # Configure parent
         self.parent = parent
-
-        buttons: list[(str, str)] = [0, 0, 0, 0]
-        buttons[0] = ("Login", "LOGIN_LOGIN")
-        buttons[1] = ("New", "LOGIN_NEW")
-        buttons[2] = ("Languages", "LOGIN_LANGUAGES")
-        buttons[3] = ("Exit", "LOGIN_EXIT")
-        self.parent.set_buttons(buttons, True)
-
+        self.update_buttons()
         self.previous_callback = "a"
 
         # Setup webcam frame
         facial_recognition_frame = facial_recognition(self, self.callback)
         facial_recognition_frame.pack()
 
-    def update_buttons() -> None:
-        pass
+    def update_buttons(self) -> None:
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+
+        buttons[0] = ("Login", "LOGIN_LOGIN")
+        buttons[1] = ("New", "LOGIN_NEW")
+        buttons[2] = ("Languages", "LOGIN_LANGUAGES")
+        buttons[3] = ("Exit", "LOGIN_EXIT")
+
+        self.parent.set_buttons(buttons, True)
 
     def callback(self, callback_str:str) -> None:
 
