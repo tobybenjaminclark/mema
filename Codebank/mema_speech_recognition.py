@@ -1,39 +1,69 @@
 import speech_recognition as sr
+from mema_constants import *
 from threading import Thread
 
 def recognize_speech_internal() -> str:
+
+    # Initialize the speech recognition object
     recognizer: sr.Recognizer
     recognizer = sr.Recognizer()
 
+    # Initialize the speech recognizer
+    # A recognizer object is created using the sr.Recognizer() constructor
     with sr.Microphone() as source:
+        # Use the microphone as the audio source
 
-        recognizer.adjust_for_ambient_noise(source)  # listen for 1 second to calibrate the energy threshold for ambient noise levels
+        # Adjust for ambient noise levels
+        # The recognizer will listen for 1 second to calibrate the energy threshold
+        # This helps in filtering out the ambient noise during speech recognition
+        recognizer.adjust_for_ambient_noise(source)
+
+        # Capture the audio from the microphone
+        # The audio is recorded using the recognizer.listen(source) method
         audio = recognizer.listen(source)
 
-    # recognize speech using Google Speech Recognition
-    # for testing purposes, we're just using the default API key
-    # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
-    # instead of `r.recognize_google(audio)`
+    # Perform speech recognition using Google Speech Recognition API
     try:
-        return recognizer.recognize_google(audio)
+        # Attempt to recognize the speech from the captured audio using Google Speech Recognition
+        # The recognizer.recognize_google(audio) method is used
+        # By default, it uses the default API key for speech recognition
+        # To use a different API key, you can pass it as the 'key' parameter
+        recognized_text = recognizer.recognize_google(audio)
+        if(MEMA_SPEECH_RECOGNITION_DISPLAY_TEXT): print(f"recognize_speech_internal()")
 
-    except sr.UnknownValueError:
-        print("Google Speech Recognition could not understand audio")
-        return "ERROR"
+        return recognized_text
+
+    except sr.UnknownValueError as e:
+        # Handle cases where speech could not be understood
+        print(f"recognize_speech_internal() error: speech could not be understood, error: {e}")
+        return "None"
 
     except sr.RequestError as e:
-        print("Could not request results from Google Speech Recognition service; {0}".format(e))
-        return "ERROR"
+        # Handle cases where there is an error in requesting results from Google Speech Recognition service
+        print(f"recognize_speech_internal() error: could not request results from gTTS, error: {e}")
+        return "None"
 
-def recognize_speech_thread(callback) -> None:
+def recognize_speech_thread(callback: callable[[str], None]) -> None:
+    # Perform speech recognition on a separate thread and pass the result to the callback function
+    # This function takes a callback function as an argument
+
+    # Call the internal speech recognition function to get the recognized text
     s = recognize_speech_internal()
+
+    # Pass the recognized text to the callback function
     callback(s)
 
-def listen(callback):
-    # This has to be run asynchronously on it's own thread.
-    print("Test")
+def listen(callback: callable[[str], None]) -> None:
+    # Start a new thread to perform speech recognition and invoke the callback function
+
+    # Start a new thread using the Thread class from the threading module
+    # The target function is recognize_speech_thread, which performs speech recognition and invokes the callback
+    # The callback function is passed as an argument to recognize_speech_thread
+    # The daemon parameter is set to False, meaning the thread will not terminate when the main program ends
     Thread(target=recognize_speech_thread, args=(callback,), daemon=False).start()
-    return None   
+
+    # Return from the Function
+    return None
 
 if __name__ == "__main__":
     listen(print)
