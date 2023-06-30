@@ -4,7 +4,7 @@ from playsound import playsound
 from threading import Thread
 import time
  
-def speak_thread(text) -> None:
+def speak_thread(text: str) -> None:
 
     # Create a Google TTS Object
     tts: gTTS = gTTS(text=text, lang='en')
@@ -25,7 +25,7 @@ def speak_thread(text) -> None:
 
     return None
 
-def speak(text) -> None:
+def speak(text: str) -> None:
     
     if(text == ""):
         return None
