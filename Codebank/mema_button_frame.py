@@ -11,6 +11,7 @@ class button_frame(Frame):
         self.parent = _parent
         self.buttons: list[Button] = []
         self.recognized_speech_string: str = ""
+        self.font = ("Arial Black", 32, "bold")
 
         # Setup grid weightings
         self.grid_columnconfigure(0, weight=1)
@@ -43,7 +44,7 @@ class button_frame(Frame):
             self.buttons[row].configure(command = lambda callback_str = callback_str : self.callback(callback_str))
 
             # Setup Label
-            self.buttons[row].configure(text = button_label)
+            self.buttons[row].configure(text = button_label, font = self.font)
 
             # Setup colour to maintain consistency
             self.buttons[row].configure(bg = MEMA_BUTTON_COLOURS[row])
