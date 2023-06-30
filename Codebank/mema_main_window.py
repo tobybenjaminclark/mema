@@ -15,10 +15,10 @@ class main_window(Tk):
         # Mainloop
         self.mainloop()
 
-    def set_buttons(self, button_callback: list[(str, str)]) -> None:
+    def set_buttons(self, button_callback: list[(str, str)], read = False) -> None:
 
         # Proxys to self.button_frame.set_buttons()
-        self.button_frame.set_buttons(button_callback)
+        self.button_frame.set_buttons(button_callback, read)
 
     def configure_tk_instance(self) -> None:
     

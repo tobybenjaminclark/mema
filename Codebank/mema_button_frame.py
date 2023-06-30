@@ -1,6 +1,7 @@
 from tkinter import *
 from mema_constants import *
 from mema_speech_recognition import *
+from mema_text_to_speech import *
 
 class button_frame(Frame):
 
@@ -36,9 +37,11 @@ class button_frame(Frame):
         # Setting the text and callback of the buttons
         self.set_buttons([(str(i), str(i)) for i in range(0,4)])
 
-    def set_buttons(self, button_callback: list[(str, str)]) -> None:
+    def set_buttons(self, button_callback: list[(str, str)], read = False) -> None:
 
         self.speech_commands = button_callback
+        if(read): self.read_buttons(button_callback)
+
         for row, button_tuple in enumerate(button_callback):
 
             button_label: str
@@ -56,6 +59,21 @@ class button_frame(Frame):
 
         # Update Frame to reflect changes
         self.update()
+
+    def read_buttons(self, button_callback: list[(str, str)]) -> None:
+        phrases = ""
+        print(button_callback)
+        for row, button_tuple in enumerate(button_callback):
+            phrase: str
+            callback_str: str
+            phrase, callback_str = button_tuple
+            phrase = phrase.lower()
+            phrases = phrases + phrase
+            phrases = phrases + ". "
+
+        print("phrases: ", phrases)
+        speak(phrases)
+            
 
     def callback(self, callback_str:str):
         self.parent.callback(callback_str)

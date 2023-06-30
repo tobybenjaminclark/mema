@@ -17,7 +17,7 @@ class content_login(content_frame):
         buttons[1] = ("New", "LOGIN_NEW")
         buttons[2] = ("Languages", "LOGIN_LANGUAGES")
         buttons[3] = ("Exit", "LOGIN_EXIT")
-        self.parent.set_buttons(buttons)
+        self.parent.set_buttons(buttons, True)
 
         self.previous_callback = "a"
 
@@ -25,12 +25,10 @@ class content_login(content_frame):
         facial_recognition_frame = facial_recognition(self, self.callback)
         facial_recognition_frame.pack()
 
-    def update_buttons():
+    def update_buttons() -> None:
         pass
 
-    def callback(self, callback_str:str):
-        
-        print(callback_str)
+    def callback(self, callback_str:str) -> None:
 
         if (callback_str == "LOGIN_EXIT"):
             print("quitting")
