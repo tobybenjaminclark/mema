@@ -4,3 +4,6 @@ gTTS
 playsound
 dlib
 face_recognition
+numpy
+pyaudio
+SpeechRecognition
