@@ -29,11 +29,19 @@ class content_login(content_frame):
         pass
 
     def callback(self, callback_str:str):
+        
+        print(callback_str)
+
+        if (callback_str == "LOGIN_EXIT"):
+            print("quitting")
+            quit()
+
         if(self.previous_callback == callback_str):
             return
         else:
             print(callback_str)
             self.previous_callback = callback_str
+
 
 
 

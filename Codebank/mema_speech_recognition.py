@@ -36,5 +36,4 @@ def listen(callback):
     return None   
 
 if __name__ == "__main__":
-    test: speech_recognizer
-    test = speech_recognizer()
+    listen(print)

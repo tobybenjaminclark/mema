@@ -20,6 +20,10 @@ class button_frame(Frame):
         # Button Setup
         self.create_buttons()
 
+        # Speech Recognition Stuff
+        self.speech_commands: list[(str, str)]
+        self.speech_commands = [("None", "None")]
+
         # Start Listening
         self.listen(None)
         
@@ -34,6 +38,7 @@ class button_frame(Frame):
 
     def set_buttons(self, button_callback: list[(str, str)]) -> None:
 
+        self.speech_commands = button_callback
         for row, button_tuple in enumerate(button_callback):
 
             button_label: str
@@ -56,6 +61,19 @@ class button_frame(Frame):
         self.parent.callback(callback_str)
 
     def listen(self, recognized_string):
-        print("\n\n\n", recognized_string, "\n\n\n")
+        
+        for row, button_tuple in enumerate(self.speech_commands):
+            phrase: str
+            callback_str: str
+            phrase, callback_str = button_tuple
+            phrase = phrase.lower()
+
+            print(recognized_string, "\t:\t", phrase, " = ", callback_str)
+            
+            if(recognized_string == phrase):
+                self.callback(callback_str)
+
         listen(self.listen)
+
+
 
