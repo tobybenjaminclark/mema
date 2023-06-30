@@ -26,7 +26,7 @@ def speak_thread(text: str) -> None:
     return None
 
 def speak(text: str) -> None:
-    
+        
     if(text == ""):
         return None
 
