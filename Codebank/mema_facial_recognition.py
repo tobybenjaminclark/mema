@@ -38,11 +38,11 @@ class facial_recognition(Frame):
     def load_face_encodings(self) -> None:
         
         # Load a sample picture and learn how to recognize it.
-        obama_image: face_recognition.ndarray = face_recognition.load_image_file("obama.jpg")
+        obama_image: face_recognition.ndarray = face_recognition.load_image_file("Databank/obama.jpg")
         obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 
         # Load a second sample picture and learn how to recognize it.
-        biden_image: face_recognition.ndarray = face_recognition.load_image_file("biden.jpeg")
+        biden_image: face_recognition.ndarray = face_recognition.load_image_file("Databank/biden.jpeg")
         biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
         # Create arrays of known face encodings and their names
