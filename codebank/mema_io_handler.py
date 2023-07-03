@@ -9,6 +9,7 @@ class io_handler():
     def __init__(self, button_frame: button_frame, input_queue: Queue) -> None:
         
         self.button_frame = button_frame
+        self.button_frame.set_io_handler(self)
 
         # Create Queue
         self.input_queue: Queue
@@ -20,6 +21,8 @@ class io_handler():
 
         self.button_input_queue: Queue
         self.button_input_queue = Queue()
+
+        self.button_frame.set_io_queue(self.button_input_queue)
 
         self.stop_speech_recognition_thread = False
 

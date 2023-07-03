@@ -36,7 +36,6 @@ class content_login(content_frame):
 
         if(callback_str == "LOGIN_NEW"):
             self.facial_recognition_frame.quit()
-            self.grid_remove(self.facial_recognition_frame)
             del self.facial_recognition_frame
 
             camera = cv2.VideoCapture(0)

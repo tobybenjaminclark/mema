@@ -23,6 +23,10 @@ class facial_recognition(Frame):
         self.video_label = Label(self)
         self.video_label.pack()
 
+        # Used to auto-deny the after() after quit
+        # (Stops the facial recognition)
+        self.halt = False
+
         # Get a reference to webcam #0 (the default one)
         self.video_capture: cv2.VideoCapture
         self.video_capture = cv2.VideoCapture(0)
@@ -73,6 +77,8 @@ class facial_recognition(Frame):
         return None
 
     def display_recognition(self) -> None:
+
+        if(self.halt): return
 
         # Grabs the current frame from the webcam and attempts to recognize faces within the frame image. Returns a 
         frame = self.process_frame()
@@ -177,9 +183,12 @@ class facial_recognition(Frame):
         self.video_label.image = img
 
         # Schedule the next frame update
-        self.after(10, self.display_recognition)
+        self.after(20, self.display_recognition)
 
     def quit(self) -> None:
+
+        # Sets to halt
+        self.halt = True
 
         # Release handle to the webcam
         self.video_capture.release()

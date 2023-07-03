@@ -58,6 +58,7 @@ class button_frame(Frame):
         self.update()
 
     def read_buttons(self, button_callback: list[(str, str)]) -> None:
+
         phrases = ""
         print(button_callback)
         for row, button_tuple in enumerate(button_callback):
@@ -68,7 +69,6 @@ class button_frame(Frame):
             phrases = phrases + phrase
             phrases = phrases + ". "
 
-        print("phrases: ", phrases)
         speak(phrases)
             
     def set_io_handler(self, io_handler):
@@ -78,7 +78,7 @@ class button_frame(Frame):
         self.io_handler_queue = io_queue
 
     def callback(self, callback_str:str):
-        self.io_handler.callback(callback_str)
+        self.io_handler_queue.put(callback_str)
 
 
 
