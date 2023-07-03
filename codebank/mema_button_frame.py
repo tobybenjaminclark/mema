@@ -6,6 +6,10 @@ from mema_text_to_speech import *
 class button_frame(Frame):
 
     def __init__(self, _parent, *args, **kwargs) -> None:
+        """
+        Calls the tk.Frame constructor (superclass) and sets up the IO Handler and Grid Weightings. After this
+        the constructor will create the buttons using the create_buttons() method.
+        """
 
         # Superclass Initialization
         Frame.__init__(self, *args, **kwargs)
