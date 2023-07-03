@@ -29,7 +29,7 @@ class button_frame(Frame):
 
         # Creating & Placing Buttons
         self.buttons = [Button(self, text = str(i)) for i in range(0, 4)]
-        for row, button in enumerate(self.buttons): button.grid(column = 0, row = row, sticky = NSEW)
+        for row, button in enumerate(self.buttons): button.grid(column = 0, row = row, sticky = NSEW, padx = 10, pady = 10)
 
         # Setting the text and callback of the buttons
         self.set_buttons([(str(i), str(i)) for i in range(0,4)])
@@ -46,7 +46,7 @@ class button_frame(Frame):
             button_label, callback_str = button_tuple
 
             if(button_label == None or callback_str == None):
-                self.buttons[row].configure(command = None, text = None, state = DISABLED, fg = "grey", bg = "grey")
+                self.buttons[row].configure(command = None, text = "", state = DISABLED, fg = "grey", bg = "grey")
                 continue
 
             # Setup callback command
@@ -56,7 +56,7 @@ class button_frame(Frame):
             self.buttons[row].configure(text = button_label.upper(), font = self.font, state = ACTIVE)
 
             # Setup colour to maintain consistency
-            self.buttons[row].configure(bg = MEMA_BUTTON_COLOURS[row])
+            self.buttons[row].configure(bg = MEMA_BUTTON_COLOURS[row], fg = "black")
 
         # Update Frame to reflect changes
         self.update()

@@ -1,6 +1,7 @@
 from mema_content_frame import *
 import cv2
 from PIL import ImageTk, Image
+from mema_text_to_speech import *
 
 """
 camera = cv2.VideoCapture(0)
@@ -51,4 +52,5 @@ class content_new_user_photo(content_frame):
         
         if(callback_request["content"] == "TAKE_PHOTO"):
             cv2.imwrite('opencv.png', cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+            speak(self.name + ", is this picture okay?")
             
