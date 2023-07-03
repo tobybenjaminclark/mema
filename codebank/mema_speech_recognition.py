@@ -6,6 +6,9 @@ from queue import Queue
 from ctypes import *
 from contextlib import contextmanager
 
+# Following code is to mute ASLA Error Messages
+# https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
+
 ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
 
 def py_error_handler(filename, line, function, err, fmt):
@@ -23,13 +26,15 @@ def noalsaerr():
 def recognize_speech_internal() -> str|None:
 
     # Initialize the speech recognition object
-    
     print("mema_speech_recognition: recognize_speech_internal() called")
     recognizer: sr.Recognizer
     recognizer = sr.Recognizer()
+
     # Initialize the speech recognizer
     # A recognizer object is created using the sr.Recognizer() constructor
+
     with sr.Microphone() as source:
+
         # Adjust for ambient noise levels
         # The recognizer will listen for 1 second to calibrate the energy threshold
         # This helps in filtering out the ambient noise during speech recognition
@@ -41,7 +46,9 @@ def recognize_speech_internal() -> str|None:
         audio = recognizer.listen(source)
 
     # Perform speech recognition using Google Speech Recognition API
+
     try:
+
         # Attempt to recognize the speech from the captured audio using Google Speech Recognition
         # The recognizer.recognize_google(audio) method is used
         # By default, it uses the default API key for speech recognition
@@ -49,22 +56,25 @@ def recognize_speech_internal() -> str|None:
         recognized_text = recognizer.recognize_google(audio)
         if(MEMA_SPEECH_RECOGNITION_DISPLAY_TEXT): print(f"recognize_speech_internal()")
 
-        
         return recognized_text
 
     except sr.UnknownValueError as e:
+
         # Handle cases where speech could not be understood
         print(f"recognize_speech_internal() error: speech could not be understood, error: {e}")
         return None
 
     except sr.RequestError as e:
+
         # Handle cases where there is an error in requesting results from Google Speech Recognition service
         print(f"recognize_speech_internal() error: could not request results from gTTS, error: {e}")
         return None
 
 def recognize_speech_thread(input_queue: Queue) -> None:
+
     # Perform speech recognition on a separate thread and pass the result to the input queue
     # This function takes a callback function as an argument
+    
     with noalsaerr():
         while True:
             s = recognize_speech_internal()
