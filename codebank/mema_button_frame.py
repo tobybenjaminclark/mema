@@ -14,7 +14,7 @@ class button_frame(Frame):
         self.io_handler = None
         self.buttons: list[Button] = []
         self.recognized_speech_string: str = ""
-        self.io_handler_queue
+        self.io_handler_queue = None
 
         self.font = ("Arial Black", 32, "bold")
 
@@ -24,13 +24,6 @@ class button_frame(Frame):
 
         # Button Setup
         self.create_buttons()
-
-        # Speech Recognition Stuff
-        self.speech_commands: list[(str, str)]
-        self.speech_commands = [("None", "None")]
-
-        # Start Listening
-        self.listen(None)
         
     def create_buttons(self) -> None:
 
@@ -86,21 +79,6 @@ class button_frame(Frame):
 
     def callback(self, callback_str:str):
         self.io_handler.callback(callback_str)
-
-    def listen(self, recognized_string):
-        
-        for row, button_tuple in enumerate(self.speech_commands):
-            phrase: str
-            callback_str: str
-            phrase, callback_str = button_tuple
-            phrase = phrase.lower()
-
-            print(recognized_string, "\t:\t", phrase, " = ", callback_str)
-            
-            if(recognized_string == phrase):
-                self.callback(callback_str)
-
-        listen(self.listen)
 
 
 

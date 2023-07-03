@@ -4,15 +4,15 @@ from threading import Thread
 from mema_button_frame import *
 from mema_speech_recognition import *
 
-class mema_io_handler():
+class io_handler():
 
-    def __init__(self, button_frame: button_frame) -> None:
+    def __init__(self, button_frame: button_frame, input_queue: Queue) -> None:
         
         self.button_frame = button_frame
 
         # Create Queue
         self.input_queue: Queue
-        self.input_queue = Queue()
+        self.input_queue = input_queue
 
         # Speech Recognition Thread
         self.sr_input_queue: Queue
@@ -22,6 +22,8 @@ class mema_io_handler():
         self.button_input_queue = Queue()
 
         self.stop_speech_recognition_thread = False
+
+        Thread(target=self.handle_io, daemon=False).start()
 
     def create_speech_recognition_thread(self) -> None:
         
@@ -69,5 +71,3 @@ class mema_io_handler():
                 self.input_queue.put(response)
 
 
-m = mema_io_handler()
-m.create_speech_recognition_thread()

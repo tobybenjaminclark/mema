@@ -3,6 +3,7 @@ from mema_constants import *
 from mema_button_frame import *
 from mema_content_frame import *
 from mema_content_login import *
+from mema_io_handler import *
 
 class main_window(Tk):
 
@@ -12,8 +13,16 @@ class main_window(Tk):
         Tk.__init__(self, *args, **kwargs)
         self.configure_tk_instance()
 
+        # Handles Speech & Button presses
+        self.io_queue: Queue
+        self.io_queue = Queue()
+        self.io_handler: io_handler = io_handler(self.button_frame, self.io_queue)
+
         # Mainloop
-        self.mainloop()
+        while True:
+            if(self.io_queue.empty() is False):
+                self.callback(self.io_queue.get()["content"])
+            self.update()
 
     def set_buttons(self, button_callback: list[(str, str)], read = False) -> None:
 
