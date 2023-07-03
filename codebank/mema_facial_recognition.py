@@ -171,10 +171,9 @@ class facial_recognition(Frame):
             bottom *= 4
             left *= 4
             
+            # Render a circle around the face
             cv2.circle(frame, ((right+left)//2, (bottom+top)//2), right-left, (255, 255, 255), 3)
-            # font = cv2.FONT_HERSHEY_DUPLEX
-            # cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
-
+            
     def display_and_reschedule(self, frame) -> None:
         # Convert the frame to an image and display it in the Tkinter label
         img = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)))
