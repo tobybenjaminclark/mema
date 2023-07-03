@@ -38,30 +38,38 @@ class facial_recognition(Frame):
         # Start facial recognition
         self.display_recognition()
 
-    def load_face_encodings(self) -> None:
-        
-        self.known_faces:list = []
-        self.known_names:list = []
+def load_face_encodings(self) -> None:
+    # Initialize empty lists for known faces and names
+    self.known_faces: list = []
+    self.known_names: list = []
 
-        # Define directory path
-        directory_path:str
-        directory_path = os.getcwd() + "/databank/"
+    # Define directory path
+    directory_path: str
+    directory_path = os.getcwd() + "/databank/"
 
-        # Getting list of subfolders
-        subfolders: list(str)
-        subfolders = [f.path for f in os.scandir(directory_path) if f.is_dir()]
+    # Getting list of subfolders
+    subfolders: list[str]
+    subfolders = [f.path for f in os.scandir(directory_path) if f.is_dir()]
 
-        for subfolder_path in subfolders:
-            file_header: TextIO = open(subfolder_path + "/header.json")
-            json_header:json = json.load(file_header)
+    for subfolder_path in subfolders:
+        # Open the header JSON file
+        file_header: TextIO = open(subfolder_path + "/header.json")
+        json_header: json = json.load(file_header)
 
-            # Get full name
-            self.known_names.append(json_header["first_name"] + " " + json_header["family_name"])
-            
-            face_image: face_recognition.ndarray = face_recognition.load_image_file(subfolder_path + "/face.jpg")
-            face_encoding = face_recognition.face_encodings(face_image)[0]
+        # Get full name from JSON header
+        self.known_names.append(json_header["first_name"] + " " + json_header["family_name"])
 
-            self.known_faces.append(face_encoding)
+        # Load the face image
+        face_image: face_recognition.ndarray = face_recognition.load_image_file(subfolder_path + "/face.jpg")
+
+        # Encode the face
+        face_encoding = face_recognition.face_encodings(face_image)[0]
+
+        # Append the face encoding to the list of known faces
+        self.known_faces.append(face_encoding)
+
+    # Return
+    return None
 
     def display_recognition(self) -> None:
 
