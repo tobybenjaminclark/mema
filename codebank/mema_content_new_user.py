@@ -42,7 +42,7 @@ class content_new_user(content_frame):
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Back", "NEW_USR_BACK")
-        buttons[1] = (None, None)
+        buttons[1] = ("Toby", "toby")
         buttons[2] = (None, None)
         buttons[3] = (None, None)
         self.parent.set_input(buttons, False)
@@ -54,7 +54,7 @@ class content_new_user(content_frame):
                 self.parent.reset_path()
 
             case "CONFIRM_YES":
-                speak("Welcome to Memory Machine ", self.name_buffer)
+                speak("Welcome to Memory Machine " + self.name_buffer)
                 self.after(1000, self.progress)
 
             case "CONFIRM_NO":

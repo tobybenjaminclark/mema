@@ -7,4 +7,7 @@ class content_frame(Frame):
 
         Frame.__init__(self, *args, **kwargs, bg = "light blue")
 
+    def callback(self, callback_request: dict[str:str]):
+        pass
+
         

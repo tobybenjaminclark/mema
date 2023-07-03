@@ -53,7 +53,7 @@ class button_frame(Frame):
             self.buttons[row].configure(command = lambda callback_str = callback_str : self.callback(callback_str))
 
             # Setup Label
-            self.buttons[row].configure(text = button_label.upper(), font = self.font)
+            self.buttons[row].configure(text = button_label.upper(), font = self.font, state = ACTIVE)
 
             # Setup colour to maintain consistency
             self.buttons[row].configure(bg = MEMA_BUTTON_COLOURS[row])
