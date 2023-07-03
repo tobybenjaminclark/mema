@@ -62,7 +62,7 @@ class facial_recognition(Frame):
             json_header: json = json.load(file_header)
 
             # Get full name from JSON header
-            self.known_names.append(json_header["first_name"] + str(json_header["user_id"]))
+            self.known_names.append(str(json_header["user_id"]))
 
             # Load the face image
             face_image: face_recognition.ndarray = face_recognition.load_image_file(subfolder_path + "/face.jpg")

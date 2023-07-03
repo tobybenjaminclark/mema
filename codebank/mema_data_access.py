@@ -40,6 +40,20 @@ def new_user(name: str, photo) -> None:
     
     cv2.imwrite(user_dir + "/face.jpg", cv2.cvtColor(photo, cv2.COLOR_BGR2RGB))
 
+def get_user(id: int) -> dict:
+
+    directory_path:str
+    directory_path = os.getcwd() + "/databank/userbank_" + str(id) + "/header.json"
+     
+    # Opening JSON file
+    with open(directory_path, 'r') as openfile:
+        file = json.load(openfile)
+    openfile.close()
+
+    print(file)
+
+    return file
+
 
 if __name__ == "__main__":
     print(create_userbank())

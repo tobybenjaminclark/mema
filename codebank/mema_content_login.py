@@ -2,6 +2,8 @@ from tkinter import *
 from mema_content_frame import *
 from mema_facial_recognition import *
 from mema_content_new_user import *
+from mema_data_access import *
+
 import cv2
 
 class content_login(content_frame):
@@ -13,6 +15,8 @@ class content_login(content_frame):
         self.parent = parent
         self.update_buttons()
         self.previous_callback = "a"
+
+        self.current_face = "Unknown"
 
         # Setup webcam frame
         self.facial_recognition_frame = facial_recognition(self, self.facial_recognition_callback)
@@ -30,7 +34,7 @@ class content_login(content_frame):
         self.parent.set_input(buttons, True)
 
     def facial_recognition_callback(self, name:str) -> None:
-        pass
+        self.current_face = name
 
     def callback(self, callback_request:dict[str:str]) -> None:
 
@@ -45,7 +49,12 @@ class content_login(content_frame):
                 self.parent.switch_content(content_new_user)
 
             case "LOGIN_LOGIN":
-                print("Login")
+
+                print(self.current_face)
+                if(self.current_face == "Unknown"): return
+
+                x = get_user(self.current_face)
+                print(x)
             
             case "LOGIN_LANGUAGES":
                 print("Languages")
