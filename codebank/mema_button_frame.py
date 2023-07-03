@@ -46,7 +46,7 @@ class button_frame(Frame):
             button_label, callback_str = button_tuple
 
             if(button_label == None or callback_str == None):
-                self.buttons[row].configure(command = None, text = None, state = DISABLED)
+                self.buttons[row].configure(command = None, text = None, state = DISABLED, fg = "grey", bg = "grey")
                 continue
 
             # Setup callback command
@@ -69,6 +69,10 @@ class button_frame(Frame):
             phrase: str
             callback_str: str
             phrase, callback_str = button_tuple
+
+            if(phrase == None or callback_str ==  None): continue
+
+            
             phrase = phrase.lower()
             phrases = phrases + phrase
             phrases = phrases + ". "

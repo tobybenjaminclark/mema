@@ -26,6 +26,9 @@ class main_window(Tk):
                 self.callback(self.io_queue.get()["content"])
             self.update()
 
+    def reset_path(self) -> None:
+        self.switch_content(content_login)
+
     def switch_content(self, new_content:type) -> None:
         
         self.content_frame.grid_forget()

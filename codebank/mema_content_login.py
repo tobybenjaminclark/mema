@@ -31,22 +31,21 @@ class content_login(content_frame):
 
     def callback(self, callback_str:str) -> None:
 
-        if (callback_str == "LOGIN_EXIT"):
-            print("quitting")
-            quit()
+        match callback_str:
 
-        if(callback_str == "LOGIN_NEW"):
-            self.facial_recognition_frame.quit()
-            del self.facial_recognition_frame
+            case "LOGIN_EXIT":
+                self.parent.quit()
+            
+            case "LOGIN_NEW":
+                self.facial_recognition_frame.quit()
+                del self.facial_recognition_frame
+                self.parent.switch_content(content_new_user)
 
-            self.parent.switch_content(content_new_user)
-
-
-        if(self.previous_callback == callback_str):
-            return
-        else:
-            print(callback_str)
-            self.previous_callback = callback_str
+            case "LOGIN_LOGIN":
+                print("Login")
+            
+            case "LOGIN_LANGUAGES":
+                print("Languages")
 
 
 
