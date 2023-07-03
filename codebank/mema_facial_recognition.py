@@ -171,10 +171,9 @@ class facial_recognition(Frame):
             bottom *= 4
             left *= 4
             
-            font = cv2.FONT_HERSHEY_DUPLEX
-            cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
-            cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-            cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+            cv2.circle(frame, ((right+left)//2, (bottom+top)//2), right-left, (255, 255, 255), 3)
+            # font = cv2.FONT_HERSHEY_DUPLEX
+            # cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
     def display_and_reschedule(self, frame) -> None:
         # Convert the frame to an image and display it in the Tkinter label
