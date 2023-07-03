@@ -1,12 +1,15 @@
 from queue import Queue
 from threading import Thread
 
+from mema_button_frame import *
 from mema_speech_recognition import *
 
 class mema_io_handler():
 
-    def __init__(self) -> None:
+    def __init__(self, button_frame: button_frame) -> None:
         
+        self.button_frame = button_frame
+
         # Create Queue
         self.input_queue: Queue
         self.input_queue = Queue()
@@ -15,33 +18,28 @@ class mema_io_handler():
         self.sr_input_queue: Queue
         self.sr_input_queue = Queue()
 
+        self.button_input_queue: Queue
+        self.button_input_queue = Queue()
+
+        self.stop_speech_recognition_thread = False
+
     def create_speech_recognition_thread(self) -> None:
         
         # Create the speech recognition thread
-        listen(self.sr_input_queue)
-
-        # Monitor the return for input
-        while(True):
-            op = self.sr_input_queue.get()
-            print(op)
+        self.stop_speech_recognition_thread = False
+        listen(self.sr_input_queue, lambda: self.stop_speech_recognition_thread)
         
-    def create_text_to_speech_thread(self) -> None:
-        pass
-
-    def create_facial_recognition_thread(self) -> None:
-        pass
-
-
-
-
     def close_speech_recognition_thread(self) -> None:
-        pass
+        
+        # Stops speech recognition thread
+        self.stop_speech_recognition_thread = True
 
-    def close_text_to_speech_thread(self) -> None:
-        pass
+    def create_button_frame(self) -> None:
+        self.button_frame.set_io_handler(self)
+        self.button_frame.set_io_queue(self.button_input_queue)
 
-    def close_facial_recognition_thread(self) -> None:
-        pass
+    def set_buttons(self, button_callback: list[(str, str)], read = False) -> None:
+        self.button_frame.set_buttons(button_callback, read)
 
 m = mema_io_handler()
 m.create_speech_recognition_thread()

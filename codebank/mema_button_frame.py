@@ -9,9 +9,13 @@ class button_frame(Frame):
 
         # Superclass Initialization
         Frame.__init__(self, *args, **kwargs)
+
         self.parent = _parent
+        self.io_handler = None
         self.buttons: list[Button] = []
         self.recognized_speech_string: str = ""
+        self.io_handler_queue
+
         self.font = ("Arial Black", 32, "bold")
 
         # Setup grid weightings
@@ -74,9 +78,14 @@ class button_frame(Frame):
         print("phrases: ", phrases)
         speak(phrases)
             
+    def set_io_handler(self, io_handler):
+        self.io_handler = io_handler
+
+    def set_io_queue(self, io_queue: Queue):
+        self.io_handler_queue = io_queue
 
     def callback(self, callback_str:str):
-        self.parent.callback(callback_str)
+        self.io_handler.callback(callback_str)
 
     def listen(self, recognized_string):
         

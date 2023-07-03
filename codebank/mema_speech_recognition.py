@@ -69,26 +69,27 @@ def recognize_speech_internal() -> str|None:
         print(f"recognize_speech_internal() error: could not request results from gTTS, error: {e}")
         return None
 
-def recognize_speech_thread(input_queue: Queue) -> None:
+def recognize_speech_thread(input_queue: Queue, stop:bool) -> None:
 
     # Perform speech recognition on a separate thread and pass the result to the input queue
     # This function takes a callback function as an argument
     # noalsaerr() blocks all ALSA errors/warnings to stop clogging stdout
 
     with noalsaerr():
-        while True:
+        while not stop:
             s = recognize_speech_internal()
             if s is not None: input_queue.put(s)
             
-
-def listen(input_queue: Queue) -> None:
+    return None
+            
+def listen(input_queue: Queue, stop: bool) -> None:
     # Start a new thread to perform speech recognition and call back to the queue
 
     # Start a new thread using the Thread class from the threading module
     # The target function is recognize_speech_thread, which performs speech recognition and invokes the callback
     # The callback function is passed as an argument to recognize_speech_thread
     # The daemon parameter is set to False, meaning the thread will not terminate when the main program ends
-    Thread(target=recognize_speech_thread, args=(input_queue,), daemon=False).start()
+    Thread(target=recognize_speech_thread, args=(input_queue,stop,), daemon=False).start()
 
     # Return from the Function
     return None
