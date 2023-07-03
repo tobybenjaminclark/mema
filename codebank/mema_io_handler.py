@@ -51,7 +51,10 @@ class io_handler():
         # Setup TTS conversions
         self.speech_translations = {}
         for translation in button_callback:
-            self.speech_translations[translation[0].lower()] = translation[1]
+            if(translation[0] != None and translation[1] != None):
+                self.speech_translations[translation[0].lower()] = translation[1]
+            else:
+                continue
 
         self.button_frame.set_buttons(button_callback, read)
 
