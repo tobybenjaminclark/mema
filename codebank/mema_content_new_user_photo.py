@@ -2,6 +2,7 @@ from mema_content_frame import *
 import cv2
 from PIL import ImageTk, Image
 from mema_text_to_speech import *
+from mema_data_access import *
 
 """
 camera = cv2.VideoCapture(0)
@@ -72,7 +73,7 @@ class content_new_user_photo(content_frame):
                 self.confirm_image()
             
             case "CONFIRM_IMAGE":
-                cv2.imwrite('opencv.png', cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+                new_user(self.name, self.current_image)
 
             case "UNCONFIRM_IMAGE":
                 self.kill_cam = False

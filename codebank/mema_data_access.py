@@ -1,5 +1,7 @@
+import cv2
 import os
 import time
+import json
 
 def create_userbank() -> str:
 
@@ -22,5 +24,24 @@ def create_userbank() -> str:
 
     return directory_path + directory_name
 
+def new_user(name: str, photo) -> None:
+
+    user_dir = create_userbank()
+    # Data to be written
+
+    dictionary = {
+       "user_id": user_dir[-1],
+       "photo": "face.jpg",
+       "first_name": name
+    }
+    
+    with open(user_dir + "/header.json", "w") as outfile:
+        json.dump(dictionary, outfile)
+    
+    cv2.imwrite(user_dir + "/face.jpg", cv2.cvtColor(photo, cv2.COLOR_BGR2RGB))
+
+
 if __name__ == "__main__":
     print(create_userbank())
+
+    
