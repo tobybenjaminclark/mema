@@ -23,7 +23,7 @@ class main_window(Tk):
         # Mainloop
         while True:
             if(self.io_queue.empty() is False):
-                self.callback(self.io_queue.get()["content"])
+                self.callback(self.io_queue.get())
             self.update()
 
     def reset_path(self) -> None:
@@ -62,8 +62,8 @@ class main_window(Tk):
         self.content_frame: content_frame = content_frame(self)
         self.content_frame.grid(row=0, column=0, sticky=NSEW)
 
-    def callback(self, callback_str: str) -> None:
-        self.content_frame.callback(callback_str)
+    def callback(self, callback_request: dict[str:str]) -> None:
+        self.content_frame.callback(callback_request)
 
     def quit(self) -> None:
         self.destroy()

@@ -35,9 +35,9 @@ class content_new_user(content_frame):
 
         self.parent.set_input(buttons, True)
 
-    def callback(self, callback_str:str) -> None:
+    def callback(self, callback_request: dict[str:str]) -> None:
 
-        match (callback_str):
+        match (callback_request["content"]):
             case "NEW_USR_BACK":
                 self.parent.reset_path()
 
