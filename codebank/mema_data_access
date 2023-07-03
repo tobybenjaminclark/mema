@@ -12,7 +12,6 @@ def create_userbank() -> str:
     subfolders = [f.path for f in os.scandir(directory_path) if f.is_dir()]
     subfolders = [path_string.rsplit('/', 1)[1] for path_string in subfolders]
     
-
     # Generating userbank name (userbank_ + next iteration)
     directory_name: str
     directory_name = "userbank_" + str(int(max(subfolders)[-1]) + 1)
