@@ -29,10 +29,10 @@ class main_window(Tk):
     def reset_path(self) -> None:
         self.switch_content(content_login)
 
-    def switch_content(self, new_content:type) -> None:
+    def switch_content(self, new_content:type, args:list = None) -> None:
         
         self.content_frame.grid_forget()
-        self.content_frame = new_content(self)
+        self.content_frame = new_content(self, args)
         self.content_frame.grid(row=0,column=0,sticky=NSEW)
 
     def set_input(self, button_callback: list[(str, str)], read = False) -> None:

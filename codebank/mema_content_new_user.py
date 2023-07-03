@@ -2,14 +2,10 @@ from tkinter import *
 from mema_content_frame import *
 from mema_facial_recognition import *
 from mema_text_to_speech import *
+from mema_content_new_user_photo import *
 import cv2
 
-"""
-camera = cv2.VideoCapture(0)
-            return_value, image = camera.read()
-            cv2.imwrite('opencv.png', image)
-            del(camera)
-"""
+
 
 class content_new_user(content_frame):
 
@@ -56,16 +52,21 @@ class content_new_user(content_frame):
         match (callback_request["content"]):
             case "NEW_USR_BACK":
                 self.parent.reset_path()
-                
+
             case "CONFIRM_YES":
                 speak("Welcome to Memory Machine ", self.name_buffer)
+                self.after(1000, self.progress)
 
             case "CONFIRM_NO":
-                speak("What is your name?")
+                speak("Sorry, please could you repeat your name?")
                 self.update_buttons()
 
             case _:
                 self.confirm_name(callback_request["content"])
+
+    def progress(self) -> None:
+
+        self.parent.switch_content(content_new_user_photo, self.name_buffer)
 
 
 
