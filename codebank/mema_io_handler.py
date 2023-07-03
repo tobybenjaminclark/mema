@@ -29,7 +29,7 @@ class io_handler():
         self.stop_speech_recognition_thread = False
 
         self.create_speech_recognition_thread()
-        Thread(target=self.handle_io, daemon=False).start()
+        Thread(target=self.handle_io, daemon=True).start()
 
     def create_speech_recognition_thread(self) -> None:
         

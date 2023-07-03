@@ -37,25 +37,10 @@ class content_new_user(content_frame):
 
     def callback(self, callback_str:str) -> None:
 
-        if (callback_str == "LOGIN_EXIT"):
-            print("quitting")
-            quit()
+        match (callback_str):
+            case "NEW_USR_BACK":
+                self.parent.reset_path()
 
-        if(callback_str == "LOGIN_NEW"):
-            self.facial_recognition_frame.quit()
-            del self.facial_recognition_frame
-
-            camera = cv2.VideoCapture(0)
-            return_value, image = camera.read()
-            cv2.imwrite('opencv.png', image)
-            del(camera)
-
-
-        if(self.previous_callback == callback_str):
-            return
-        else:
-            print(callback_str)
-            self.previous_callback = callback_str
 
 
 

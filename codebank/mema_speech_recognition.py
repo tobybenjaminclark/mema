@@ -88,7 +88,7 @@ def listen(input_queue: Queue, stop: bool) -> None:
     # The target function is recognize_speech_thread, which performs speech recognition and invokes the callback
     # The callback function is passed as an argument to recognize_speech_thread
     # The daemon parameter is set to False, meaning the thread will not terminate when the main program ends
-    Thread(target=recognize_speech_thread, args=(input_queue,stop,), daemon=False).start()
+    Thread(target=recognize_speech_thread, args=(input_queue,stop,), daemon=True).start()
 
     # Return from the Function
     return None

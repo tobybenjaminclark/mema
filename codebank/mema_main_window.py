@@ -65,4 +65,9 @@ class main_window(Tk):
     def callback(self, callback_str: str) -> None:
         self.content_frame.callback(callback_str)
 
+    def quit(self) -> None:
+        self.destroy()
+        quit()
+
 x = main_window()
+quit()
