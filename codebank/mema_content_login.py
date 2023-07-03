@@ -4,7 +4,6 @@ from mema_facial_recognition import *
 from mema_content_new_user import *
 from mema_data_access import *
 
-import cv2
 
 class content_login(content_frame):
 

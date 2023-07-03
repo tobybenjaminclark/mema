@@ -4,12 +4,6 @@ from PIL import ImageTk, Image
 from mema_text_to_speech import *
 from mema_data_access import *
 
-"""
-camera = cv2.VideoCapture(0)
-            return_value, image = camera.read()
-            
-"""
-
 class content_new_user_photo(content_frame):
 
     def __init__(self, parent, name, *args, **kwargs):
