@@ -1,6 +1,7 @@
 from tkinter import *
 from mema_content_frame import *
 from mema_facial_recognition import *
+from mema_content_new_user import *
 import cv2
 
 class content_login(content_frame):
@@ -38,10 +39,7 @@ class content_login(content_frame):
             self.facial_recognition_frame.quit()
             del self.facial_recognition_frame
 
-            camera = cv2.VideoCapture(0)
-            return_value, image = camera.read()
-            cv2.imwrite('opencv.png', image)
-            del(camera)
+            self.parent.switch_content(content_new_user)
 
 
         if(self.previous_callback == callback_str):
