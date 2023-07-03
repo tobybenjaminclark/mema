@@ -2,12 +2,13 @@ from gtts import gTTS
 from os import remove
 from playsound import playsound
 from threading import Thread
+from mema_constants import *
 import time
  
 def speak_thread(text: str) -> None:
 
     # Create a Google TTS Object
-    tts: gTTS = gTTS(text=text, lang='en')
+    tts: gTTS = gTTS(text=text, lang='en', slow = MEMA_SLOW_TTS)
 
     # Generating a pseudorandom file name using the current time in milliseconds
     # Since we need to save the file to play it, this can prevent duplicate file name errors.

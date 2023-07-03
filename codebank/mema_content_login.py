@@ -15,7 +15,7 @@ class content_login(content_frame):
         self.previous_callback = "a"
 
         # Setup webcam frame
-        self.facial_recognition_frame = facial_recognition(self, self.callback)
+        self.facial_recognition_frame = facial_recognition(self, self.facial_recognition_callback)
         self.facial_recognition_frame.pack()
 
     def update_buttons(self) -> None:
@@ -28,6 +28,9 @@ class content_login(content_frame):
         buttons[3] = ("Exit", "LOGIN_EXIT")
 
         self.parent.set_input(buttons, True)
+
+    def facial_recognition_callback(self, name:str) -> None:
+        pass
 
     def callback(self, callback_request:dict[str:str]) -> None:
 
