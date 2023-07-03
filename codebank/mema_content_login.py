@@ -1,6 +1,7 @@
 from tkinter import *
 from mema_content_frame import *
 from mema_facial_recognition import *
+import cv2
 
 class content_login(content_frame):
 
@@ -13,8 +14,8 @@ class content_login(content_frame):
         self.previous_callback = "a"
 
         # Setup webcam frame
-        facial_recognition_frame = facial_recognition(self, self.callback)
-        facial_recognition_frame.pack()
+        self.facial_recognition_frame = facial_recognition(self, self.callback)
+        self.facial_recognition_frame.pack()
 
     def update_buttons(self) -> None:
 
@@ -32,6 +33,17 @@ class content_login(content_frame):
         if (callback_str == "LOGIN_EXIT"):
             print("quitting")
             quit()
+
+        if(callback_str == "LOGIN_NEW"):
+            self.facial_recognition_frame.quit()
+            self.grid_remove(self.facial_recognition_frame)
+            del self.facial_recognition_frame
+
+            camera = cv2.VideoCapture(0)
+            return_value, image = camera.read()
+            cv2.imwrite('opencv.png', image)
+            del(camera)
+
 
         if(self.previous_callback == callback_str):
             return
