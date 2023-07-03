@@ -28,8 +28,12 @@ MEMA_SPEECH_RECOGNITION_DISPLAY_TEXT: bool = False
 
 # Change this to add/remove response types (adding IO?)
 global MEMA_RESPONSES
-MEMA_RESPONSES = Enum('MEMA_RESPONSES', ["SPOKEN", "BUTTON"])
+MEMA_RESPONSES:Enum = Enum('MEMA_RESPONSES', ["SPOKEN", "BUTTON"])
 
 # Change this to make the TTS speed
 global MEMA_SLOW_TTS
-MEMA_SLOW_TTS = False
+MEMA_SLOW_TTS:bool = False
+
+# Change this to change the font on the large buttons
+global MEMA_BUTTON_FONT
+MEMA_BUTTON_FONT:tuple[str,int,str] = ("Arial Black", 32, "bold")
