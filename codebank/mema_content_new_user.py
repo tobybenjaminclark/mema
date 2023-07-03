@@ -21,6 +21,8 @@ class content_new_user(content_frame):
         self.update_buttons()
         self.previous_callback = "a"
 
+        speak("Let's set you up with Memory Machine. What is your name?")
+
         # Setup webcam frame
         self.label = Label(self, text="Welcome to Memory Machine\n\nWhat is your name?", font = ("Arial", 50, "bold"))
         self.label.pack()
@@ -39,7 +41,6 @@ class content_new_user(content_frame):
 
     def update_buttons(self) -> None:
 
-        speak("Let's set you up with Memory Machine. What is your name?")
         self.awaiting_confirmation: bool = False
         self.name_buffer: str = ""
 
@@ -55,11 +56,14 @@ class content_new_user(content_frame):
         match (callback_request["content"]):
             case "NEW_USR_BACK":
                 self.parent.reset_path()
+                
             case "CONFIRM_YES":
-                print("NAME IS ", self.name_buffer)
+                speak("Welcome to Memory Machine ", self.name_buffer)
+
             case "CONFIRM_NO":
-                print("NAME ISNT ", self.name_buffer)
+                speak("What is your name?")
                 self.update_buttons()
+
             case _:
                 self.confirm_name(callback_request["content"])
 
