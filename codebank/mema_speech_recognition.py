@@ -11,13 +11,13 @@ from contextlib import contextmanager
 
 ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
 
-def py_error_handler(filename, line, function, err, fmt):
+def py_error_handler(filename, line, function, err, fmt) -> None:
     pass
 
 c_error_handler = ERROR_HANDLER_FUNC(py_error_handler)
 
 @contextmanager
-def noalsaerr():
+def noalsaerr() -> None:
     asound = cdll.LoadLibrary('libasound.so')
     asound.snd_lib_error_set_handler(c_error_handler)
     yield
@@ -26,7 +26,6 @@ def noalsaerr():
 def recognize_speech_internal() -> str|None:
 
     # Initialize the speech recognition object
-    print("mema_speech_recognition: recognize_speech_internal() called")
     recognizer: sr.Recognizer
     recognizer = sr.Recognizer()
 
@@ -74,13 +73,13 @@ def recognize_speech_thread(input_queue: Queue) -> None:
 
     # Perform speech recognition on a separate thread and pass the result to the input queue
     # This function takes a callback function as an argument
-    
+    # noalsaerr() blocks all ALSA errors/warnings to stop clogging stdout
+
     with noalsaerr():
         while True:
             s = recognize_speech_internal()
-
-            # Pass the recognized text to the callback method
-            input_queue.put(s)
+            if s is not None: input_queue.put(s)
+            
 
 def listen(input_queue: Queue) -> None:
     # Start a new thread to perform speech recognition and call back to the queue

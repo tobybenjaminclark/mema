@@ -39,6 +39,7 @@ class facial_recognition(Frame):
         self.display_recognition()
 
     def load_face_encodings(self) -> None:
+        
         # Initialize empty lists for known faces and names
         self.known_faces: list = []
         self.known_names: list = []
