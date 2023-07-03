@@ -41,5 +41,33 @@ class mema_io_handler():
     def set_buttons(self, button_callback: list[(str, str)], read = False) -> None:
         self.button_frame.set_buttons(button_callback, read)
 
+    def handle_io(self):
+        
+        while True:
+
+            response: dict[str:any]|None = None
+
+            # Handle Spoken Interactions
+            if not self.sr_input_queue.empty():
+                spoken_content:str = self.sr_input_queue.get()
+
+                # Formulate spoken content
+                response: dict[str:any] = {}
+                response['input_type'] = MEMA_RESPONSES.SPOKEN
+                response['content'] = spoken_content
+
+            # Handle Button Interactions
+            if not self.button_input_queue.empty():
+                button_input:str = self.button_input_queue.get()
+                
+                # Formulate spoken content
+                response: dict[str:any] = {}
+                response['input_type'] = MEMA_RESPONSES.BUTTON
+                response['content'] = button_input
+        
+            if response is not None:
+                self.input_queue.put(response)
+
+
 m = mema_io_handler()
 m.create_speech_recognition_thread()

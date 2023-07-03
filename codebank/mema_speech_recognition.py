@@ -79,7 +79,6 @@ def recognize_speech_thread(input_queue: Queue, stop:bool) -> None:
         while not stop:
             s = recognize_speech_internal()
             if s is not None: input_queue.put(s)
-            
     return None
             
 def listen(input_queue: Queue, stop: bool) -> None:
