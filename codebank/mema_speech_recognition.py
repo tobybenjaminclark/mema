@@ -24,7 +24,7 @@ def noalsaerr() -> None:
     asound.snd_lib_error_set_handler(None)
 
 def recognize_speech_internal() -> str|None:
-
+    print("recognize_speech_internal called")
     # Initialize the speech recognition object
     recognizer: sr.Recognizer
     recognizer = sr.Recognizer()
@@ -53,6 +53,7 @@ def recognize_speech_internal() -> str|None:
         # By default, it uses the default API key for speech recognition
         # To use a different API key, you can pass it as the 'key' parameter
         recognized_text = recognizer.recognize_google(audio)
+        print(recognized_text)
         if(MEMA_SPEECH_RECOGNITION_DISPLAY_TEXT): print(f"recognize_speech_internal()")
 
         return recognized_text
@@ -74,7 +75,6 @@ def recognize_speech_thread(input_queue: Queue, stop:bool) -> None:
     # Perform speech recognition on a separate thread and pass the result to the input queue
     # This function takes a callback function as an argument
     # noalsaerr() blocks all ALSA errors/warnings to stop clogging stdout
-
     with noalsaerr():
         while not stop:
             s = recognize_speech_internal()
@@ -95,7 +95,7 @@ def listen(input_queue: Queue, stop: bool) -> None:
 
 if __name__ == "__main__":
     test_queue = Queue()
-    listen(test_queue)
+    listen(test_queue, False)
 
     while True:
         print(test_queue.get())
