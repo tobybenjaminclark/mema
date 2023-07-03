@@ -45,6 +45,10 @@ class button_frame(Frame):
             callback_str: str
             button_label, callback_str = button_tuple
 
+            if(button_label == None or callback_str == None):
+                self.buttons[row].configure(command = None, text = None, state = DISABLED)
+                continue
+
             # Setup callback command
             self.buttons[row].configure(command = lambda callback_str = callback_str : self.callback(callback_str))
 
