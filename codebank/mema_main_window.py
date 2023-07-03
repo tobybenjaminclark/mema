@@ -18,16 +18,24 @@ class main_window(Tk):
         self.io_queue = Queue()
         self.io_handler: io_handler = io_handler(self.button_frame, self.io_queue)
 
+        self.switch_content(content_login)
+
         # Mainloop
         while True:
             if(self.io_queue.empty() is False):
                 self.callback(self.io_queue.get()["content"])
             self.update()
 
-    def set_buttons(self, button_callback: list[(str, str)], read = False) -> None:
+    def switch_content(self, new_content:type) -> None:
+        
+        self.content_frame.grid_forget()
+        self.content_frame = new_content(self)
+        self.content_frame.grid(row=0,column=0,sticky=NSEW)
+
+    def set_input(self, button_callback: list[(str, str)], read = False) -> None:
 
         # Proxys to self.button_frame.set_buttons()
-        self.button_frame.set_buttons(button_callback, read)
+        self.io_handler.set_input(button_callback, read)
 
     def configure_tk_instance(self) -> None:
     
@@ -48,7 +56,7 @@ class main_window(Tk):
         self.button_frame: button_frame = button_frame(self)
         self.button_frame.grid(row=0,column=1, sticky=NSEW)
 
-        self.content_frame: content_frame = content_login(self)
+        self.content_frame: content_frame = content_frame(self)
         self.content_frame.grid(row=0, column=0, sticky=NSEW)
 
     def callback(self, callback_str: str) -> None:

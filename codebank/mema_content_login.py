@@ -26,7 +26,7 @@ class content_login(content_frame):
         buttons[2] = ("Languages", "LOGIN_LANGUAGES")
         buttons[3] = ("Exit", "LOGIN_EXIT")
 
-        self.parent.set_buttons(buttons, True)
+        self.parent.set_input(buttons, True)
 
     def callback(self, callback_str:str) -> None:
 

@@ -43,7 +43,8 @@ class io_handler():
         self.button_frame.set_io_handler(self)
         self.button_frame.set_io_queue(self.button_input_queue)
 
-    def set_buttons(self, button_callback: list[(str, str)], read = False) -> None:
+    def set_input(self, button_callback: list[(str, str)], read = False) -> None:
+        
         self.button_frame.set_buttons(button_callback, read)
 
     def handle_io(self):
