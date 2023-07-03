@@ -14,7 +14,10 @@ class content_new_user_photo(content_frame):
     def __init__(self, parent, name, *args, **kwargs):
         content_frame.__init__(self, *args, **kwargs)
 
+        speak("We need to take a photograph of you to login, please center your head and say TAKE PHOTO")
+
         self.current_image: Image = None
+        self.kill_cam: bool = False
 
         self.parent = parent
         self.name = name
@@ -38,6 +41,8 @@ class content_new_user_photo(content_frame):
         self.parent.set_input(buttons, False)
 
     def show_frames(self):
+        if(self.kill_cam): return
+
         # Get the latest frame and convert into Image
         self.current_image = cv2.cvtColor(self.cap.read()[1],cv2.COLOR_BGR2RGB)
         img = Image.fromarray(self.current_image)
@@ -48,9 +53,33 @@ class content_new_user_photo(content_frame):
         # Repeat after an interval to capture continiously
         self.label.after(20, self.show_frames)
 
+    def confirm_image(self):
+        speak(self.name + ", is this picture okay?")
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Yes", "CONFIRM_IMAGE")
+        buttons[1] = ("No", "UNCONFIRM_IMAGE")
+        buttons[2] = (None, None)
+        buttons[3] = (None, None)
+        self.parent.set_input(buttons, False)
+
     def callback(self, callback_request: dict[str:str]):
         
-        if(callback_request["content"] == "TAKE_PHOTO"):
-            cv2.imwrite('opencv.png', cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
-            speak(self.name + ", is this picture okay?")
+        match callback_request["content"]:
+
+            case "TAKE_PHOTO":
+                self.kill_cam = True
+                self.confirm_image()
+            
+            case "CONFIRM_IMAGE":
+                cv2.imwrite('opencv.png', cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+
+            case "UNCONFIRM_IMAGE":
+                self.kill_cam = False
+                self.update_buttons()
+                self.show_frames()
+                speak("Sorry, say TAKE PHOTO when you are ready.")
+                
+
+        # yes: 
             
