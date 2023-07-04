@@ -10,7 +10,7 @@ class content_new_user_photo(content_frame):
     def __init__(self, parent, name, *args, **kwargs):
         content_frame.__init__(self, *args, **kwargs)
 
-        speak("We need to take a photograph of you to login, please center your head and say TAKE PHOTO")
+        speak("We need to take a photograph of you to login, please center your face and say TAKE PHOTO")
 
         self.current_image: Image = None
         self.kill_cam: bool = False
@@ -18,10 +18,15 @@ class content_new_user_photo(content_frame):
         self.parent = parent
         self.name = name
 
-        self.label = Label(self, text = "LOGIN")
-        self.label.grid(row=0, column=0)
-        self.label = Label(self)
-        self.label.grid(row=0, column=0)
+        self.title = Label(self, text = "Memory Machine", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 36, "bold"))
+        self.title.pack()
+
+        description_text: str = "Let's take your photograph to login,\ncenter your face and say 'TAKE PHOTO'"
+        self.description = Label(self, text = description_text, fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 30, "bold"))
+        self.description.pack(pady = (0, 30))
+
+        self.label = Label(self, anchor = CENTER, highlightbackground = MEMA_BLACK, highlightthickness = 2, bg = MEMA_BLACK)
+        self.label.pack()
         self.cap = cv2.VideoCapture(0)
         self.show_frames()
 

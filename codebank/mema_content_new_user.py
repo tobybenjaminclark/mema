@@ -14,19 +14,28 @@ class content_new_user(content_frame):
 
         # Configure parent
         self.parent = parent
+
+        self.intro_label = Label(self, text = "Welcome to", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 26, "bold"))
+        self.main_label = Label(self, text = "Memory Machine", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
+        self.sub_label = Label(self, text = "What's your name?", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
+        self.intro_label.pack()
+        self.main_label.pack(pady=(0,30))
+        self.sub_label.pack()
+
         self.update_buttons()
         self.previous_callback = "a"
+        self.sub_label.configure(text = "What's your name?")
 
         speak("Let's set you up with Memory Machine. What is your name?")
 
-        # Setup webcam frame
-        self.label = Label(self, text="Welcome to Memory Machine\n\nWhat is your name?", font = ("Arial", 50, "bold"))
-        self.label.pack()
+
 
     def confirm_name(self, name: str) -> None:
         self.awaiting_confirmation = True
         self.name_buffer = name
         speak("You said, " + name + ", is that correct? Simply say Yes or No.")
+        self.sub_label.configure(text = "Did you say " + name + "?")
+        self.update()
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Yes", "CONFIRM_YES")
@@ -39,6 +48,9 @@ class content_new_user(content_frame):
 
         self.awaiting_confirmation: bool = False
         self.name_buffer: str = ""
+
+        self.sub_label.configure(text = "Sorry, please repeat your name")
+        self.update()
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Back", "NEW_USR_BACK")
@@ -55,7 +67,7 @@ class content_new_user(content_frame):
 
             case "CONFIRM_YES":
                 speak("Welcome to Memory Machine " + self.name_buffer)
-                self.after(1000, self.progress)
+                self.after(2500, self.progress)
 
             case "CONFIRM_NO":
                 speak("Sorry, please could you repeat your name?")
