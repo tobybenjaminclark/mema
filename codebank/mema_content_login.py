@@ -22,7 +22,7 @@ class content_login(content_frame):
         self.current_face = "Unknown"
 
         # This will display MeMa at the top of the screen
-        self.mema_label = Label(self, text = "Memory Machine", font = ("Arial", 56, "bold"))
+        self.mema_label = Label(self, text = "Memory Machine", font = ("Arial", 56, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
         self.mema_label.pack(pady = 20)
 
         # This sets up the Facial Recognition Frame, which recognizes faces using cv2 & face_recognition modules.

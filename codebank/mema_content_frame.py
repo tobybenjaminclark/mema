@@ -7,7 +7,7 @@ class content_frame(Frame):
         """
         Initization method calls the tk.Frame constructor
         """
-        Frame.__init__(self, *args, **kwargs, bg = "light blue")
+        Frame.__init__(self, *args, **kwargs, bg = "white")
 
     def callback(self, callback_request: dict[str:str]):
         """

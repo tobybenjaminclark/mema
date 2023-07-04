@@ -12,7 +12,7 @@ class button_frame(Frame):
         """
 
         # Superclass Initialization
-        Frame.__init__(self, *args, **kwargs)
+        Frame.__init__(self, bg = MEMA_WHITE, *args, **kwargs)
 
         # Store the parent widget
         self.parent = _parent
@@ -71,6 +71,7 @@ class button_frame(Frame):
                     command=None,
                     text="",
                     state=DISABLED,
+                    borderwidth=5,
                     fg="grey",
                     bg="grey"
                 )
@@ -82,8 +83,9 @@ class button_frame(Frame):
                     text=button_label.upper(),
                     font=self.font,
                     state=NORMAL,
-                    bg=MEMA_BUTTON_COLOURS[row],
-                    fg="black"
+                    bg= MEMA_BUTTON_COLOURS[row],
+                    fg= MEMA_BLACK,
+                    borderwidth=5
                 )
 
         # Update the frame to reflect changes
