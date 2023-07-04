@@ -28,7 +28,7 @@ def create_userbank() -> str:
 
     return directory_path + directory_name
 
-def new_user(name: str, photo) -> None:
+def new_user(name: str, photo) -> int:
     """
     Creates a new userbank, stores the passed photograph and name in the generated header file. Uses the
     create_userbank() function to create the new userbank. Automatically generates a new user ID. Writes
@@ -55,6 +55,8 @@ def new_user(name: str, photo) -> None:
     
     # Save the photo as an image file
     cv2.imwrite(user_dir + "/face.jpg", cv2.cvtColor(photo, cv2.COLOR_BGR2RGB))
+
+    return int(user_dir[-1])
 
 def get_user(id: int) -> dict:
     """

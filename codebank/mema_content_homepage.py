@@ -3,30 +3,24 @@ from mema_content_frame import *
 from mema_facial_recognition import *
 from mema_text_to_speech import *
 from mema_content_new_user_photo import *
-import cv2
-
-
+from mema_data_access import *
 
 class content_home(content_frame):
 
-    def __init__(self, parent, *args, **kwargs)-> None:
+    def __init__(self, parent, user_id, *args, **kwargs)-> None:
         content_frame.__init__(self, *args, **kwargs)
 
         # Configure parent
         self.parent = parent
+        self.user_id = user_id
         self.update_buttons()
-        self.previous_callback = "a"
 
-        speak("Let's set you up with Memory Machine. What is your name?")
-
-        # Setup webcam frame
-        self.label = Label(self, text="Welcome to Memory Machine\n\nWhat is your name?", font = ("Arial", 50, "bold"))
+        self.label2 = Label(self, text = "Welcome to MeMa", font = ("Arial", 30, "bold"))
+        self.label = Label(self, text = str(get_user(self.user_id)["first_name"]), font = ("Arial", 50, "bold"))
+        self.label2.pack()
         self.label.pack()
 
     def update_buttons(self) -> None:
-
-        self.awaiting_confirmation: bool = False
-        self.name_buffer: str = ""
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Exit", "HOME_EXIT")
@@ -40,21 +34,6 @@ class content_home(content_frame):
         match (callback_request["content"]):
             case "HOME_EXIT":
                 self.parent.reset_path()
-
-            case "CONFIRM_YES":
-                speak("Welcome to Memory Machine " + self.name_buffer)
-                self.after(1000, self.progress)
-
-            case "CONFIRM_NO":
-                speak("Sorry, please could you repeat your name?")
-                self.update_buttons()
-
-            case _:
-                self.confirm_name(callback_request["content"])
-
-    def progress(self) -> None:
-
-        self.parent.switch_content(content_new_user_photo, self.name_buffer)
 
 
 

@@ -3,6 +3,7 @@ import cv2
 from PIL import ImageTk, Image
 from mema_text_to_speech import *
 from mema_data_access import *
+from mema_content_homepage import *
 
 class content_new_user_photo(content_frame):
 
@@ -67,7 +68,8 @@ class content_new_user_photo(content_frame):
                 self.confirm_image()
             
             case "CONFIRM_IMAGE":
-                new_user(self.name, self.current_image)
+                new_user_id: int = new_user(self.name, self.current_image)
+                self.parent.switch_content(content_home, new_user_id)
 
             case "UNCONFIRM_IMAGE":
                 self.kill_cam = False

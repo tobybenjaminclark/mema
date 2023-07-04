@@ -3,7 +3,7 @@ from mema_content_frame import *
 from mema_facial_recognition import *
 from mema_content_new_user import *
 from mema_data_access import *
-
+from mema_content_homepage import *
 
 class content_login(content_frame):
 
@@ -68,8 +68,8 @@ class content_login(content_frame):
                 print(self.current_face)
                 if(self.current_face == "Unknown"): return
 
-                x = get_user(self.current_face)
-                print(x)
+                user_id = get_user(self.current_face)
+                self.parent.switch_content(content_home, self.current_face)
             
             # Change language
             case "LOGIN_LANGUAGES":
