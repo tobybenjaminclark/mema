@@ -7,7 +7,7 @@ MEMA_SCREEN_DIMENSIONS: str = "1280x800"
 
 # Change this to change the default button colours.
 global MEMA_BUTTON_COLOURS
-MEMA_BUTTON_COLOURS: list[str] = ["#F5FFC6", "#B4E1FF", "#AB87FF", "#C1FF9B"]
+MEMA_BUTTON_COLOURS: list[str] = ["#FCD0A1", "#AFD2E9", "#B8B8FF", "#D295BF"]
 
 # Change this to change the content & button width
 global MEMA_CONTENT_WIDTH, MEMA_BUTTON_WIDTH

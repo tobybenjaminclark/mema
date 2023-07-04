@@ -21,9 +21,13 @@ class content_login(content_frame):
         # Sets the current face to Unknown.
         self.current_face = "Unknown"
 
+        # This will display MeMa at the top of the screen
+        self.mema_label = Label(self, text = "Memory Machine", font = ("Arial", 56, "bold"))
+        self.mema_label.pack(pady = 20)
+
         # This sets up the Facial Recognition Frame, which recognizes faces using cv2 & face_recognition modules.
         # It will display the webcam, and will pass the recognized face UserID to facial_recognition_callback() method.
-        self.facial_recognition_frame = facial_recognition(self, self.facial_recognition_callback)
+        self.facial_recognition_frame = facial_recognition(self, self.facial_recognition_callback, width = 800)
         self.facial_recognition_frame.pack()
 
     def update_buttons(self) -> None:
