@@ -19,7 +19,7 @@ class content_new_user(content_frame):
         self.main_label = Label(self, text = "Memory Machine", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
         self.sub_label = Label(self, text = "What's your name?", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
         self.intro_label.pack()
-        self.main_label.pack(pady=(0,30))
+        self.main_label.pack(pady=(0,50))
         self.sub_label.pack()
 
         self.update_buttons()
