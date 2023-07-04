@@ -12,19 +12,30 @@ from contextlib import contextmanager
 ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
 
 def py_error_handler(filename, line, function, err, fmt) -> None:
+    """
+    Empty Error Handler used by the noalsaerr() context manager to block ALSA warnings.
+    """
     pass
 
 c_error_handler = ERROR_HANDLER_FUNC(py_error_handler)
 
 @contextmanager
 def noalsaerr() -> None:
+    """
+    This switches the libasound.so error handler to the py_error_handler function (which is empty), in essence it blocks
+    the ALSA warnings that get spammed in terminal. 
+    """
     asound = cdll.LoadLibrary('libasound.so')
     asound.snd_lib_error_set_handler(c_error_handler)
     yield
     asound.snd_lib_error_set_handler(None)
 
 def recognize_speech_internal() -> str|None:
-    print("recognize_speech_internal called")
+    """
+    Uses the Speech Recognition Library to listen on the microphone and convert speech to text. Returns a string or None
+    if no speech is recognized.
+    """
+
     # Initialize the speech recognition object
     recognizer: sr.Recognizer
     recognizer = sr.Recognizer()
@@ -71,6 +82,10 @@ def recognize_speech_internal() -> str|None:
         return None
 
 def recognize_speech_thread(input_queue: Queue, stop:bool) -> None:
+    """
+    Runs the speech recognition function inside of a noalserr __enter__, this essentially stops the terminal from
+    being spammed with ALSA warnings. When the function returns a phrase, it is added to the input_queue.
+    """
 
     # Perform speech recognition on a separate thread and pass the result to the input queue
     # This function takes a callback function as an argument
@@ -82,12 +97,15 @@ def recognize_speech_thread(input_queue: Queue, stop:bool) -> None:
     return None
             
 def listen(input_queue: Queue, stop: bool) -> None:
-    # Start a new thread to perform speech recognition and call back to the queue
+    """
+    Starts a thread to recognize speech. Recognized phrases are added to the parsed input queue, uses the
+    speech_recognition library.
+    """
 
     # Start a new thread using the Thread class from the threading module
-    # The target function is recognize_speech_thread, which performs speech recognition and invokes the callback
-    # The callback function is passed as an argument to recognize_speech_thread
-    # The daemon parameter is set to False, meaning the thread will not terminate when the main program ends
+    # The target function is recognize_speech_thread, which performs speech recognition and adds recognized
+    # phrases to the input_queue passed. The daemon parameter is set to True, meaning the thread will
+    # terminate when the main program ends
     Thread(target=recognize_speech_thread, args=(input_queue,stop,), daemon=True).start()
 
     # Return from the Function
