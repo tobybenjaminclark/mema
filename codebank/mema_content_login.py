@@ -22,13 +22,24 @@ class content_login(content_frame):
         self.current_face = "Unknown"
 
         # This will display MeMa at the top of the screen
-        self.mema_label = Label(self, text = "Memory Machine", font = ("Arial", 56, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
+        title: str = "Memory Machine"
+        self.mema_label = Label(self, text = title, font = ("Arial", 56, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
         self.mema_label.pack(pady = 20)
 
         # This sets up the Facial Recognition Frame, which recognizes faces using cv2 & face_recognition modules.
         # It will display the webcam, and will pass the recognized face UserID to facial_recognition_callback() method.
         self.facial_recognition_frame = facial_recognition(self, self.facial_recognition_callback, width = 800)
         self.facial_recognition_frame.pack()
+
+        # This will display text under the facial recognition panel
+        description:str = "Look at the Camera and say 'LOGIN'"
+        self.mema_label2 = Label(self, text = description, font = ("Arial", 35, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
+        self.mema_label2.pack(pady = (20,5))
+
+        # Displays sub-description label
+        sub_description:str = "New to Memory Machine? Say 'NEW'"
+        self.mema_label3 = Label(self, text = sub_description, font = ("Arial", 30), bg = MEMA_WHITE, fg = MEMA_BLACK)
+        self.mema_label3.pack(pady = (0,20))
 
     def update_buttons(self) -> None:
         """

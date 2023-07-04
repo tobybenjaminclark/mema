@@ -13,14 +13,14 @@ class facial_recognition(Frame):
     def __init__(self, parent, callback, *args, **kwargs) -> None:
 
         # Call Superclass Constructor
-        Frame.__init__(self, parent, *args, **kwargs)
+        Frame.__init__(self, parent, *args, **kwargs, highlightbackground = MEMA_BLACK, highlightthickness = 2)
 
         # Sets the callback function
         self.callback: function(str)
         self.callback = callback
 
         # Create Label to Display
-        self.video_label = Label(self)
+        self.video_label = Label(self, bg = MEMA_BLACK)
         self.video_label.pack()
 
         # Used to auto-deny the after() after quit
