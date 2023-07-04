@@ -23,10 +23,10 @@ class content_home(content_frame):
     def update_buttons(self) -> None:
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
-        buttons[0] = ("Exit", "HOME_EXIT")
-        buttons[1] = (None, None)
+        buttons[0] = ("Create New Memory", "HOME_NEWM")
+        buttons[1] = ("View Memories", "HOME_VIEWM")
         buttons[2] = (None, None)
-        buttons[3] = (None, None)
+        buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 
     def callback(self, callback_request: dict[str:str]) -> None:
@@ -34,6 +34,10 @@ class content_home(content_frame):
         match (callback_request["content"]):
             case "HOME_EXIT":
                 self.parent.reset_path()
+            case "HOME_NEWM":
+                print("New Memory")
+            case "HOME_VIEWM":
+                print("View Memories")
 
 
 

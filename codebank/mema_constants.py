@@ -11,7 +11,7 @@ MEMA_BUTTON_COLOURS: list[str] = ["#FCD0A1", "#AFD2E9", "#B8B8FF", "#D295BF"]
 
 # Change this to change frame backgrounds & text color
 global MEMA_WHITE, MEMA_BLACK
-MEMA_WHITE: str = "#FAFFFD"
+MEMA_WHITE: str = "#EFE9E7"
 MEMA_BLACK: str = "#1B1311"
 
 

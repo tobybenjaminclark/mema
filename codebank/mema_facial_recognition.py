@@ -183,6 +183,9 @@ class facial_recognition(Frame):
         # Schedule the next frame update
         self.after(20, self.display_recognition)
 
+    def __del__(self) -> None:
+        self.quit()
+
     def quit(self) -> None:
 
         # Sets to halt
