@@ -5,52 +5,118 @@ import PIL
 from PIL import ImageTk
 from mema_content_frame import *
 
-class content_record(content_frame):
+class content_record(Frame):
+    """
+    A class for recording video and taking photos using a webcam.
 
-    def __init__(self, parent, *args, **kwargs) -> None:
+    Args:
+        parent (tk.Widget): The parent widget.
 
-        Frame.__init__(self, parent, *args, **kwargs)
+    Attributes:
+        recording (bool): Indicates whether recording is in progress.
+        label (tk.Label): The label to display the video stream.
+        stop_button (tk.Button): The button to stop recording.
+        record_button (tk.Button): The button to start/stop recording.
+        take_photo_button (tk.Button): The button to take a photo.
+        cap (cv2.VideoCapture): The video capture object.
+        out (cv2.VideoWriter): The video writer object.
+        current_image (numpy.ndarray): The current image frame from the webcam.
+    """
 
+    def __init__(self, parent, *args, **kwargs):
+        """
+        Initialize the ContentRecord object.
+
+        Args:
+            parent (tk.Widget): The parent widget.
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+        """
+        super().__init__(parent, *args, **kwargs)
+
+        self.parent = parent
         self.recording = False
 
-        # This will return video from the first webcam on your computer.
-        self.label = Label(self, anchor = CENTER, highlightbackground = "black", highlightthickness = 2, bg = "black")
+        # Create and pack the label to display the video stream
+        self.label = Label(self, anchor=CENTER, highlightbackground="black", highlightthickness=2, bg="black")
         self.label.pack()
 
-        self.stop_button = Button(self, text = "stop", command = lambda: self.stop())
-        self.stop_button.pack()
-
-        self.record_button = Button(self, text = "start recording", command = lambda: self.start_recording())
-        self.record_button.pack()
-
-        self.take_photo_button = Button(self, text = "take photo", command = lambda: self.take_photo())
-        self.take_photo_button.pack()
-
+        # Create a video capture object for the webcam
         self.cap = cv2.VideoCapture(0)
 
-        self.show_frames()
-    
-    def start_recording(self):
+        self.update_buttons()
 
-        # Define the codec and create VideoWriter object
-        self.record_button.configure(text = "stop recording", command = lambda: self.stop_recording())
-        self.update()
+        # Start displaying video frames
+        self.show_frames()
+
+    def update_buttons(self):
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Start Recording", "RECORD_RECORD")
+        buttons[1] = ("Take Photo", "RECORD_TAKE_PHOTO")
+        buttons[2] = (None, None)
+        buttons[3] = ("Back", "RECORD_BACK")
+        self.parent.set_input(buttons, True)
+
+
+
+    def toggle_recording(self):
+        """
+        Toggle the recording state.
+
+        If not currently recording, start recording and change button text to 'Stop Recording'.
+        If already recording, stop recording and change button text to 'Start Recording'.
+        """
+        if not self.recording:
+            self.start_recording()
+        else:
+            self.stop_recording()
+
+    def start_recording(self):
+        """
+        Start recording video.
+
+        This method initializes the video writer object and sets the recording flag to True.
+        """
+        # Define the codec and create a VideoWriter object
         self.fourcc = cv2.VideoWriter_fourcc(*'MP4V')
         self.out = cv2.VideoWriter('sample.mp4', self.fourcc, 20.0, (640, 480))
         self.recording = True
 
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Stop Recording", "RECORD_RECORD")
+        buttons[1] = (None, None)
+        buttons[2] = (None, None)
+        buttons[3] = ("Back", "RECORD_BACK")
+        self.parent.set_input(buttons, True)
+
     def stop_recording(self):
+        """
+        Stop recording video.
+
+        This method releases the video writer object and sets the recording flag to False.
+        """
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Start Recording", "RECORD_RECORD")
+        buttons[1] = ("Take Photo", "RECORD_TAKE_PHOTO")
+        buttons[2] = (None, None)
+        buttons[3] = ("Back", "RECORD_BACK")
+        self.parent.set_input(buttons, True)
 
         self.recording = False
-        # After we release our webcam, we also release the output
-        self.record_button.configure(text = "start recording", command = lambda: self.start_recording())
-        self.update()
-        self.out.release() 
+        self.out.release()
 
     def take_photo(self):
-        # Save the photo as an image file
-        try: cv2.imwrite("test.jpg", cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
-        except Exception as e: print(f"could not take photo, exception: {e}")
+        """
+        Take a photo and save it as an image file.
+
+        The photo is saved as 'test.jpg' in the current directory.
+        """
+        try:
+            cv2.imwrite("test.jpg", cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+        except Exception as e:
+            print(f"Could not take photo. Exception: {e}")
 
     def show_frames(self):
 
@@ -80,8 +146,16 @@ class content_record(content_frame):
         # De-allocate any associated memory usage 
         cv2.destroyAllWindows()
 
-        self.destroy()
-        quit()
+    def callback(self, callback_request:dict):
+        
+        match callback_request["content"]:
 
-    def callback(callback_request:dict):
-        pass
+            case "RECORD_RECORD":
+                self.toggle_recording()
+
+            case "RECORD_TAKE_PHOTO":
+                self.take_photo()
+
+            case "RECORD_BACK":
+                self.stop()
+                self.parent.reset_path()

@@ -8,3 +8,4 @@ numpy
 pyaudio
 SpeechRecognition
 tkvideoplayer
+pdoc
