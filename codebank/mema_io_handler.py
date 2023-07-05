@@ -7,7 +7,11 @@ from mema_speech_recognition import *
 class io_handler():
 
     def __init__(self, button_frame: button_frame, input_queue: Queue) -> None:
-        
+        """
+        Initializes the IO Handler, sets the IO Handler of the button frame, creates the main input queue, speech-recog input queue
+        and button event input queue. Initializes an empty speech-callback translation dictionary and starts the thread.
+        """
+
         self.button_frame = button_frame
         self.button_frame.set_io_handler(self)
 
@@ -32,21 +36,34 @@ class io_handler():
         Thread(target=self.handle_io, daemon=True).start()
 
     def create_speech_recognition_thread(self) -> None:
-        
+        """
+        Creates & Starts the speech recognition thread
+        """
+
         # Create the speech recognition thread
         self.stop_speech_recognition_thread = False
         listen(self.sr_input_queue, False)
         
     def close_speech_recognition_thread(self) -> None:
-        
+        """
+        Stops the speech recognition thread (iffy)
+        """
+
         # Stops speech recognition thread
         self.stop_speech_recognition_thread = True
 
     def create_button_frame(self) -> None:
+        """
+        Sets the button_frame IO Handler and IO Queue to this.
+        """
+
         self.button_frame.set_io_handler(self)
         self.button_frame.set_io_queue(self.button_input_queue)
 
     def set_input(self, button_callback: list[(str, str)], read = False) -> None:
+        """
+        Handles the mapping of TTS-commands to Callback Strings
+        """
 
         # Setup TTS conversions
         self.speech_translations = {}
@@ -59,7 +76,10 @@ class io_handler():
         self.button_frame.set_buttons(button_callback, read)
 
     def handle_io(self):
-        
+        """
+        Main Thread loop to take IO requests from the speech recognition and button press queue and formulate it into JSON-style
+        call-back requests to the main_window, which will then be passed directly to the current content_frame.
+        """
         while True:
 
             response: dict[str:any]|None = None
