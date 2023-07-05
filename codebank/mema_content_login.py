@@ -60,6 +60,9 @@ class content_login(content_frame):
         """
         self.current_face = name
 
+    def __del__(self) -> None:
+        self.facial_recognition_frame.quit()
+
     def callback(self, callback_request:dict[str:str]) -> None:
         """
         Callback method called when the user interacts (speech/button), calls the appropriate response.

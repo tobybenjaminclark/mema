@@ -82,6 +82,6 @@ class content_new_user_photo(content_frame):
                 self.show_frames()
                 speak("Sorry, say TAKE PHOTO when you are ready.")
                 
-
-        # yes: 
+    def __del__(self):
+        self.cap.release()
             

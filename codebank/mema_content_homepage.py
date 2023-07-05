@@ -4,6 +4,7 @@ from mema_facial_recognition import *
 from mema_text_to_speech import *
 from mema_content_new_user_photo import *
 from mema_data_access import *
+from mema_content_memory_create import *
 
 class content_home(content_frame):
 
@@ -35,7 +36,7 @@ class content_home(content_frame):
             case "HOME_EXIT":
                 self.parent.reset_path()
             case "HOME_NEWM":
-                print("New Memory")
+                self.parent.switch_content(content_memory_create, )
             case "HOME_VIEWM":
                 print("View Memories")
 

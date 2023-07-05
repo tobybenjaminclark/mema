@@ -107,7 +107,7 @@ class facial_recognition(Frame):
 
             # Resize frame of video to 1/4 size for faster face recognition processing
             small_frame: cv2.Mat
-            small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
+            small_frame = cv2.resize(frame, (0, 0), fx=0.20, fy=0.20)
 
             # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
             rgb_small_frame: cv2.Mat
@@ -166,10 +166,10 @@ class facial_recognition(Frame):
         # Display the results
         for (top, right, bottom, left), name in zip(self.face_locations, self.face_names):
             # Scale back up face locations since the frame we detected in was scaled to 1/4 size
-            top *= 4
-            right *= 4
-            bottom *= 4
-            left *= 4
+            top *= 5
+            right *= 5
+            bottom *= 5
+            left *= 5
             
             # Render a circle around the face
             cv2.circle(frame, ((right+left)//2, (bottom+top)//2), right-left, (255, 255, 255), 3)
