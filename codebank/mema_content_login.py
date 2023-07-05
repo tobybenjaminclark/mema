@@ -21,7 +21,7 @@ class content_login(content_frame):
     
     def setup_title(self, title: str = "Memory Machine") -> None:
         """
-        Creates a title label and packs it to the screen. 
+        Creates a title label and packs it to the screen.
         """
 
         self.mema_label: Label

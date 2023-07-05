@@ -10,32 +10,85 @@ import cv2
 class content_new_user(content_frame):
 
     def __init__(self, parent, *args, **kwargs)-> None:
+        """
+        Initializes the GUI and frame variables (awaiting_confirmation & name_buffer)
+        """
+
         content_frame.__init__(self, *args, **kwargs)
 
         # Configure parent
         self.parent = parent
 
-        self.intro_label: Label = Label(self, text = "Welcome to", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 26, "bold"))
-        self.main_label: Label = Label(self, text = "Memory Machine", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
-        self.sub_label: Label = Label(self, text = "What's your name?", fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
-        self.intro_label.pack()
-        self.main_label.pack(pady=(0,50))
-        self.sub_label.pack()
+        # Is the user confirming their name?
+        self.awaiting_confirmation: bool
+        self.awaiting_confirmation = False
 
-        self.update_buttons()
-        self.previous_callback = "a"
-        self.sub_label.configure(text = "What's your name?")
+        # Buffer to store the spoken name in
+        self.name_buffer: str
+        self.name_buffer = "a"
 
+        # Update buttons and setup the GUI
+        # True is passed to update_buttons here as it represents the first time the buttons are 
+        # created. Look at the update_buttons() method for more information.
+        self.setup_gui()
+        self.update_buttons(True)
+        
         speak("Let's set you up with Memory Machine. What is your name?")
 
+    def setup_gui(self) -> None:
+        """
+        Initializes this frames GUI, creating the introduction labels.
+        """
 
+        self.setup_intro_label()
+        self.setup_main_label()
+        self.setup_sub_label()
+        
+    def setup_intro_label(self, label_text:str = "Welcome to") -> None:
+        """
+        Creates a label saying "Welcome to", this should be placed above the main label ("Memory Machine")
+        """
+
+        self.intro_label: Label
+        self.intro_label = Label(self, text = label_text, fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 26, "bold"))
+        self.intro_label.pack()
+
+    def setup_main_label(self, label_text:str = "Memory Machine") -> None:
+        """
+        Creates a large label saying "Memory Machine". This label has a considerable amount of padding below (50px)
+        """
+
+        self.main_label: Label
+        self.main_label = Label(self, text = label_text, fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
+        self.main_label.pack(pady=(0,50))
+
+    def setup_sub_label(self, label_text:str = "What's your name?") -> None:
+        """
+        Creates a sub label, asking the user what their name is
+        """
+
+        self.sub_label: Label
+        self.sub_label = Label(self, text = label_text, fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
+        self.sub_label.pack()
 
     def confirm_name(self, name: str) -> None:
+        """
+        Changes the label to the users name after they have said it to allow them to confirm it. Also changes the butttons
+        """
+        speak("You said, " + name + ", is that correct? Simply say Yes or No.")
+
         self.awaiting_confirmation = True
         self.name_buffer = name
-        speak("You said, " + name + ", is that correct? Simply say Yes or No.")
+        
         self.sub_label.configure(text = "Did you say " + name + "?")
+
+        self.change_buttons_after_name()
         self.update()
+
+    def change_buttons_after_name(self) -> None:
+        """
+        Changes the buttons after the user has input their name to allow them to confirm/unconfirm the name.
+        """
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Yes", "CONFIRM_YES")
@@ -44,13 +97,13 @@ class content_new_user(content_frame):
         buttons[3] = (None, None)
         self.parent.set_input(buttons, False)
 
-    def update_buttons(self) -> None:
+    def update_buttons(self, first_time = False) -> None:
+        """
+        Updates the displayed buttons to show back. The first_time parameter, which is default to be False is used to update the sub_label
+        to say 'Sorry, please repeat your name'.
+        """
 
-        self.awaiting_confirmation: bool = False
-        self.name_buffer: str = ""
-
-        self.sub_label.configure(text = "Sorry, please repeat your name")
-        self.update()
+        if(not first_time): self.sub_label.configure(text = "Sorry, please repeat your name")
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Back", "NEW_USR_BACK")
@@ -59,7 +112,12 @@ class content_new_user(content_frame):
         buttons[3] = (None, None)
         self.parent.set_input(buttons, False)
 
+        self.update()
+
     def callback(self, callback_request: dict[str:str]) -> None:
+        """
+        Handles all callback, (e.g. button presses) Can either return to menu, go to the photo screen.
+        """
 
         match (callback_request["content"]):
             case "NEW_USR_BACK":
@@ -67,7 +125,7 @@ class content_new_user(content_frame):
 
             case "CONFIRM_YES":
                 speak("Welcome to Memory Machine " + self.name_buffer)
-                self.after(2500, self.progress)
+                self.after(2500, self.parent.switch_content(content_new_user_photo, self.name_buffer))
 
             case "CONFIRM_NO":
                 speak("Sorry, please could you repeat your name?")
@@ -76,9 +134,7 @@ class content_new_user(content_frame):
             case _:
                 self.confirm_name(callback_request["content"])
 
-    def progress(self) -> None:
-
-        self.parent.switch_content(content_new_user_photo, self.name_buffer)
+        
 
 
 
