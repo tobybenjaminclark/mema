@@ -8,7 +8,10 @@ from mema_io_handler import *
 class main_window(Tk):
 
     def __init__(self, *args, **kwargs) -> None:
-        
+        """
+        Initializes the window, sets up the queues and IO Handler. Calls the mainloop function.
+        """
+
         # Call Superclass Constructor & setup
         Tk.__init__(self, *args, **kwargs)
         self.configure_tk_instance()
@@ -20,28 +23,50 @@ class main_window(Tk):
 
         self.switch_content(content_login)
 
-        # Mainloop
+        # Mainloop (Overwritten as a method)
+        self.mainloop()
+
+    def mainloop(self) -> None:
+        """
+        Handles events and updates the screen (main loop)
+        """
+
         while True:
             if(self.io_queue.empty() is False):
                 self.callback(self.io_queue.get())
             self.update()
+        return None
 
     def reset_path(self) -> None:
+        """
+        Resets the current page to the content_login page (memory machine main page)
+        """
+
         self.switch_content(content_login)
 
     def switch_content(self, new_content:type, args:list = None) -> None:
-        
+        """
+        Switches the content to the passed type, with the passed arguments
+        """
+
         self.content_frame.grid_forget()
         self.content_frame = new_content(self, args)
         self.content_frame.grid(row=0,column=0,sticky=NSEW)
 
     def set_input(self, button_callback: list[(str, str)], read = False) -> None:
+        """
+        Sets the inputs for a page, this is usually called by the page to update the buttons. This method will
+        then update the speech recognition thread.
+        """
 
         # Proxys to self.button_frame.set_buttons()
         self.io_handler.set_input(button_callback, read)
 
     def configure_tk_instance(self) -> None:
-    
+        """
+        Sets up the Tk instance, see mema_constants.py for preset options. Sets up the content frame and button frame.
+        """
+
         # Sets the window geometry to the mema3 physical screen
         self.geometry(MEMA_SCREEN_DIMENSIONS)
 
@@ -63,9 +88,18 @@ class main_window(Tk):
         self.content_frame.grid(row=0, column=0, sticky=NSEW)
 
     def callback(self, callback_request: dict[str:str]) -> None:
+        """
+        Passes callback to the content frame. This is called from the mainloop() method, and is used to notify
+        the content frame of events.
+        """
+
         self.content_frame.callback(callback_request)
 
     def quit(self) -> None:
+        """
+        Destroys the frame and exits.
+        """
+
         self.destroy()
         quit()
 
