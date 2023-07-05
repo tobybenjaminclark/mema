@@ -11,6 +11,10 @@ from typing import TextIO
 class facial_recognition(Frame):
 
     def __init__(self, parent, callback, *args, **kwargs) -> None:
+        """
+        Initializes the facial_recognition frame, starts a cv2 video capture, and starts recognizing faces in the current
+        capture stream, this is then rendered to a Tk Frame. (This class is a subclass of a tk.Frame)
+        """
 
         # Call Superclass Constructor
         Frame.__init__(self, parent, *args, **kwargs, highlightbackground = MEMA_BLACK, highlightthickness = 2)
@@ -43,7 +47,10 @@ class facial_recognition(Frame):
         self.display_recognition()
 
     def load_face_encodings(self) -> None:
-        
+        """
+        Loads the face encodings from the databank/userbank_n folder to recognize users.
+        """
+
         # Initialize empty lists for known faces and names
         self.known_faces: list = []
         self.known_names: list = []
@@ -77,6 +84,9 @@ class facial_recognition(Frame):
         return None
 
     def display_recognition(self) -> None:
+        """
+        Main function, grabs a frame, processes it and reschedules
+        """
 
         if(self.halt): return
 
