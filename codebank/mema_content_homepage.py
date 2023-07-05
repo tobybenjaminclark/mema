@@ -37,7 +37,7 @@ class content_home(content_frame):
             case "HOME_EXIT":
                 self.parent.reset_path()
             case "HOME_NEWM": 
-                self.parent.switch_content(content_record, self.user_id)
+                self.parent.switch_content(content_record)
             case "HOME_VIEWM":
                 print("View Memories")
 

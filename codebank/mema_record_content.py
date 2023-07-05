@@ -1,7 +1,8 @@
 import numpy as np
 import cv2
 from tkinter import *
-from PIL import Image, ImageTk
+import PIL
+from PIL import ImageTk
 from mema_content_frame import *
 
 class content_record(content_frame):
@@ -61,7 +62,7 @@ class content_record(content_frame):
         if(self.recording): self.out.write(frame) 
         
         self.current_image = cv2.cvtColor(self.cap.read()[1],cv2.COLOR_BGR2RGB)
-        img = Image.fromarray(self.current_image)
+        img = PIL.Image.fromarray(self.current_image)
 
         # Convert image to PhotoImage
         imgtk = ImageTk.PhotoImage(image = img)

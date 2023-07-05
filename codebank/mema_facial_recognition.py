@@ -204,3 +204,4 @@ class facial_recognition(Frame):
         # Release handle to the webcam
         self.video_capture.release()
         cv2.destroyAllWindows()
+        print("Login CV2 Instance Destroyed")

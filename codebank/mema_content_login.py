@@ -112,9 +112,12 @@ class content_login(content_frame):
 
             # Login using the current face
             case "LOGIN_LOGIN":
-
+                
                 print(self.current_face)
                 if(self.current_face == "Unknown"): return
+
+                self.facial_recognition_frame.quit()
+                del self.facial_recognition_frame
 
                 user_id = get_user(self.current_face)
                 self.parent.switch_content(content_home, self.current_face)

@@ -50,6 +50,7 @@ class main_window(Tk):
         """
 
         self.content_frame.grid_forget()
+        del self.content_frame
         self.content_frame = new_content(self, args)
         self.content_frame.grid(row=0,column=0,sticky=NSEW)
 
