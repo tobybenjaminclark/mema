@@ -21,6 +21,10 @@ class content_login(content_frame):
         # Sets the current face to Unknown.
         self.current_face = "Unknown"
 
+        self.setup_gui()
+    
+    def setup_gui(self) -> None:
+        
         # This will display MeMa at the top of the screen
         title: str = "Memory Machine"
         self.mema_label = Label(self, text = title, font = ("Arial", 56, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
