@@ -1,6 +1,6 @@
 from mema_content_frame import *
 import cv2
-from PIL import ImageTk, Image
+import PIL
 from mema_text_to_speech import *
 from mema_data_access import *
 from mema_content_homepage import *
@@ -33,12 +33,15 @@ class content_new_user_photo(content_frame):
         self.update_buttons()
 
     def update_buttons(self) -> None:
+        """
+        Updates the buttons to display the option to Take Photo or return to the main menu
+        """
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
-        buttons[0] = ("Take Photo", "TAKE_PHOTO")
+        buttons[0] = ("Take Photo", "NEW_USER_TAKE_PHOTO")
         buttons[1] = (None, None)
         buttons[2] = (None, None)
-        buttons[3] = (None, None)
+        buttons[3] = ("Back", "NEW_USER_BACK")
         self.parent.set_input(buttons, False)
 
     def show_frames(self):
@@ -46,9 +49,9 @@ class content_new_user_photo(content_frame):
 
         # Get the latest frame and convert into Image
         self.current_image = cv2.cvtColor(self.cap.read()[1],cv2.COLOR_BGR2RGB)
-        img = Image.fromarray(self.current_image)
+        img = PIL.Image.fromarray(self.current_image)
         # Convert image to PhotoImage
-        imgtk = ImageTk.PhotoImage(image = img)
+        imgtk = PIL.ImageTk.PhotoImage(image = img)
         self.label.imgtk = imgtk
         self.label.configure(image=imgtk)
         # Repeat after an interval to capture continiously
@@ -61,16 +64,19 @@ class content_new_user_photo(content_frame):
         buttons[0] = ("Yes", "CONFIRM_IMAGE")
         buttons[1] = ("No", "UNCONFIRM_IMAGE")
         buttons[2] = (None, None)
-        buttons[3] = (None, None)
+        buttons[3] = ("Back", "NEW_USER_BACK")
         self.parent.set_input(buttons, False)
 
     def callback(self, callback_request: dict[str:str]):
         
         match callback_request["content"]:
 
-            case "TAKE_PHOTO":
+            case "NEW_USER_TAKE_PHOTO":
                 self.kill_cam = True
                 self.confirm_image()
+
+            case "NEW_USER_BACK":
+                self.parent.reset_path()
             
             case "CONFIRM_IMAGE":
                 new_user_id: int = new_user(self.name, self.current_image)

@@ -1,5 +1,6 @@
 from mema_content_frame import *
 from mema_text_to_speech import *
+from mema_data_access import *
 
 class content_memory_create(content_frame):
 
@@ -54,7 +55,7 @@ class content_memory_create(content_frame):
         speak("You said, " + name + ", is that correct? Simply say Yes or No.")
 
         self.awaiting_confirmation = True
-        self.name_buffer = name
+        self.memory_name_buffer = name
         
         self.sub_label.configure(text = "Did you say " + name + "?")
 
@@ -101,6 +102,7 @@ class content_memory_create(content_frame):
 
             case "CONFIRM_YES":
                 print("MEMORY!")
+                create_memoryspace(self.user_id, self.memory_name_buffer)
 
             case "CONFIRM_NO":
                 speak("Sorry, please could you repeat your name?")

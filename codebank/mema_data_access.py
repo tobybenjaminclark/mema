@@ -79,3 +79,14 @@ def get_user(id: int) -> dict:
     openfile.close()
 
     return file
+
+def create_memoryspace(id: int, memory_name: str) -> str:
+    """
+    Creates a new memoryspace in the passed users ID, with the passed memory name string
+    """
+
+    # Make a new directory for the memory to be stored in
+    directory_path = os.getcwd() + "/databank/userbank_" + str(id) + "/memoryspace_" + str(memory_name).replace(" ", "_").lower()
+    os.makedirs(directory_path, exist_ok = True)
+
+    return directory_path
