@@ -9,3 +9,5 @@ pyaudio
 SpeechRecognition
 tkvideoplayer
 pdoc
+scipy
+sounddevice
