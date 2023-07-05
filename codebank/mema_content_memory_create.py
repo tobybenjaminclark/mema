@@ -3,19 +3,40 @@ from mema_text_to_speech import *
 
 class content_memory_create(content_frame):
 
-    def __init__(self, parent, user_id, *args, **kwargs):
+    def __init__(self, parent, user_id: int, *args, **kwargs) -> None:
         content_frame.__init__(self, *args, **kwargs)
-
-        speak("We need to take a photograph of you to login, please center your face and say TAKE PHOTO")
-
-        self.scrollbar = Scrollbar(self, orient = 'horizontal', command = self.xview)
-        self.scrollbar.grid(row=1, column = 0, sticky = 'ew')
-
-        self.label = Label(text = "TEST TEST TEST TEST TEST TEST", font = ("Arial", 50, "bold"))
-        self.label.grid(row = 0, column = 0)
-
         self.parent = parent
-        self.user_id = user_id
+        self.user_id: int = user_id
+
+        return None
+
+    def update_buttons(self) -> None:
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Camera", "MEM_CREATE_CAMERA")
+        buttons[1] = ("Audio", "MEM_CREATE_AUDIO")
+        buttons[2] = ("Caption", "MEM_CREATE_CAPTION")
+        buttons[3] = ("Back", "MEM_CREATE_BACK")
+        self.parent.set_input(buttons, True)
+
+    def setup_gui(self) -> None:
+
+        return None
 
     def callback(self, callback_request:dict) -> None:
-        print(callback_request)
+        
+        match callback_request["content"]:
+
+            case "MEM_CREATE_CAMERA":
+                pass
+
+            case "MEM_CREATE_AUDIO":
+                pass
+
+            case "MEM_CREATE_CAPTION":
+                pass
+
+            case "MEM_CREATE_BACK":
+                self.parent.reset_path()
+
+        return None
