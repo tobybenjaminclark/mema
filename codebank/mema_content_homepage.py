@@ -5,6 +5,7 @@ from mema_text_to_speech import *
 from mema_content_new_user_photo import *
 from mema_data_access import *
 from mema_content_memory_create import *
+from mema_record_content import *
 
 class content_home(content_frame):
 
@@ -36,7 +37,7 @@ class content_home(content_frame):
             case "HOME_EXIT":
                 self.parent.reset_path()
             case "HOME_NEWM": 
-                self.parent.switch_content(content_memory_create, self.user_id)
+                self.parent.switch_content(content_record, self.user_id)
             case "HOME_VIEWM":
                 print("View Memories")
 
