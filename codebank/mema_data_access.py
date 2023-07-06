@@ -16,7 +16,7 @@ def create_userbank() -> str:
     directory_path = os.getcwd() + "/databank/"
 
     # Getting list of subfolders
-    subfolders = [f.path for f in os.scandir(directory_path) if f.is_dir()]
+    subfolders = [file.path for file in os.scandir(directory_path) if file.is_dir()]
     subfolders = [path_string.rsplit('/', 1)[1] for path_string in subfolders]
     
     # Generating userbank name (userbank_ + next iteration)
