@@ -4,7 +4,7 @@ from mema_data_access import *
 
 class content_memory_create_name(content_frame):
 
-    def __init__(self, parent, user_id: int, *args, **kwargs)-> None:
+    def __init__(self, parent, memory_path: str, *args, **kwargs)-> None:
         """
         Initializes the GUI and frame variables (awaiting_confirmation & name_buffer)
         """
@@ -13,7 +13,7 @@ class content_memory_create_name(content_frame):
 
         # Configure parent
         self.parent = parent
-        self.user_id = user_id
+        self.memory_path = memory_path
 
         # Is the user confirming their name?
         self.awaiting_confirmation: bool
