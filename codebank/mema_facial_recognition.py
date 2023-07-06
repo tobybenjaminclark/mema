@@ -61,7 +61,7 @@ class facial_recognition(Frame):
 
         # Getting list of subfolders
         subfolders: list[str]
-        subfolders = [file.path for file in os.scandir(directory_path) if file.is_dir()]
+        subfolders = [f.path for f in os.scandir(directory_path) if f.is_dir()]
 
         for subfolder_path in subfolders:
             # Open the header JSON file

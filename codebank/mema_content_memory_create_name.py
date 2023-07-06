@@ -1,10 +1,12 @@
 from mema_content_frame import *
 from mema_text_to_speech import *
 from mema_data_access import *
+from mema_record_content import *
+from mema_content_memory_create_home import *
 
 class content_memory_create_name(content_frame):
 
-    def __init__(self, parent, memory_path: str, *args, **kwargs)-> None:
+    def __init__(self, parent, user_id: str, *args, **kwargs)-> None:
         """
         Initializes the GUI and frame variables (awaiting_confirmation & name_buffer)
         """
@@ -13,7 +15,7 @@ class content_memory_create_name(content_frame):
 
         # Configure parent
         self.parent = parent
-        self.memory_path = memory_path
+        self.user_id = user_id
 
         # Is the user confirming their name?
         self.awaiting_confirmation: bool
@@ -102,7 +104,9 @@ class content_memory_create_name(content_frame):
 
             case "CONFIRM_YES":
                 print("MEMORY!")
-                create_memoryspace(self.user_id, self.memory_name_buffer)
+                mempath = create_memoryspace(self.user_id, self.memory_name_buffer)
+                self.parent.switch_content(content_memory_create_home, mempath)
+
 
             case "CONFIRM_NO":
                 speak("Sorry, please could you repeat your name?")

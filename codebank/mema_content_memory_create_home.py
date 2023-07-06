@@ -7,14 +7,15 @@ from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
 
-class content_home(content_frame):
+class content_memory_create_home(content_frame):
 
-    def __init__(self, parent, user_id, *args, **kwargs)-> None:
+    def __init__(self, parent, memoryspace_path: str, *args, **kwargs)-> None:
         content_frame.__init__(self, *args, **kwargs)
 
         # Configure parent
         self.parent = parent
-        self.user_id = user_id
+        self.memoryspace_path: str = memoryspace_path
+        self.frame = 0
         self.update_buttons()
 
         self.label2 = Label(self, text = "Welcome to MeMa", font = ("Arial", 30, "bold"))
@@ -25,7 +26,7 @@ class content_home(content_frame):
     def update_buttons(self) -> None:
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
-        buttons[0] = ("Create New Memory", "HOME_NEWM")
+        buttons[0] = ("Camera", "CREATE_HOME_CAM")
         buttons[1] = ("View Memories", "HOME_VIEWM")
         buttons[2] = (None, None)
         buttons[3] = ("Exit", "HOME_EXIT")
@@ -36,12 +37,7 @@ class content_home(content_frame):
         match (callback_request["content"]):
             case "HOME_EXIT":
                 self.parent.reset_path()
-            case "HOME_NEWM": 
-                self.parent.switch_content(content_memory_create_name, self.user_id)
+            case "CREATE_HOME_CAM": 
+                self.parent.switch_content(content_record, self.memoryspace_path, self.frame)
             case "HOME_VIEWM":
                 print("View Memories")
-
-
-
-
-
