@@ -24,18 +24,18 @@ class main_window(Tk):
         self.switch_content(content_login)
 
         # Mainloop (Overwritten as a method)
+        self.after(5, self.custom_mainloop)
         self.mainloop()
 
-    def mainloop(self) -> None:
+    def custom_mainloop(self) -> None:
         """
         Handles events and updates the screen (main loop)
         """
+        if(self.io_queue.empty() is False):
+            self.callback(self.io_queue.get())
+        self.update()
+        self.after(5, self.custom_mainloop)
 
-        while True:
-            if(self.io_queue.empty() is False):
-                self.callback(self.io_queue.get())
-            self.update()
-        return None
 
     def reset_path(self) -> None:
         """

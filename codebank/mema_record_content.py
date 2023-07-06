@@ -5,6 +5,7 @@ import PIL
 from PIL import ImageTk
 from mema_content_frame import *
 from tkVideoPlayer import TkinterVideo
+import os
 
 class content_record(Frame):
     """
@@ -69,6 +70,15 @@ class content_record(Frame):
         buttons[3] = ("Back", "RECORD_BACK")
         self.parent.set_input(buttons, True)
 
+    def update_buttons_video(self):
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Keep Video", "RECORD_VIDEO_KEEP")
+        buttons[1] = ("Retake Video", "RECORD_VIDEO_RETAKE")
+        buttons[2] = (None, None)
+        buttons[3] = ("Back", "RECORD_BACK")
+        self.parent.set_input(buttons, True)
+
     def toggle_recording(self):
         """
         Toggle the recording state.
@@ -116,6 +126,7 @@ class content_record(Frame):
         self.recording = False
         self.out.release()
 
+        self.update_buttons_video()
         self.show_video()
 
     def take_photo(self):
@@ -167,7 +178,6 @@ class content_record(Frame):
         self.videoplayer.pack(expand=True, fill="both")
         self.videoplayer.play()
         self.videoplayer.bind("<<Ended>>", self.replay)
-        self.mainloop()
 
     def stop(self):
 
@@ -198,3 +208,17 @@ class content_record(Frame):
                 self.halt = False
                 self.show_frames()
                 self.update_buttons()
+
+            case "RECORD_VIDEO_RETAKE":
+                print("Destroy")
+                self.videoplayer.destroy()
+                self.label = Label(self, anchor=CENTER, highlightbackground="black", highlightthickness=2, bg="black")
+                self.label.pack()
+                self.update()
+                self.halt = False
+                self.show_frames()
+                self.update_buttons()
+                os.remove("sample.mp4")
+
+            case "RECORD_VIDEO_KEEP":
+                pass
