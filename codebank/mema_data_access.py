@@ -88,7 +88,8 @@ def create_memoryspace(id: int, memory_name: str) -> str:
     # Make a new directory for the memory to be stored in
     directory_path = os.getcwd() + "/databank/userbank_" + str(id) + "/memoryspace_" + str(memory_name).replace(" ", "_").lower()
     os.makedirs(directory_path, exist_ok = True)
-
+    
+    print(f"data_access: created memoryspace @ {directory_path}")
     return directory_path
 
 def write_image_to_memoryspace(image, memoryspace_path) -> None:

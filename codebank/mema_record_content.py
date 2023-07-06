@@ -5,6 +5,7 @@ import PIL
 from PIL import ImageTk
 from mema_content_frame import *
 from tkVideoPlayer import TkinterVideo
+from mema_content_memory_create_home import *
 import os
 
 class content_record(Frame):
@@ -101,7 +102,7 @@ class content_record(Frame):
         This method initializes the video writer object and sets the recording flag to True.
         """
         # Define the codec and create a VideoWriter object
-        video_path = self.memoryspace_path + self.memoryspace_frame + "_video.mp4"
+        video_path = self.memoryspace_path + "/" + self.memoryspace_frame + "_video.mp4"
         self.fourcc = cv2.VideoWriter_fourcc(*'MP4V')
         self.out = cv2.VideoWriter(video_path, self.fourcc, 20.0, (640, 480))
         self.recording = True
@@ -176,9 +177,9 @@ class content_record(Frame):
         
         self.label.destroy()
         self.halt = True
-
+        video_path: str = self.memoryspace_path + "/" + self.memoryspace_frame + "_video.mp4"
         self.videoplayer = TkinterVideo(master=self, scaled=True)
-        self.videoplayer.load(r"sample.mp4")
+        self.videoplayer.load(video_path)
         self.videoplayer.pack(expand=True, fill="both")
         self.videoplayer.play()
         self.videoplayer.bind("<<Ended>>", self.replay)
@@ -203,10 +204,11 @@ class content_record(Frame):
 
             case "RECORD_BACK":
                 self.stop()
-                self.parent.reset_path()
-
+                self.parent.switch_content(content_memory_create_home, self.memoryspace_path)
+                
             case "RECORD_PHOTO_KEEP":
-                cv2.imwrite("test.jpg", cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+                path = self.memoryspace_path + "/" + self.memoryspace_frame + "_photo.jpeg"
+                cv2.imwrite(path, cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
             
             case "RECORD_PHOTO_RETAKE":
                 self.halt = False

@@ -6,6 +6,7 @@ from mema_content_new_user_photo import *
 from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
+from mema_record_content import *
 
 class content_memory_create_home(content_frame):
 
@@ -17,11 +18,6 @@ class content_memory_create_home(content_frame):
         self.memoryspace_path: str = memoryspace_path
         self.frame = 0
         self.update_buttons()
-
-        self.label2 = Label(self, text = "Welcome to MeMa", font = ("Arial", 30, "bold"))
-        self.label = Label(self, text = str(get_user(self.user_id)["first_name"]), font = ("Arial", 50, "bold"))
-        self.label2.pack()
-        self.label.pack()
 
     def update_buttons(self) -> None:
 
@@ -38,6 +34,6 @@ class content_memory_create_home(content_frame):
             case "HOME_EXIT":
                 self.parent.reset_path()
             case "CREATE_HOME_CAM": 
-                self.parent.switch_content(content_record, self.memoryspace_path, self.frame)
+                self.parent.switch_content(content_record, self.memoryspace_path, str(self.frame))
             case "HOME_VIEWM":
                 print("View Memories")

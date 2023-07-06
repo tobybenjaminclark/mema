@@ -44,14 +44,14 @@ class main_window(Tk):
 
         self.switch_content(content_login)
 
-    def switch_content(self, new_content:type, args:list = None) -> None:
+    def switch_content(self, new_content:type, *args) -> None:
         """
         Switches the content to the passed type, with the passed arguments
         """
 
         self.content_frame.grid_forget()
         del self.content_frame
-        self.content_frame = new_content(self, args)
+        self.content_frame = new_content(self, *args)
         self.content_frame.grid(row=0,column=0,sticky=NSEW)
 
     def set_input(self, button_callback: list[(str, str)], read = False) -> None:
