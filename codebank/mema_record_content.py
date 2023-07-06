@@ -25,7 +25,7 @@ class content_record(Frame):
         current_image (numpy.ndarray): The current image frame from the webcam.
     """
 
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, memoryspace_path: str, memoryspace_frame: str, *args, **kwargs):
         """
         Initialize the ContentRecord object.
 
@@ -35,6 +35,9 @@ class content_record(Frame):
             **kwargs: Arbitrary keyword arguments.
         """
         super().__init__(parent, *args, **kwargs)
+
+        self.memoryspace_path = memoryspace_path
+        self.memoryspace_frame = memoryspace_frame
 
         self.parent = parent
         self.recording = False
@@ -98,8 +101,9 @@ class content_record(Frame):
         This method initializes the video writer object and sets the recording flag to True.
         """
         # Define the codec and create a VideoWriter object
+        video_path = self.memoryspace_path + self.memoryspace_frame + "_video.mp4"
         self.fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-        self.out = cv2.VideoWriter('sample.mp4', self.fourcc, 20.0, (640, 480))
+        self.out = cv2.VideoWriter(video_path, self.fourcc, 20.0, (640, 480))
         self.recording = True
 
         buttons: list[(str, str)] = [0, 0, 0, 0]

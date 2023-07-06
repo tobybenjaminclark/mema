@@ -93,6 +93,3 @@ def create_memoryspace(id: int, memory_name: str) -> str:
 
 def write_image_to_memoryspace(image, memoryspace_path) -> None:
     pass
-
-def write_video_to_memoryspace(output, memoryspace_path) -> None:
-    pass
