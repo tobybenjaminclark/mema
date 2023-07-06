@@ -2,7 +2,7 @@ from mema_content_frame import *
 from mema_text_to_speech import *
 from mema_data_access import *
 
-class content_memory_create(content_frame):
+class content_memory_create_name(content_frame):
 
     def __init__(self, parent, user_id: int, *args, **kwargs)-> None:
         """
