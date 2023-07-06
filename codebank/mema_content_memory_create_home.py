@@ -6,7 +6,6 @@ from mema_content_new_user_photo import *
 from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
-from mema_record_content import *
 
 class content_memory_create_home(content_frame):
 
@@ -34,6 +33,6 @@ class content_memory_create_home(content_frame):
             case "HOME_EXIT":
                 self.parent.reset_path()
             case "CREATE_HOME_CAM": 
-                self.parent.switch_content(content_record, self.memoryspace_path, str(self.frame))
+                self.parent.switch_content(content_record, self.memoryspace_path, str(self.frame), content_memory_create_home)
             case "HOME_VIEWM":
                 print("View Memories")

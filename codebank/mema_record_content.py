@@ -5,7 +5,6 @@ import PIL
 from PIL import ImageTk
 from mema_content_frame import *
 from tkVideoPlayer import TkinterVideo
-from mema_content_memory_create_home import *
 import os
 
 class content_record(Frame):
@@ -26,7 +25,7 @@ class content_record(Frame):
         current_image (numpy.ndarray): The current image frame from the webcam.
     """
 
-    def __init__(self, parent, memoryspace_path: str, memoryspace_frame: str, *args, **kwargs):
+    def __init__(self, parent, memoryspace_path: str, memoryspace_frame: str, return_page, *args, **kwargs):
         """
         Initialize the ContentRecord object.
 
@@ -37,6 +36,7 @@ class content_record(Frame):
         """
         super().__init__(parent, *args, **kwargs)
 
+        self.return_page = return_page
         self.memoryspace_path = memoryspace_path
         self.memoryspace_frame = memoryspace_frame
 
@@ -204,11 +204,13 @@ class content_record(Frame):
 
             case "RECORD_BACK":
                 self.stop()
-                self.parent.switch_content(content_memory_create_home, self.memoryspace_path)
+                self.parent.switch_content(self.return_page, self.memoryspace_path)
                 
             case "RECORD_PHOTO_KEEP":
                 path = self.memoryspace_path + "/" + self.memoryspace_frame + "_photo.jpeg"
                 cv2.imwrite(path, cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+                self.stop()
+                self.parent.switch_content(self.return_page, self.memoryspace_path)
             
             case "RECORD_PHOTO_RETAKE":
                 self.halt = False
@@ -227,4 +229,5 @@ class content_record(Frame):
                 os.remove("sample.mp4")
 
             case "RECORD_VIDEO_KEEP":
-                pass
+                self.stop()
+                self.parent.switch_content(self.return_page, self.memoryspace_path)
