@@ -4,6 +4,7 @@ from tkinter import *
 import PIL
 from PIL import ImageTk
 from mema_content_frame import *
+from tkVideoPlayer import TkinterVideo
 
 class content_record(Frame):
     """
@@ -36,6 +37,7 @@ class content_record(Frame):
 
         self.parent = parent
         self.recording = False
+        self.halt = False
 
         # Create and pack the label to display the video stream
         self.label = Label(self, anchor=CENTER, highlightbackground="black", highlightthickness=2, bg="black")
@@ -58,7 +60,14 @@ class content_record(Frame):
         buttons[3] = ("Back", "RECORD_BACK")
         self.parent.set_input(buttons, True)
 
+    def update_buttons_photo(self):
 
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Keep Photo", "RECORD_PHOTO_KEEP")
+        buttons[1] = ("Retake Photo", "RECORD_PHOTO_RETAKE")
+        buttons[2] = (None, None)
+        buttons[3] = ("Back", "RECORD_BACK")
+        self.parent.set_input(buttons, True)
 
     def toggle_recording(self):
         """
@@ -107,6 +116,8 @@ class content_record(Frame):
         self.recording = False
         self.out.release()
 
+        self.show_video()
+
     def take_photo(self):
         """
         Take a photo and save it as an image file.
@@ -114,7 +125,9 @@ class content_record(Frame):
         The photo is saved as 'test.jpg' in the current directory.
         """
         try:
-            cv2.imwrite("test.jpg", cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+            self.halt = True
+            self.update_buttons_photo()
+            
         except Exception as e:
             print(f"Could not take photo. Exception: {e}")
 
@@ -123,6 +136,9 @@ class content_record(Frame):
         # reads frames from a camera 
         # ret checks return at each frame
         ret, frame = self.cap.read() 
+
+        # check if photo taken
+        if(self.halt): return
 
         # output the frame
         if(self.recording): self.out.write(frame) 
@@ -137,6 +153,21 @@ class content_record(Frame):
         
         self.after(20, self.show_frames)
 
+    def replay(self, event):
+        print("replayed")
+        self.videoplayer.play()
+
+    def show_video(self):
+        
+        self.label.destroy()
+        self.halt = True
+
+        self.videoplayer = TkinterVideo(master=self, scaled=True)
+        self.videoplayer.load(r"sample.mp4")
+        self.videoplayer.pack(expand=True, fill="both")
+        self.videoplayer.play()
+        self.videoplayer.bind("<<Ended>>", self.replay)
+        self.mainloop()
 
     def stop(self):
 
@@ -159,3 +190,11 @@ class content_record(Frame):
             case "RECORD_BACK":
                 self.stop()
                 self.parent.reset_path()
+
+            case "RECORD_PHOTO_KEEP":
+                cv2.imwrite("test.jpg", cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+            
+            case "RECORD_PHOTO_RETAKE":
+                self.halt = False
+                self.show_frames()
+                self.update_buttons()
