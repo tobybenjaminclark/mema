@@ -40,10 +40,12 @@ class content_memory_create_home(content_frame):
         video_path: str
         video_path = image_path.replace("_photo.jpeg", "_video.mp4")
 
-        
+        text_path: str
+        text_path = image_path.replace("_photo.jpeg", "_label.txt")
 
         image_exists = exists(image_path)
         video_exists = exists(video_path)
+        label_exists = exists(text_path)
 
         print(f"mema_content_memory_create_home: {image_exists}/{video_exists} = {image_path},\t{video_path}")
 
@@ -63,7 +65,13 @@ class content_memory_create_home(content_frame):
             self.videoplayer.pack(expand=True, fill="both")
             self.videoplayer.play()
             self.videoplayer.bind("<<Ended>>", self.replay)
-            self.videoplayer.pack(side=LEFT)
+            self.videoplayer.pack()
+
+        if label_exists:
+            with open(text_path, "r") as file:
+                text = file.read()
+            self.memory_label = Label(self.memory_frame, text = text)
+            self.memory_label.pack()
 
         self.memory_frame.pack()
 
@@ -72,7 +80,7 @@ class content_memory_create_home(content_frame):
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Camera", "CREATE_HOME_CAM")
-        buttons[1] = ("View Memories", "HOME_VIEWM")
+        buttons[1] = ("Add Label","CREATE_HOME_LABEL")
         buttons[2] = (None, None)
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)
@@ -84,5 +92,6 @@ class content_memory_create_home(content_frame):
                 self.parent.reset_path()
             case "CREATE_HOME_CAM": 
                 self.parent.switch_content(content_record, self.memoryspace_path, str(self.frame), content_memory_create_home)
-            case "HOME_VIEWM":
+            case "CREATE_HOME_LABEL":
+                # Switch to the thing to create the label.
                 print("View Memories")
