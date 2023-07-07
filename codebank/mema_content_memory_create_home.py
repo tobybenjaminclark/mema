@@ -7,6 +7,7 @@ from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
 from PIL import ImageTk, Image
+from os.path import exists
 
 class content_memory_create_home(content_frame):
 
@@ -21,18 +22,51 @@ class content_memory_create_home(content_frame):
         files = [file.path for file in os.scandir(memoryspace_path)]
         print(files)
 
-        for path in files:
-            # If an image, show the image
-            if(path.endswith(".jpeg")):
-                x = path.rsplit("databank/")
-                y = "databank/" + x[1]
-                path = y
-                img = ImageTk.PhotoImage(Image.open(path))
-                panel = Label(self, image=img)
-                panel.photo = img
-                panel.grid(column=2,row=2)
+        self.memory_frame = Frame(self)
+        self.memory_frame.pack()
         
+        self.update_frame()
         self.update_buttons()
+
+    def replay(self, event):
+        self.videoplayer.play()
+
+    def update_frame(self) -> None:
+        
+        # Path to the current frame image (if exists)
+        image_path: str
+        image_path = self.memoryspace_path + "/" + str(self.frame) + "_photo.jpeg"
+
+        video_path: str
+        video_path = image_path.replace("_photo.jpeg", "_video.mp4")
+
+        
+
+        image_exists = exists(image_path)
+        video_exists = exists(video_path)
+
+        print(f"mema_content_memory_create_home: {image_exists}/{video_exists} = {image_path},\t{video_path}")
+
+        self.memory_frame.destroy()
+        self.memory_frame = Frame(self)
+
+        if(image_exists):
+            local_image_path = "databank/" + image_path.rsplit("databank/")[1]
+            img = ImageTk.PhotoImage(Image.open(local_image_path))
+            self.panel = Label(self.memory_frame, image=img)
+            self.panel.photo = img
+            self.panel.pack()
+
+        if(video_exists):
+            self.videoplayer = TkinterVideo(master=self.memory_frame, scaled=True)
+            self.videoplayer.load(video_path)
+            self.videoplayer.pack(expand=True, fill="both")
+            self.videoplayer.play()
+            self.videoplayer.bind("<<Ended>>", self.replay)
+            self.videoplayer.pack(side=LEFT)
+
+        self.memory_frame.pack()
+
 
     def update_buttons(self) -> None:
 
