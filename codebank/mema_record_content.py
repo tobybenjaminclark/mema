@@ -178,7 +178,8 @@ class content_record(Frame):
         self.label.destroy()
         self.halt = True
         video_path: str = self.memoryspace_path + "/" + self.memoryspace_frame + "_video.mp4"
-        self.videoplayer = TkinterVideo(master=self, scaled=True)
+        self.videoplayer = TkinterVideo(master=self, scaled = True)
+        self.videoplayer.set_scaled(True, True)
         self.videoplayer.load(video_path)
         self.videoplayer.pack(expand=True, fill="both")
         self.videoplayer.play()

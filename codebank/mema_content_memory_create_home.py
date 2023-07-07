@@ -65,6 +65,14 @@ class content_memory_create_home(content_frame):
         self.memory_frame.destroy()
         self.memory_frame = Frame(self)
 
+        if(video_exists):
+            self.videoplayer = TkinterVideo(master=self, scaled = True)
+            self.videoplayer.set_size((800, 500), True)
+            self.videoplayer.load(video_path)
+            self.videoplayer.play()
+            self.videoplayer.bind("<<Ended>>", self.replay)
+            self.videoplayer.pack()
+
         if(image_exists):
             local_image_path = "databank/" + image_path.rsplit("databank/")[1]
             img = ImageTk.PhotoImage(Image.open(local_image_path))
@@ -72,21 +80,13 @@ class content_memory_create_home(content_frame):
             self.panel.photo = img
             self.panel.pack()
 
-        if(video_exists):
-            self.videoplayer = TkinterVideo(master=self.memory_frame, scaled=True)
-            self.videoplayer.load(video_path)
-            self.videoplayer.pack(expand=True, fill="both")
-            self.videoplayer.play()
-            self.videoplayer.bind("<<Ended>>", self.replay)
-            self.videoplayer.pack()
-
         if label_exists:
             with open(text_path, "r") as file:
                 text = file.read()
             self.memory_label = Label(self.memory_frame, text = text)
             self.memory_label.pack()
 
-        self.memory_frame.pack()
+        self.memory_frame.pack(expand=True)
 
     def next_frame(self):
         self.frame = (self.frame + 1) % self.max_frames
