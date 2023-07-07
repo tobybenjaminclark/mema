@@ -6,6 +6,7 @@ from mema_content_new_user_photo import *
 from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
+from mema_content_memory_create_label import *
 from PIL import ImageTk, Image
 from os.path import exists
 
