@@ -111,5 +111,4 @@ class content_memory_create_home(content_frame):
             case "NEXT_FRAME":
                 self.next_frame()
             case "CREATE_HOME_LABEL":
-                # Switch to the thing to create the label.
-                print("View Memories")
+                self.parent.switch_content(content_memory_create_label, self.memoryspace_path, content_memory_create_home)
