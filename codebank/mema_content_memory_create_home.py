@@ -19,8 +19,20 @@ class content_memory_create_home(content_frame):
         self.memoryspace_path: str = memoryspace_path
         self.frame = 0
 
+        # Finds the max frame. (Adds 1, as always needs an empty frame to add to)
+        # Error checking
+        try:
+            self.max_frames = int(max([file.path.rpartition("/")[2][0] for file in os.scandir(memoryspace_path)]))+2
+        finally:
+            if(self.max_frames < 2): self.max_frames = 1
+
+        print(self.max_frames)
+
         files = [file.path for file in os.scandir(memoryspace_path)]
         print(files)
+
+        self.frame_label = Label(self, text = f"Frame: {self.frame}")
+        self.frame_label.pack(pady = 10)
 
         self.memory_frame = Frame(self)
         self.memory_frame.pack()
@@ -75,13 +87,17 @@ class content_memory_create_home(content_frame):
 
         self.memory_frame.pack()
 
+    def next_frame(self):
+        self.frame = (self.frame + 1) % self.max_frames
+        self.frame_label.configure(text = f"Frame: {self.frame}")
+        self.update_frame()
 
     def update_buttons(self) -> None:
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Camera", "CREATE_HOME_CAM")
         buttons[1] = ("Add Label","CREATE_HOME_LABEL")
-        buttons[2] = (None, None)
+        buttons[2] = ("Next Frame", "NEXT_FRAME")
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 
@@ -92,6 +108,8 @@ class content_memory_create_home(content_frame):
                 self.parent.reset_path()
             case "CREATE_HOME_CAM": 
                 self.parent.switch_content(content_record, self.memoryspace_path, str(self.frame), content_memory_create_home)
+            case "NEXT_FRAME":
+                self.next_frame()
             case "CREATE_HOME_LABEL":
                 # Switch to the thing to create the label.
                 print("View Memories")
