@@ -6,6 +6,7 @@ from mema_content_new_user_photo import *
 from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
+from PIL import ImageTk, Image
 
 class content_memory_create_home(content_frame):
 
@@ -16,6 +17,21 @@ class content_memory_create_home(content_frame):
         self.parent = parent
         self.memoryspace_path: str = memoryspace_path
         self.frame = 0
+
+        files = [file.path for file in os.scandir(memoryspace_path)]
+        print(files)
+
+        for path in files:
+            # If an image, show the image
+            if(path.endswith(".jpeg")):
+                x = path.rsplit("databank/")
+                y = "databank/" + x[1]
+                path = y
+                img = ImageTk.PhotoImage(Image.open(path))
+                panel = Label(self, image=img)
+                panel.photo = img
+                panel.grid(column=2,row=2)
+        
         self.update_buttons()
 
     def update_buttons(self) -> None:
