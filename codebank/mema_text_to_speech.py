@@ -1,8 +1,21 @@
-from gtts import gTTS
-from os import remove
-from playsound import playsound
-from threading import Thread
+# General MeMa Imports
 from mema_constants import *
+
+# gTTS is Google's Text-To-Speech Library, you can install using pip --install gTTS
+# documentation is available here: https://gtts.readthedocs.io/en/latest/
+from gtts import gTTS
+
+# os.remove is used to delete the file after it has been played
+from os import remove
+
+# Playsound is used to play the sound recorded aloud and can be installed
+# through pip using pip --install playsound
+from playsound import playsound
+
+# Threading is used to play the sound asynchronously to the rest of the program
+from threading import Thread
+
+# Time is used to generate pseudo-random filenames.
 import time
  
 def speak_thread(text: str) -> None:
@@ -52,6 +65,7 @@ def speak(text: str) -> None:
     Thread(target=speak_thread, args=(text,), daemon=False).start()
     return None
 
+# TTS Test
 if __name__ == "__main__":
     speak("Test 1")
     time.sleep(1)

@@ -1,6 +1,9 @@
+# General MeMa Imports
 from mema_content_frame import *
 from mema_speech_recognition import *
 from mema_constants import *
+
+# Used for error logging
 import sys
 
 class content_memory_create_label(content_frame):
