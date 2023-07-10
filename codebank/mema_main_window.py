@@ -38,7 +38,8 @@ class main_window(Tk):
 
 
     def reset_path(self) -> None:
-        """        Resets the current page to the content_login page (memory machine main page)
+        """
+        Resets the current page to the content_login page (memory machine main page)
         """
 
         self.switch_content(content_login)
