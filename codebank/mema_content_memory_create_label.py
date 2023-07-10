@@ -4,6 +4,7 @@ from mema_speech_recognition import *
 class content_memory_create_label(content_frame):
 
     def __init__(self, parent, memoryspace_path: str, return_obj, frame: int, *args, **kwargs) -> None:
+
         content_frame.__init__(self, *args, **kwargs)
         self.parent = parent
         self.memoryspace_path = memoryspace_path
@@ -13,9 +14,9 @@ class content_memory_create_label(content_frame):
         self.label_content = ""
 
         self.setup_gui()
-        self.update_buttons()
+        self.display_initial_buttons()
 
-    def update_label(self):
+    def update_label_text(self):
 
         self.text.configure(text = self.label_content)
 
@@ -27,7 +28,14 @@ class content_memory_create_label(content_frame):
         self.text = Label(self, text = self.label_content)
         self.text.pack()
 
-    def update_buttons(self):
+    def display_initial_buttons(self):
+        """
+        Display the initial set of buttons.
+        
+        This function sets up and displays the initial buttons on the user interface. The buttons are represented as a list of
+        tuples, where each tuple consists of a button label and a corresponding action identifier. The buttons in this function
+        are used for starting the recording label and exiting the program.
+        """
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Record Label", "START_RECORDING_LABEL")
@@ -36,7 +44,14 @@ class content_memory_create_label(content_frame):
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 
-    def update_show_recording(self):
+    def display_secondary_buttons(self):
+        """
+        Display the secondary set of buttons.
+        
+        This function sets up and displays the secondary buttons on the user interface. The buttons are represented as a list of
+        tuples, where each tuple consists of a button label and a corresponding action identifier. The buttons in this function
+        are used for stopping the recording label and exiting the program.
+        """
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Stop Recording Label", "STOP_RECORDING_LABEL")
@@ -45,7 +60,14 @@ class content_memory_create_label(content_frame):
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)       
 
-    def confirmation_buttons(self):
+    def display_confirmaiton_buttons(self):
+        """
+        Display the confirmation set of buttons.
+        
+        This function sets up and displays the confirmation buttons on the user interface. The buttons are represented as a list
+        of tuples, where each tuple consists of a button label and a corresponding action identifier. The buttons in this
+        function are used for confirming or retaking the label, as well as exiting the program.
+        """
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Keep Label", "LABEL_WRITE")
@@ -59,11 +81,11 @@ class content_memory_create_label(content_frame):
         match callback_request["content"]:
 
             case "START_RECORDING_LABEL":
-                self.update_show_recording()
+                self.display_secondary_buttons()
                 self.recording_label = True
 
             case "STOP_RECORDING_LABEL":
-                self.confirmation_buttons()
+                self.display_confirmaiton_buttons()
                 self.recording_label = False
 
             case "HOME_EXIT":
@@ -76,12 +98,12 @@ class content_memory_create_label(content_frame):
                 self.parent.switch_content(self.return_obj, self.memoryspace_path)
 
             case "LABEL_RETAKE":
-                self.update_buttons()
+                self.display_initial_buttons()
                 self.label_content = ""
-                self.update_label()
+                self.update_label_text()
 
             case _:
                 if self.recording_label:
                     spoken_content = callback_request["content"]
                     self.label_content += spoken_content
-                    self.update_label()
+                    self.update_label_text()
