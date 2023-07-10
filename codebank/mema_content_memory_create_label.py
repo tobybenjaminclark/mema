@@ -1,6 +1,7 @@
 from mema_content_frame import *
 from mema_speech_recognition import *
 from mema_constants import *
+import sys
 
 class content_memory_create_label(content_frame):
 
@@ -96,7 +97,7 @@ class content_memory_create_label(content_frame):
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)       
 
-    def display_confirmaiton_buttons(self):
+    def display_confirmation_buttons(self):
         """
         Display the confirmation set of buttons.
         
@@ -111,6 +112,21 @@ class content_memory_create_label(content_frame):
         buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False) 
+
+    def write_label_file(self) -> None:
+        """
+        Writes the written label to the selected memoryspace, on the selected frame. If this is not possible, displays an error
+        in the terminal.
+        """
+        try:
+            # Attempt to write file
+            file_path = self.memoryspace_path + "/" + str(self.frame_index) + "_label.txt"
+            file = open(file_path, "w")
+            file.write(self.label_content)
+            file.close()
+        except:
+            # Show an error if this is not possible
+            print(f"mema_content_memory_create_label: could not write label to {file_path}", file = sys.stderr)
 
     def callback(self, callback_request: dict) -> None:
         """
@@ -143,9 +159,7 @@ class content_memory_create_label(content_frame):
             # Write the label content to a file in the memoryspace
             # Switch the content to the return page
             case "LABEL_WRITE":
-                file_path = self.memoryspace_path + "/" + str(self.frame_index) + "_label.txt"
-                with open(file_path, "w") as file:
-                    file.write(self.label_content)
+                self.write_label_file()
                 self.parent.switch_content(self.return_page, self.memoryspace_path)
 
             # User chose to retake the label
