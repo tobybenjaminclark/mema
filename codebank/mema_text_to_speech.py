@@ -2,9 +2,11 @@
 from mema_constants import *
 
 # gTTS is Google's Text-To-Speech Library, you can install using pip --install gTTS
-# documentation is available here: https://gtts.readthedocs.io/en/latest/
+# gTTS is used to play text aloud on the MeMa.
+# Documentation: https://gtts.readthedocs.io/en/latest/
 from gtts import gTTS
 
+# Imports the `remove` function from the `os` module. This is used to remove files.
 # os.remove is used to delete the file after it has been played
 from os import remove
 
