@@ -1,3 +1,4 @@
+# Generic MeMa Imports
 from mema_content_frame import *
 from mema_facial_recognition import *
 from mema_text_to_speech import *
@@ -6,7 +7,14 @@ from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
 from mema_content_memory_create_label import *
+
+# PIL (Python Imaging Library) is a library used for opening, manipulating, and saving many different image file formats.
+# ImageTk module provides support for displaying images in Tkinter GUI.
+# Image module provides a class with the same name which is used to represent a PIL image.
 from PIL import ImageTk, Image
+
+# exists is a function in the os.path module that checks whether a path exists or not. In this code
+# it is used to detect whether a memory exists or not, before loading it to avoid causing an error.
 from os.path import exists
 
 # GUI library

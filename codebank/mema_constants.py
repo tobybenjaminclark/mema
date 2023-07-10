@@ -1,4 +1,5 @@
-
+# Enum class from the enum module. Used to create an enumeration to represent callback types
+# see MEMA_RESPONSES for a functional declaration of an Enum (this can also be declared via OOP)
 from enum import Enum
 
 # Change this to change the window dimensions.

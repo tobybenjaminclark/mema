@@ -3,7 +3,8 @@ from mema_content_frame import *
 from mema_speech_recognition import *
 from mema_constants import *
 
-# Used for error logging
+# sys is a module that provides access to some variables used or maintained by the interpreter and to functions that interact with the interpreter
+# It is used in this code for error logging, achieved through writing to the stderr stream
 import sys
 
 # GUI library
