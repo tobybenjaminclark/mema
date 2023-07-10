@@ -7,6 +7,10 @@ from mema_data_access import *
 from mema_record_content import *
 from mema_content_memory_create_label import *
 
+# sys is a module that provides access to some variables used or maintained by the interpreter and to functions that interact with the interpreter
+# It is used in this code for error logging, achieved through writing to the stderr stream
+import sys
+
 # GUI library
 # tkinter is the standard GUI library for Python.
 # It is used in this code for creating the graphical user interface (GUI) elements.
@@ -82,28 +86,63 @@ class content_memory_create_home(content_frame):
         self.memory_frame.destroy()
         self.memory_frame = Frame(self)
 
-        if(video_exists):
-            self.videoplayer = TkinterVideo(master=self, scaled = True)
-            self.videoplayer.set_size((800, 500), True)
-            self.videoplayer.load(video_path)
-            self.videoplayer.play()
-            self.videoplayer.bind("<<Ended>>", self.replay)
-            self.videoplayer.pack()
-
-        if(image_exists):
-            local_image_path = "databank/" + image_path.rsplit("databank/")[1]
-            img = ImageTk.PhotoImage(Image.open(local_image_path))
-            self.panel = Label(self.memory_frame, image=img)
-            self.panel.photo = img
-            self.panel.pack()
-
-        if label_exists:
-            with open(text_path, "r") as file:
-                text = file.read()
-            self.memory_label = Label(self.memory_frame, text = text)
-            self.memory_label.pack()
+        # Adds video, image and label to frame if they exist.
+        if video_exists: self.add_video_to_frame(video_path)
+        if image_exists: self.add_image_to_frame(image_path)
+        if label_exists: self.add_label_to_frame(text_path)
 
         self.memory_frame.pack(expand=True)
+
+    def add_label_to_frame(self, text_path: str):
+        """
+        Opens the label for the current frame
+        """
+
+        # Variable Types
+        file: TextIO
+        text: str
+
+        # Open the text file and read its content
+        try:
+            file = open(text_path, 'r')
+            text = file.read()
+            file.close()
+        except:
+            text = f"Could not read label: {text_path}"
+            print(f"mema_content_memory_create_home: could not read label @ {text_path}", file = sys.stderr)
+        
+        # Create a label with the text content and add it to the memory frame
+        self.memory_label = Label(self.memory_frame, text=text)
+        self.memory_label.pack()
+
+    def add_image_to_frame(self, image_path: str):
+        # Create a local path for the image by extracting the file name
+        local_image_path = "databank/" + image_path.rsplit("databank/")[1]
+        
+        # Open the image file, create an image object, and convert it to PhotoImage format
+        img = ImageTk.PhotoImage(Image.open(local_image_path))
+        
+        # Create a label with the image and add it to the memory frame
+        self.panel = Label(self.memory_frame, image=img)
+        self.panel.photo = img
+        self.panel.pack()
+
+    def add_video_to_frame(self, video_path: str):
+        # Create a video player widget and set its size
+        self.videoplayer = TkinterVideo(master=self.memory_frame, scaled=True)
+        self.videoplayer.set_size((800, 500), True)
+        
+        # Load the video file into the video player
+        self.videoplayer.load(video_path)
+        
+        # Play the video
+        self.videoplayer.play()
+        
+        # Bind the "<<Ended>>" event to the replay method
+        self.videoplayer.bind("<<Ended>>", self.replay)
+        
+        # Add the video player to the memory frame
+        self.videoplayer.pack()
 
     def next_frame(self):
         self.frame = (self.frame + 1) % self.max_frames
