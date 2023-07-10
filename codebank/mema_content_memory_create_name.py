@@ -32,7 +32,7 @@ class content_memory_create_name(content_frame):
 
         # Buffer to store the spoken name in
         self.memory_name_buffer: str
-        self.memory_name_buffer = "a"
+        self.memory_name_buffer = ""
 
         # Update buttons and setup the GUI
         # True is passed to update_buttons here as it represents the first time the buttons are 
@@ -46,7 +46,6 @@ class content_memory_create_name(content_frame):
         """
         Initializes this frames GUI, creating the introduction labels.
         """
-
         self.setup_sub_label()
         
 
@@ -54,9 +53,8 @@ class content_memory_create_name(content_frame):
         """
         Creates a sub label, asking the user what to call this memory
         """
-
         self.sub_label: Label
-        self.sub_label = Label(self, text = label_text, fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 46, "bold"))
+        self.sub_label = Label(self, text = label_text, fg = MEMA_BLACK, bg = MEMA_WHITE, font = ("Arial", 36, "bold"))
         self.sub_label.pack()
 
     def confirm_name(self, name: str) -> None:
@@ -91,7 +89,7 @@ class content_memory_create_name(content_frame):
         to say 'Sorry, please repeat your name'.
         """
 
-        if(not first_time): self.sub_label.configure(text = "Sorry, please repeat what you would like this memory to be called")
+        if(not first_time): self.sub_label.configure(text = "Sorry, please repeat what\nyou would like this memory to be called")
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Back", "NEW_USR_BACK")
@@ -116,9 +114,8 @@ class content_memory_create_name(content_frame):
                 mempath = create_memoryspace(self.user_id, self.memory_name_buffer)
                 self.parent.switch_content(content_memory_create_home, mempath)
 
-
             case "CONFIRM_NO":
-                speak("Sorry, please could you repeat your name?")
+                self.memory_name_buffer = ""
                 self.update_buttons()
 
             case _:

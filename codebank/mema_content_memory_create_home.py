@@ -8,6 +8,13 @@ from mema_content_memory_create_name import *
 from mema_record_content import *
 from mema_content_memory_create_label import *
 
+# GUI library
+# tkinter is the standard GUI library for Python.
+# It is used in this code for creating the graphical user interface (GUI) elements.
+# The `*` import syntax imports all the public names defined in tkinter module.
+# Documentation: https://docs.python.org/3/library/tkinter.html
+from tkinter import *
+
 # PIL (Python Imaging Library) is a library used for opening, manipulating, and saving many different image file formats.
 # ImageTk module provides support for displaying images in Tkinter GUI.
 # Image module provides a class with the same name which is used to represent a PIL image.
@@ -17,12 +24,7 @@ from PIL import ImageTk, Image
 # it is used to detect whether a memory exists or not, before loading it to avoid causing an error.
 from os.path import exists
 
-# GUI library
-# tkinter is the standard GUI library for Python.
-# It is used in this code for creating the graphical user interface (GUI) elements.
-# The `*` import syntax imports all the public names defined in tkinter module.
-# Documentation: https://docs.python.org/3/library/tkinter.html
-from tkinter import *
+
 
 class content_memory_create_home(content_frame):
 
