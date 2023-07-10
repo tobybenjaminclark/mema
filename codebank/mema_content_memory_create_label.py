@@ -23,6 +23,10 @@ class content_memory_create_label(content_frame):
         # Store the return object
         self.return_page = _return_page
 
+        # Header Text (Shown on GUI)
+        self.header_text: str
+        self.header_text = "Say text to create a label"
+
         # Store the frame number
         self.frame_index: int
         self.frame_index = _frame_index
@@ -53,7 +57,7 @@ class content_memory_create_label(content_frame):
         Sets up the GUI Widgets on the screen. Initializes a header and a label to show the spoken text
         """
 
-        self.header = Label(self, text = "Say text to create a label")
+        self.header = Label(self, text = self.header_text)
         self.header.pack(pady = 20)
 
         self.text = Label(self, text = self.label_content)
