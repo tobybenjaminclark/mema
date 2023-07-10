@@ -1,5 +1,12 @@
-from tkinter import *
+
 from mema_constants import *
+
+# GUI library
+# tkinter is the standard GUI library for Python.
+# It is used in this code for creating the graphical user interface (GUI) elements.
+# The `*` import syntax imports all the public names defined in tkinter module.
+# Documentation: https://docs.python.org/3/library/tkinter.html
+from tkinter import *
 
 class content_frame(Frame):
 

@@ -1,4 +1,3 @@
-from tkinter import *
 from mema_content_frame import *
 from mema_facial_recognition import *
 from mema_text_to_speech import *
@@ -7,6 +6,13 @@ from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
 from mema_constants import *
+
+# GUI library
+# tkinter is the standard GUI library for Python.
+# It is used in this code for creating the graphical user interface (GUI) elements.
+# The `*` import syntax imports all the public names defined in tkinter module.
+# Documentation: https://docs.python.org/3/library/tkinter.html
+from tkinter import *
 
 class content_home(content_frame):
 

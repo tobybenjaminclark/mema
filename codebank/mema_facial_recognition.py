@@ -1,4 +1,3 @@
-from tkinter import *
 import face_recognition
 import cv2
 import PIL.Image, PIL.ImageTk
@@ -7,6 +6,13 @@ from mema_constants import *
 import os
 import json
 from typing import TextIO
+
+# GUI library
+# tkinter is the standard GUI library for Python.
+# It is used in this code for creating the graphical user interface (GUI) elements.
+# The `*` import syntax imports all the public names defined in tkinter module.
+# Documentation: https://docs.python.org/3/library/tkinter.html
+from tkinter import *
 
 class facial_recognition(Frame):
 

@@ -6,6 +6,13 @@ from mema_constants import *
 # Used for error logging
 import sys
 
+# GUI library
+# tkinter is the standard GUI library for Python.
+# It is used in this code for creating the graphical user interface (GUI) elements.
+# The `*` import syntax imports all the public names defined in tkinter module.
+# Documentation: https://docs.python.org/3/library/tkinter.html
+from tkinter import *
+
 class content_memory_create_label(content_frame):
 
     def __init__(self, parent, memoryspace_path: str, _return_page, _frame_index: int, *args, **kwargs) -> None:

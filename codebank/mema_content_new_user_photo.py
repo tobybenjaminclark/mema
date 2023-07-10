@@ -6,6 +6,13 @@ from mema_text_to_speech import *
 from mema_data_access import *
 from mema_content_homepage import *
 
+# GUI library
+# tkinter is the standard GUI library for Python.
+# It is used in this code for creating the graphical user interface (GUI) elements.
+# The `*` import syntax imports all the public names defined in tkinter module.
+# Documentation: https://docs.python.org/3/library/tkinter.html
+from tkinter import *
+
 class content_new_user_photo(content_frame):
 
     def __init__(self, parent, name, *args, **kwargs):
