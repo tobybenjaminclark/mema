@@ -1,5 +1,6 @@
 from mema_content_frame import *
 from mema_speech_recognition import *
+from mema_constants import *
 
 class content_memory_create_label(content_frame):
 
@@ -74,8 +75,8 @@ class content_memory_create_label(content_frame):
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Record Label", "START_RECORDING_LABEL")
-        buttons[1] = (None, None)
-        buttons[2] = (None, None)
+        buttons[1] = MEMA_EMPTY_BUTTON
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 
@@ -90,8 +91,8 @@ class content_memory_create_label(content_frame):
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Stop Recording Label", "STOP_RECORDING_LABEL")
-        buttons[1] = (None, None)
-        buttons[2] = (None, None)
+        buttons[1] = MEMA_EMPTY_BUTTON
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)       
 
@@ -107,7 +108,7 @@ class content_memory_create_label(content_frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Keep Label", "LABEL_WRITE")
         buttons[1] = ("Retake Label", "LABEL_RETAKE")
-        buttons[2] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False) 
 

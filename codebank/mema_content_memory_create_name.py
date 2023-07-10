@@ -1,8 +1,10 @@
 from mema_content_frame import *
+from mema_content_memory_create_home import *
 from mema_text_to_speech import *
 from mema_data_access import *
 from mema_record_content import *
-from mema_content_memory_create_home import *
+from mema_constants import *
+
 
 class content_memory_create_name(content_frame):
 
@@ -72,8 +74,8 @@ class content_memory_create_name(content_frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Yes", "CONFIRM_YES")
         buttons[1] = ("No", "CONFIRM_NO")
-        buttons[2] = (None, None)
-        buttons[3] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
+        buttons[3] = MEMA_EMPTY_BUTTON
         self.parent.set_input(buttons, False)
 
     def update_buttons(self, first_time = False) -> None:
@@ -87,8 +89,8 @@ class content_memory_create_name(content_frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Back", "NEW_USR_BACK")
         buttons[1] = ("Toby", "toby")
-        buttons[2] = (None, None)
-        buttons[3] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
+        buttons[3] = MEMA_EMPTY_BUTTON
         self.parent.set_input(buttons, False)
 
         self.update()

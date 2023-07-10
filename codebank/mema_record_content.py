@@ -61,7 +61,7 @@ class content_record(Frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Start Recording", "RECORD_RECORD")
         buttons[1] = ("Take Photo", "RECORD_TAKE_PHOTO")
-        buttons[2] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Back", "RECORD_BACK")
         self.parent.set_input(buttons, True)
 
@@ -70,7 +70,7 @@ class content_record(Frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Keep Photo", "RECORD_PHOTO_KEEP")
         buttons[1] = ("Retake Photo", "RECORD_PHOTO_RETAKE")
-        buttons[2] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Back", "RECORD_BACK")
         self.parent.set_input(buttons, True)
 
@@ -79,7 +79,7 @@ class content_record(Frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Keep Video", "RECORD_VIDEO_KEEP")
         buttons[1] = ("Retake Video", "RECORD_VIDEO_RETAKE")
-        buttons[2] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Back", "RECORD_BACK")
         self.parent.set_input(buttons, True)
 
@@ -109,8 +109,8 @@ class content_record(Frame):
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Stop Recording", "RECORD_RECORD")
-        buttons[1] = (None, None)
-        buttons[2] = (None, None)
+        buttons[1] = MEMA_EMPTY_BUTTON
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Back", "RECORD_BACK")
         self.parent.set_input(buttons, True)
 
@@ -124,7 +124,7 @@ class content_record(Frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Start Recording", "RECORD_RECORD")
         buttons[1] = ("Take Photo", "RECORD_TAKE_PHOTO")
-        buttons[2] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Back", "RECORD_BACK")
         self.parent.set_input(buttons, True)
 

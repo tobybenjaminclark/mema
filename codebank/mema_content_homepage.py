@@ -6,6 +6,7 @@ from mema_content_new_user_photo import *
 from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
+from mema_constants import *
 
 class content_home(content_frame):
 
@@ -27,7 +28,7 @@ class content_home(content_frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Create New Memory", "HOME_NEWM")
         buttons[1] = ("View Memories", "HOME_VIEWM")
-        buttons[2] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 

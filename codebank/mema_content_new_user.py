@@ -3,6 +3,7 @@ from mema_content_frame import *
 from mema_facial_recognition import *
 from mema_text_to_speech import *
 from mema_content_new_user_photo import *
+from mema_constants import *
 import cv2
 
 
@@ -93,8 +94,8 @@ class content_new_user(content_frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Yes", "CONFIRM_YES")
         buttons[1] = ("No", "CONFIRM_NO")
-        buttons[2] = (None, None)
-        buttons[3] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
+        buttons[3] = MEMA_EMPTY_BUTTON
         self.parent.set_input(buttons, False)
 
     def update_buttons(self, first_time = False) -> None:
@@ -108,8 +109,8 @@ class content_new_user(content_frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Back", "NEW_USR_BACK")
         buttons[1] = ("Toby", "toby")
-        buttons[2] = (None, None)
-        buttons[3] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
+        buttons[3] = MEMA_EMPTY_BUTTON
         self.parent.set_input(buttons, False)
 
         self.update()

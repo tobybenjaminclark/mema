@@ -43,3 +43,8 @@ MEMA_SLOW_TTS:bool = False
 # Change this to change the font on the large buttons
 global MEMA_BUTTON_FONT
 MEMA_BUTTON_FONT:tuple[str,int,str] = ("Arial Black", 32, "bold")
+
+# Constant for an empty button on button initialization
+global MEMA_EMPTY_BUTTON
+MEMA_EMPTY_BUTTON: tuple[str|None, str|None]
+MEMA_EMPTY_BUTTON = (None, None)

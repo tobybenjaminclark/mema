@@ -1,6 +1,7 @@
 from mema_content_frame import *
 import cv2
 import PIL
+from mema_constants import *
 from mema_text_to_speech import *
 from mema_data_access import *
 from mema_content_homepage import *
@@ -39,8 +40,8 @@ class content_new_user_photo(content_frame):
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Take Photo", "NEW_USER_TAKE_PHOTO")
-        buttons[1] = (None, None)
-        buttons[2] = (None, None)
+        buttons[1] = MEMA_EMPTY_BUTTON
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Back", "NEW_USER_BACK")
         self.parent.set_input(buttons, False)
 
@@ -63,7 +64,7 @@ class content_new_user_photo(content_frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Yes", "CONFIRM_IMAGE")
         buttons[1] = ("No", "UNCONFIRM_IMAGE")
-        buttons[2] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("Back", "NEW_USER_BACK")
         self.parent.set_input(buttons, False)
 
