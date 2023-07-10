@@ -1,13 +1,36 @@
-import speech_recognition as sr
+# General MeMa Import
 from mema_constants import *
-from threading import Thread
-from typing import Callable
+
+# Library for speech recognition
+# The `speech_recognition` library (aliased as `sr`) provides functionality for speech recognition.
+# It allows capturing audio from various sources, such as microphones, and converting it to text.
+import speech_recognition as sr
+
+# Type hints for function signatures
+# The `typing` module provides tools for type hints in Python.
+# The `Callable` type hint is used to specify the signature of callable objects.
+# The `Union` type hint is used to specify that a variable can have multiple possible types.
+from typing import Callable, Union
+
+# Data structure for storing recognized phrases
+# The `queue` module provides a `Queue` class for creating queues, which are useful for storing and retrieving items in a first-in, first-out (FIFO) order.
 from queue import Queue
+
+# For handling C data types
+# The `ctypes` module provides facilities for working with C data types in Python.
+# It is used here for handling C data types in the context of speech recognition.
 from ctypes import *
+
+# Creating context managers
+# The `contextlib` module provides utilities for creating and working with context managers in Python.
+# It is used here for creating context managers in the context of speech recognition.
 from contextlib import contextmanager
 
-# Following code is to mute ASLA Error Messages
-# https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
+# Mute ALSA Error Messages
+# The following code mutes ALSA error messages to prevent them from being displayed in the terminal.
+# It uses `ERROR_HANDLER_FUNC` and `noalsaerr` context manager for this purpose.
+# The purpose is to block ALSA warnings that get spammed in the terminal.
+# This code is taken from: https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
 
 ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
 
