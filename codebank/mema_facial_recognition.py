@@ -1,10 +1,48 @@
-import face_recognition
-import cv2
-import PIL.Image, PIL.ImageTk
-import numpy as np
+# Generic MeMa Import
 from mema_constants import *
+
+# Facial recognition library
+# face_recognition is a library for face recognition tasks.
+# It provides functionality for face detection, face encoding, and face comparison.
+# Documentation: https://github.com/ageitgey/face_recognition
+import face_recognition
+
+# OpenCV library
+# cv2 is the OpenCV library for computer vision tasks.
+# It provides functionality for video capture, image processing, and video display.
+# OpenCV is used in this code for webcam video capture and frame processing.
+# Documentation: https://docs.opencv.org/
+import cv2
+
+# Python Imaging Library
+# PIL (Python Imaging Library) is a library for image processing.
+# It provides functionality for working with images, including opening, manipulating, and saving images.
+# PIL is used in this code for image-related tasks, such as displaying images in the GUI.
+import PIL.Image
+import PIL.ImageTk
+
+# Numerical operations library
+# numpy (short for Numerical Python) provides functionality for numerical computations and array manipulation.
+# It is used in this code for various numerical operations.
+# Documentation: https://numpy.org/doc/
+import numpy as np
+
+# Operating system interaction library
+# os is a library that provides functions for interacting with the operating system.
+# It is used in this code for performing operating system-related tasks, such as file operations.
 import os
+
+# JSON library
+# json is a library for working with JSON (JavaScript Object Notation) data.
+# It provides functionality for reading and writing JSON files.
+# json is used in this code for loading JSON data from files.
+# Documentation: https://docs.python.org/3/library/json.html
 import json
+
+# Type hints library
+# typing provides support for type hints in Python.
+# It is used in this code for annotating function signatures with types.
+# The specific type hints used in this code are not described in the comments.
 from typing import TextIO
 
 # GUI library

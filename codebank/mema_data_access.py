@@ -1,6 +1,22 @@
+# Operating system interaction library
+# os is a library that provides functions for interacting with the operating system.
+# It is used in this code for performing operating system-related tasks, such as directory operations.
 import os
+
+# JSON library
+# json is a library for working with JSON (JavaScript Object Notation) data.
+# It provides functionality for reading and writing JSON files.
+# json is used in this code for loading and saving data in JSON format.
+# Documentation: https://docs.python.org/3/library/json.html
 import json
+
+# OpenCV library
+# cv2 is the OpenCV library for computer vision tasks.
+# It provides functionality for image processing, video capture, and more.
+# cv2 is used in this code for image-related tasks, such as reading and writing images.
+# Documentation: https://docs.opencv.org/
 import cv2
+
 
 def create_userbank() -> str:
     """

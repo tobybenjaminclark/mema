@@ -1,10 +1,16 @@
+# Generic MeMa Imports
 from mema_content_frame import *
-import cv2
-import PIL
 from mema_constants import *
 from mema_text_to_speech import *
 from mema_data_access import *
 from mema_content_homepage import *
+
+# OpenCV library
+# cv2 is the OpenCV library for computer vision tasks.
+# It provides functionality for capturing video frames, image processing, and video recording.
+# OpenCV is used in this code to interact with the webcam and display to the screen (using PIL)
+# Documentation: https://docs.opencv.org/
+import cv2
 
 # GUI library
 # tkinter is the standard GUI library for Python.
@@ -12,6 +18,13 @@ from mema_content_homepage import *
 # The `*` import syntax imports all the public names defined in tkinter module.
 # Documentation: https://docs.python.org/3/library/tkinter.html
 from tkinter import *
+
+# Python Imaging Library
+# PIL (Python Imaging Library) is a library for image processing.
+# It provides functionality for working with images, including opening, manipulating, and saving images.
+# PIL is used in this code for image-related tasks, such capturing and displaying images
+import PIL
+import PIL.ImageTk
 
 class content_new_user_photo(content_frame):
 
