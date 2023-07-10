@@ -1,10 +1,47 @@
-import numpy as np
-import cv2
-from tkinter import *
-import PIL
-from PIL import ImageTk
+# Generic MeMa Import
 from mema_content_frame import *
+
+# Numerical operations library
+# numpy (short for Numerical Python) provides functionality for numerical computations and array manipulation.
+# It is used in this code for various numerical operations.
+# Documentation: https://numpy.org/doc/
+import numpy as np
+
+# OpenCV library
+# cv2 is the OpenCV library for computer vision tasks.
+# It provides functionality for capturing video frames, image processing, and video recording.
+# OpenCV is used in this code to interact with the webcam and perform computer vision operations.
+# Documentation: https://docs.opencv.org/
+import cv2
+
+# GUI library
+# tkinter is the standard GUI library for Python.
+# It is used in this code for creating the graphical user interface (GUI) elements.
+# The `*` import syntax imports all the public names defined in tkinter module.
+# Documentation: https://docs.python.org/3/library/tkinter.html
+from tkinter import *
+
+# Python Imaging Library
+# PIL (Python Imaging Library) is a library for image processing.
+# It provides functionality for working with images, including opening, manipulating, and saving images.
+# PIL is used in this code for image-related tasks, such as displaying images in the GUI.
+import PIL
+
+# ImageTk module from PIL
+# The ImageTk module from PIL provides support for creating Tkinter-compatible image objects.
+# It is used in this code to convert images to Tkinter-compatible format for displaying in the GUI.
+from PIL import ImageTk
+
+# Tkinter-based video player
+# TkinterVideo is a module that provides a Tkinter-based video player widget.
+# It is used in this code to create a video player for displaying recorded videos.
+# The specific functionality of the video player is not described in the comments.
+# Documentation (limited): https://pypi.org/project/tkvideoplayer/
 from tkVideoPlayer import TkinterVideo
+
+# Operating system interaction library
+# os is a library that provides functions for interacting with the operating system.
+# It is used in this code for file removal
 import os
 
 class content_record(Frame):

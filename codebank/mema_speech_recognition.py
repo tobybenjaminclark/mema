@@ -6,12 +6,6 @@ from mema_constants import *
 # It allows capturing audio from various sources, such as microphones, and converting it to text.
 import speech_recognition as sr
 
-# Type hints for function signatures
-# The `typing` module provides tools for type hints in Python.
-# The `Callable` type hint is used to specify the signature of callable objects.
-# The `Union` type hint is used to specify that a variable can have multiple possible types.
-from typing import Callable, Union
-
 # Data structure for storing recognized phrases
 # The `queue` module provides a `Queue` class for creating queues, which are useful for storing and retrieving items in a first-in, first-out (FIFO) order.
 from queue import Queue
@@ -25,6 +19,11 @@ from ctypes import *
 # The `contextlib` module provides utilities for creating and working with context managers in Python.
 # It is used here for creating context managers in the context of speech recognition.
 from contextlib import contextmanager
+
+# For thread usage
+# The `threading` module allows for thread creation. This is used to recognize speech asynchronously in Python.
+# This means it can run concurrently, alongside the main program.
+from threading import Thread
 
 # Mute ALSA Error Messages
 # The following code mutes ALSA error messages to prevent them from being displayed in the terminal.
