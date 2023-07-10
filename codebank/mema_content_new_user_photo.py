@@ -8,7 +8,7 @@ from mema_content_homepage import *
 # OpenCV library
 # cv2 is the OpenCV library for computer vision tasks.
 # It provides functionality for capturing video frames, image processing, and video recording.
-# OpenCV is used in this code to interact with the webcam and display to the screen (using PIL)
+# OpenCV is used in this code to interact with the webcam and display to the screen 
 # Documentation: https://docs.opencv.org/
 import cv2
 
