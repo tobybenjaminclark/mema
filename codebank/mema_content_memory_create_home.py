@@ -34,11 +34,45 @@ class content_memory_create_home(content_frame):
     def __init__(self, parent, memoryspace_path: str, *args, **kwargs)-> None:
         content_frame.__init__(self, *args, **kwargs)
 
-        # Configure parent
+        # Parent should be main window
+        self.parent: any
         self.parent = parent
-        self.memoryspace_path: str = memoryspace_path
+
+        # Memoryspace Path is the path to the current memoryspace
+        self.memoryspace_path: str
+        self.memoryspace_path = memoryspace_path
+
+        # Current Frame (indexed from 0)
+        self.frame: int
         self.frame = 0
 
+        # Maximum Frames (calculated in setup_max_frames)
+        self.max_frames: int
+        self.max_frames = 0
+
+        # Label to show the frame number
+        self.frame_label: Label
+
+        # Memory Frame to show the current frame of the current memory
+        self.memory_frame: Frame
+
+        # Stored in `self.memory_frame`
+        # Displays video (if it exists)
+        self.memory_videoplayer: TkinterVideo
+
+        # Stored in `self.memory_frame`
+        # Displays image (if it exists)
+        self.memory_image: Label
+
+        # Stored in `self.memory_frame`
+        # Displays memory caption (if it exists)
+        self.memory_caption: Label
+
+        # Setup
+        self.setup_max_frames()
+        self.setup_gui()
+
+    def setup_max_frames(self):
         # Finds the max frame. (Adds 1, as always needs an empty frame to add to)
         # Error checking
         try:
@@ -48,6 +82,7 @@ class content_memory_create_home(content_frame):
         finally:
             if(self.max_frames < 2): self.max_frames = 1
 
+    def setup_gui(self):
         self.frame_label = Label(self, text = f"Frame: {self.frame}")
         self.frame_label.pack(pady = 10)
 
@@ -58,7 +93,7 @@ class content_memory_create_home(content_frame):
         self.update_buttons()
 
     def replay(self, event):
-        self.videoplayer.play()
+        self.memory_videoplayer.play()
 
     def update_frame(self) -> None:
         
@@ -107,8 +142,8 @@ class content_memory_create_home(content_frame):
             print(f"mema_content_memory_create_home: could not read label @ {text_path}", file = sys.stderr)
         
         # Create a label with the text content and add it to the memory frame
-        self.memory_label = Label(self.memory_frame, text=text,borderwidth = 2, relief = "solid", fg = MEMA_BLACK, bg = "#FFFFFF", font = ("Arial", 26, "bold"), wraplength = 500)
-        self.memory_label.pack(ipadx=10,ipady=3,padx=5,pady=10)
+        self.memory_caption = Label(self.memory_frame, text=text,borderwidth = 2, relief = "solid", fg = MEMA_BLACK, bg = "#FFFFFF", font = ("Arial", 26, "bold"), wraplength = 500)
+        self.memory_caption.pack(ipadx=10,ipady=3,padx=5,pady=10)
 
     def add_image_to_frame(self, image_path: str):
         # Create a local path for the image by extracting the file name
@@ -118,26 +153,26 @@ class content_memory_create_home(content_frame):
         img = ImageTk.PhotoImage(Image.open(local_image_path))
         
         # Create a label with the image and add it to the memory frame
-        self.panel = Label(self.memory_frame, image=img, bg = MEMA_BLACK)
-        self.panel.photo = img
-        self.panel.pack(ipadx=3, ipady=3)
+        self.memory_image = Label(self.memory_frame, image=img, bg = MEMA_BLACK)
+        self.memory_image.photo = img
+        self.memory_image.pack(ipadx=3, ipady=3)
 
     def add_video_to_frame(self, video_path: str):
         # Create a video player widget and set its size
-        self.videoplayer = TkinterVideo(master=self.memory_frame, scaled = True)
-        self.videoplayer.set_scaled(True, True)
+        self.memory_videoplayer = TkinterVideo(master=self.memory_frame, scaled = True)
+        self.memory_videoplayer.set_scaled(True, True)
         
         # Load the video file into the video player
-        self.videoplayer.load(video_path)
+        self.memory_videoplayer.load(video_path)
         
         # Add the video player to the memory frame
-        self.videoplayer.pack(expand=True, fill="both")
+        self.memory_videoplayer.pack(expand=True, fill="both")
 
         # Play the video
-        self.videoplayer.play()
+        self.memory_videoplayer.play()
         
         # Bind the "<<Ended>>" event to the replay method
-        self.videoplayer.bind("<<Ended>>", self.replay)
+        self.memory_videoplayer.bind("<<Ended>>", self.replay)
         
 
 
@@ -170,7 +205,7 @@ class content_memory_create_home(content_frame):
         being displayed.
         """
 
-        try: self.videoplayer.stop()
+        try: self.memory_videoplayer.stop()
         except: pass
 
     def callback(self, callback_request: dict[str:str]) -> None:
