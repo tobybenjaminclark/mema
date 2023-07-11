@@ -70,11 +70,12 @@ class content_memory_create_label(content_frame):
         Sets up the GUI Widgets on the screen. Initializes a header and a label to show the spoken text
         """
 
-        self.header = Label(self, text = self.header_text)
+        self.header = Label(self, text = self.header_text, font = ("Arial", 36, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
         self.header.pack(pady = 20)
 
-        self.text = Label(self, text = self.label_content)
-        self.text.pack()
+        self.text = Label(self, text = self.label_content, font = ("Arial Black", 26, "bold"), bg = "#FFFFFF", fg = MEMA_BLACK, wraplength = 500)
+        self.text.configure(borderwidth = 2, relief = "solid")
+        self.text.pack(ipadx = 10, ipady = 10)
 
     def display_initial_buttons(self):
         """
@@ -188,7 +189,10 @@ class content_memory_create_label(content_frame):
             # Append the spoken content to the label
             # Update the label text
             case _:
-                if self.recording_label:
-                    spoken_content = callback_request["content"]
-                    self.label_content += spoken_content
-                    self.update_label_text()
+                # Return if not recording
+                if not self.recording_label: return
+
+                # Only update the label text if recording
+                spoken_content = callback_request["content"]
+                self.label_content += spoken_content
+                self.update_label_text()
