@@ -96,31 +96,27 @@ class content_memory_create_home(content_frame):
         self.memory_videoplayer.play()
 
     def update_frame(self) -> None:
+        """
+        Updates the memory_frame to display the content of the new frame index. Changes
+        what is displayed, including video, image and label.
+        """
         
-        # Path to the current frame image (if exists)
-        image_path: str
-        image_path = self.memoryspace_path + "/" + str(self.frame) + "_content.jpeg"
-
-        video_path: str
-        video_path = image_path.replace(".jpeg", ".mp4")
-
-        text_path: str
-        text_path = image_path.replace("_content.jpeg", "_label.txt")
-
-        image_exists = exists(image_path)
-        video_exists = exists(video_path)
-        label_exists = exists(text_path)
-
-        print(f"mema_content_memory_create_home: {image_exists}/{video_exists} = {image_path},\t{video_path}")
-
+        # Destory the current frame
         self.memory_frame.destroy()
         self.memory_frame = Frame(self, bg=MEMA_WHITE)
 
-        # Adds video, image and label to frame if they exist.
-        if video_exists: self.add_video_to_frame(video_path)
-        if image_exists: self.add_image_to_frame(image_path)
-        if label_exists: self.add_label_to_frame(text_path)
+        # Path to the current frame image (if exists)
+        image_path, video_path, text_path: str
+        image_path = self.memoryspace_path + "/" + str(self.frame) + "_content.jpeg"
+        video_path = image_path.replace(".jpeg", ".mp4")
+        text_path = image_path.replace("_content.jpeg", "_label.txt")
 
+        # Adds video, image and label to frame if they exist.
+        if exists(video_path): self.add_video_to_frame(video_path)
+        if exists(image_path): self.add_image_to_frame(image_path)
+        if exists(text_path): self.add_label_to_frame(text_path)
+
+        # Pack the new frame, with the newly added widgets
         self.memory_frame.pack(expand=True,fill = "both")
 
     def add_label_to_frame(self, text_path: str):
