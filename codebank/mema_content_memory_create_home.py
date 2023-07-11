@@ -76,7 +76,7 @@ class content_memory_create_home(content_frame):
         # Finds the max frame. (Adds 1, as always needs an empty frame to add to)
         # Error checking
         try:
-            self.max_frames = int(max([file.path.rpartition("/")[2][0] for file in os.scandir(memoryspace_path)]))+2
+            self.max_frames = int(max([file.path.rpartition("/")[2][0] for file in os.scandir(self.memoryspace_path)]))+2
         except:
             self.max_frames = 1
         finally:
