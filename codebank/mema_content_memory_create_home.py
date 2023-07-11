@@ -129,8 +129,7 @@ class content_memory_create_home(content_frame):
 
     def add_video_to_frame(self, video_path: str):
         # Create a video player widget and set its size
-        self.videoplayer = TkinterVideo(master=self.memory_frame, scaled=True)
-        self.videoplayer.set_size((800, 500), True)
+        self.videoplayer = TkinterVideo(master=self.memory_frame)
         
         # Load the video file into the video player
         self.videoplayer.load(video_path)

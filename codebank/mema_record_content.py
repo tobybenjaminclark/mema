@@ -268,5 +268,6 @@ class content_record(Frame):
                 os.remove("sample.mp4")
 
             case "RECORD_VIDEO_KEEP":
+                self.videoplayer.stop()
                 self.stop()
                 self.parent.switch_content(self.return_page, self.memoryspace_path)
