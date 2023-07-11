@@ -56,7 +56,7 @@ class content_memory_create_home(content_frame):
         self.frame_label = Label(self, text = f"Frame: {self.frame}")
         self.frame_label.pack(pady = 10)
 
-        self.memory_frame = Frame(self)
+        self.memory_frame = Frame(self, bg = MEMA_WHITE)
         self.memory_frame.pack()
         
         self.update_frame()
@@ -112,8 +112,8 @@ class content_memory_create_home(content_frame):
             print(f"mema_content_memory_create_home: could not read label @ {text_path}", file = sys.stderr)
         
         # Create a label with the text content and add it to the memory frame
-        self.memory_label = Label(self.memory_frame, text=text)
-        self.memory_label.pack()
+        self.memory_label = Label(self.memory_frame, text=text,borderwidth = 2, relief = "solid", fg = MEMA_BLACK, bg = "#FFFFFF", font = ("Arial", 26, "bold"), wraplength = 500)
+        self.memory_label.pack(ipadx=10,ipady=3,padx=5,pady=10)
 
     def add_image_to_frame(self, image_path: str):
         # Create a local path for the image by extracting the file name
@@ -123,9 +123,9 @@ class content_memory_create_home(content_frame):
         img = ImageTk.PhotoImage(Image.open(local_image_path))
         
         # Create a label with the image and add it to the memory frame
-        self.panel = Label(self.memory_frame, image=img)
+        self.panel = Label(self.memory_frame, image=img, bg = MEMA_BLACK)
         self.panel.photo = img
-        self.panel.pack()
+        self.panel.pack(ipadx=3, ipady=3)
 
     def add_video_to_frame(self, video_path: str):
         # Create a video player widget and set its size
