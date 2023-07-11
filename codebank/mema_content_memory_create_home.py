@@ -160,14 +160,22 @@ class content_memory_create_home(content_frame):
         buttons[3] = ("Exit", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 
+    def stop_videoplayer(self) -> None:
+        try: self.videoplayer.stop()
+        except: pass
+
     def callback(self, callback_request: dict[str:str]) -> None:
 
         match (callback_request["content"]):
             case "HOME_EXIT":
+                self.stop_videoplayer()
                 self.parent.reset_path()
-            case "CREATE_HOME_CAM": 
+            case "CREATE_HOME_CAM":
+                self.stop_videoplayer()
                 self.parent.switch_content(content_record, self.memoryspace_path, str(self.frame), content_memory_create_home)
             case "NEXT_FRAME":
+                self.stop_videoplayer()
                 self.next_frame()
             case "CREATE_HOME_LABEL":
+                self.stop_videoplayer()
                 self.parent.switch_content(content_memory_create_label, self.memoryspace_path, content_memory_create_home, self.frame)
