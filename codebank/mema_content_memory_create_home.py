@@ -91,7 +91,7 @@ class content_memory_create_home(content_frame):
         if image_exists: self.add_image_to_frame(image_path)
         if label_exists: self.add_label_to_frame(text_path)
 
-        self.memory_frame.pack(expand=True)
+        self.memory_frame.pack(expand=True,fill = "both")
 
     def add_label_to_frame(self, text_path: str):
         """
@@ -129,19 +129,22 @@ class content_memory_create_home(content_frame):
 
     def add_video_to_frame(self, video_path: str):
         # Create a video player widget and set its size
-        self.videoplayer = TkinterVideo(master=self.memory_frame)
+        self.videoplayer = TkinterVideo(master=self.memory_frame, scaled = True)
+        self.videoplayer.set_scaled(True, True)
         
         # Load the video file into the video player
         self.videoplayer.load(video_path)
         
+        # Add the video player to the memory frame
+        self.videoplayer.pack(expand=True, fill="both")
+
         # Play the video
         self.videoplayer.play()
         
         # Bind the "<<Ended>>" event to the replay method
         self.videoplayer.bind("<<Ended>>", self.replay)
         
-        # Add the video player to the memory frame
-        self.videoplayer.pack()
+
 
     def next_frame(self):
         self.frame = (self.frame + 1) % self.max_frames
