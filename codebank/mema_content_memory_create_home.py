@@ -84,7 +84,7 @@ class content_memory_create_home(content_frame):
         print(f"mema_content_memory_create_home: {image_exists}/{video_exists} = {image_path},\t{video_path}")
 
         self.memory_frame.destroy()
-        self.memory_frame = Frame(self)
+        self.memory_frame = Frame(self, bg=MEMA_WHITE)
 
         # Adds video, image and label to frame if they exist.
         if video_exists: self.add_video_to_frame(video_path)
