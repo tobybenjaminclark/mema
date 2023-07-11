@@ -69,13 +69,13 @@ class content_memory_create_home(content_frame):
         
         # Path to the current frame image (if exists)
         image_path: str
-        image_path = self.memoryspace_path + "/" + str(self.frame) + "_photo.jpeg"
+        image_path = self.memoryspace_path + "/" + str(self.frame) + "_content.jpeg"
 
         video_path: str
-        video_path = image_path.replace("_photo.jpeg", "_video.mp4")
+        video_path = image_path.replace(".jpeg", ".mp4")
 
         text_path: str
-        text_path = image_path.replace("_photo.jpeg", "_label.txt")
+        text_path = image_path.replace("_content.jpeg", "_label.txt")
 
         image_exists = exists(image_path)
         video_exists = exists(video_path)

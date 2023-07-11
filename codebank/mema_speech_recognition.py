@@ -28,7 +28,8 @@ from threading import Thread
 # Mute ALSA Error Messages
 # The following code mutes ALSA error messages to prevent them from being displayed in the terminal.
 # It uses `ERROR_HANDLER_FUNC` and `noalsaerr` context manager for this purpose.
-# The purpose is to block ALSA warnings that get spammed in the terminal.
+# The purpose is to block ALSA warnings that get spammed in the terminal, to unmute them comment out the code
+# in the noaslaerr() context manager.
 # This code is taken from: https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
 
 ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)

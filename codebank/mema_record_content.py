@@ -41,7 +41,7 @@ from tkVideoPlayer import TkinterVideo
 
 # Operating system interaction library
 # os is a library that provides functions for interacting with the operating system.
-# It is used in this code for file removal
+# It is used in this code for file removal and file detection
 import os
 
 class content_record(Frame):
@@ -139,7 +139,7 @@ class content_record(Frame):
         This method initializes the video writer object and sets the recording flag to True.
         """
         # Define the codec and create a VideoWriter object
-        video_path = self.memoryspace_path + "/" + self.memoryspace_frame + "_video.mp4"
+        video_path = self.memoryspace_path + "/" + self.memoryspace_frame + "_content.mp4"
         self.fourcc = cv2.VideoWriter_fourcc(*'MP4V')
         self.out = cv2.VideoWriter(video_path, self.fourcc, 20.0, (640, 480))
         self.recording = True
@@ -214,7 +214,7 @@ class content_record(Frame):
         
         self.label.destroy()
         self.halt = True
-        video_path: str = self.memoryspace_path + "/" + self.memoryspace_frame + "_video.mp4"
+        video_path: str = self.memoryspace_path + "/" + self.memoryspace_frame + "_content.mp4"
         self.videoplayer = TkinterVideo(master=self, scaled = True)
         self.videoplayer.set_scaled(True, True)
         self.videoplayer.load(video_path)
@@ -246,8 +246,15 @@ class content_record(Frame):
                 self.parent.switch_content(self.return_page, self.memoryspace_path)
                 
             case "RECORD_PHOTO_KEEP":
-                path = self.memoryspace_path + "/" + self.memoryspace_frame + "_photo.jpeg"
+                path = self.memoryspace_path + "/" + self.memoryspace_frame + "_content.jpeg"
                 cv2.imwrite(path, cv2.cvtColor(self.current_image, cv2.COLOR_BGR2RGB))
+
+                # Ensures video OR photo
+                try:
+                    os.remove(self.memoryspace_path+"/"+self.memoryspace_frame+"_content.mp4")
+                except:
+                    pass
+
                 self.stop()
                 self.parent.switch_content(self.return_page, self.memoryspace_path)
             
@@ -270,4 +277,10 @@ class content_record(Frame):
             case "RECORD_VIDEO_KEEP":
                 self.videoplayer.stop()
                 self.stop()
+
+                try:
+                    os.remove(self.memoryspace_path+"/"+self.memoryspace_frame+"_content.jpeg")
+                except:
+                    pass
+
                 self.parent.switch_content(self.return_page, self.memoryspace_path)
