@@ -48,11 +48,6 @@ class content_memory_create_home(content_frame):
         finally:
             if(self.max_frames < 2): self.max_frames = 1
 
-        print(self.max_frames)
-
-        files = [file.path for file in os.scandir(memoryspace_path)]
-        print(files)
-
         self.frame_label = Label(self, text = f"Frame: {self.frame}")
         self.frame_label.pack(pady = 10)
 
@@ -147,11 +142,20 @@ class content_memory_create_home(content_frame):
 
 
     def next_frame(self):
+        """
+        Moves forward one frame, loops at self.max_frames. Reconfigures the frame label and
+        memoryspace-frame, frame.
+        """
+
         self.frame = (self.frame + 1) % self.max_frames
         self.frame_label.configure(text = f"Frame: {self.frame}")
         self.update_frame()
 
     def update_buttons(self) -> None:
+        """
+        Updates the button frame to show options to go to the camera, add a label, go to the next frame or
+        exit the current page (go back to the MeMa login page.)
+        """
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("Camera", "CREATE_HOME_CAM")
@@ -161,21 +165,37 @@ class content_memory_create_home(content_frame):
         self.parent.set_input(buttons, False)
 
     def stop_videoplayer(self) -> None:
+        """
+        Attempts to stop the current videoplayer. Uses exception handling, in-case a video is not currently
+        being displayed.
+        """
+
         try: self.videoplayer.stop()
         except: pass
 
     def callback(self, callback_request: dict[str:str]) -> None:
 
         match (callback_request["content"]):
+
+            # This returns to the Memory Machine login screen
             case "HOME_EXIT":
                 self.stop_videoplayer()
                 self.parent.reset_path()
+
+            # This takes the user to the `content_record` page, which allows them to
+            # record & add a new video/image to the current frame.
             case "CREATE_HOME_CAM":
                 self.stop_videoplayer()
                 self.parent.switch_content(content_record, self.memoryspace_path, str(self.frame), content_memory_create_home)
+
+            # This takes the user to the next `frame` of a memory, it updates the memoryframe
+            # frame to display the new content. It will loop around if it is at the max frames.
             case "NEXT_FRAME":
                 self.stop_videoplayer()
                 self.next_frame()
+
+            # This takes the user to the label creation page, `content_memory_create_label` which
+            # allows them to create a label which will be displayed underneath the current frame.
             case "CREATE_HOME_LABEL":
                 self.stop_videoplayer()
                 self.parent.switch_content(content_memory_create_label, self.memoryspace_path, content_memory_create_home, self.frame)
