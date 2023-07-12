@@ -6,6 +6,7 @@ from mema_data_access import *
 from mema_content_memory_create_name import *
 from mema_record_content import *
 from mema_constants import *
+from mema_content_memory_list import *
 
 # GUI library
 # tkinter is the standard GUI library for Python.
@@ -46,7 +47,7 @@ class content_home(content_frame):
             case "HOME_NEWM": 
                 self.parent.switch_content(content_memory_create_name, self.user_id)
             case "HOME_VIEWM":
-                print("View Memories")
+                self.parent.switch_content(content_memory_list, self.user_id)
 
 
 

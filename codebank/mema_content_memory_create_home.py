@@ -70,7 +70,7 @@ class content_memory_create_home(content_frame):
 
         # Setup
         self.setup_max_frames()
-        self.setup_gui()
+        self.initialize_gui()
 
     def setup_max_frames(self):
         # Finds the max frame. (Adds 1, as always needs an empty frame to add to)
@@ -82,25 +82,25 @@ class content_memory_create_home(content_frame):
         finally:
             if(self.max_frames < 2): self.max_frames = 1
 
-    def setup_gui(self):
+    def initialize_gui(self):
         self.frame_label = Label(self, text = f"Frame: {self.frame}")
         self.frame_label.pack(pady = 10)
 
         self.memory_frame = Frame(self, bg = MEMA_WHITE)
         self.memory_frame.pack()
         
-        self.update_frame()
+        self.update_memory_frame()
         self.update_buttons()
 
     def replay(self, event):
         self.memory_videoplayer.play()
 
-    def update_frame(self) -> None:
+    def update_memory_frame(self) -> None:
         """
         Updates the memory_frame to display the content of the new frame index. Changes
         what is displayed, including video, image and label.
         """
-        
+
         # Destory the current frame
         self.memory_frame.destroy()
         self.memory_frame = Frame(self, bg=MEMA_WHITE)
@@ -112,14 +112,14 @@ class content_memory_create_home(content_frame):
         text_path = image_path.replace("_content.jpeg", "_label.txt")
 
         # Adds video, image and label to frame if they exist.
-        if exists(video_path): self.add_video_to_frame(video_path)
-        if exists(image_path): self.add_image_to_frame(image_path)
-        if exists(text_path): self.add_label_to_frame(text_path)
+        if exists(video_path): self.display_video_on_memory_frame(video_path)
+        if exists(image_path): self.display_image_on_memory_frame(image_path)
+        if exists(text_path): self.display_label_on_memory_frame(text_path)
 
         # Pack the new frame, with the newly added widgets
         self.memory_frame.pack(expand=True,fill = "both")
 
-    def add_label_to_frame(self, text_path: str):
+    def display_label_on_memory_frame(self, text_path: str):
         """
         Opens the label for the current frame
         """
@@ -141,7 +141,7 @@ class content_memory_create_home(content_frame):
         self.memory_caption = Label(self.memory_frame, text=text,borderwidth = 2, relief = "solid", fg = MEMA_BLACK, bg = "#FFFFFF", font = ("Arial", 26, "bold"), wraplength = 500)
         self.memory_caption.pack(ipadx=10,ipady=3,padx=5,pady=10)
 
-    def add_image_to_frame(self, image_path: str):
+    def display_image_on_memory_frame(self, image_path: str):
         # Create a local path for the image by extracting the file name
         local_image_path = "databank/" + image_path.rsplit("databank/")[1]
         
@@ -153,7 +153,7 @@ class content_memory_create_home(content_frame):
         self.memory_image.photo = img
         self.memory_image.pack(ipadx=3, ipady=3)
 
-    def add_video_to_frame(self, video_path: str):
+    def display_video_on_memory_frame(self, video_path: str):
         # Create a video player widget and set its size
         self.memory_videoplayer = TkinterVideo(master=self.memory_frame, scaled = True)
         self.memory_videoplayer.set_scaled(True, True)
@@ -180,7 +180,7 @@ class content_memory_create_home(content_frame):
 
         self.frame = (self.frame + 1) % self.max_frames
         self.frame_label.configure(text = f"Frame: {self.frame}")
-        self.update_frame()
+        self.update_memory_frame()
 
     def update_buttons(self) -> None:
         """
