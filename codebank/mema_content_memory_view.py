@@ -86,22 +86,36 @@ class content_memory_view(content_frame):
             if(self.max_frames < 2): self.max_frames = 1
 
     def initialize_gui(self):
+        """
+        Initializes the graphical user interface (GUI) for the application.
+        """
 
-        self.title_frame = Frame(self, bg = MEMA_WHITE)
+        # Create the title frame at the top of the window
+        self.title_frame = Frame(self, bg=MEMA_WHITE)
 
-        self.frame_label = Label(self.title_frame, text = f"Frame: {self.frame}", font = ("Arial", 36, "bold"), bg = MEMA_WHITE)
-        self.frame_label.pack(side = RIGHT)
+        # Create a label for displaying the current frame number
+        self.frame_label = Label(self.title_frame, text=f"Frame: {self.frame}", font=("Arial", 36, "bold"), bg=MEMA_WHITE)
+        self.frame_label.pack(side=RIGHT)
 
+        # Extract the selected memory name from the memoryspace_path
         selected_memory = self.memoryspace_path.split("memoryspace")[1][1:]
-        self.memoryspace_label = Label(self.title_frame, text = selected_memory, font = ("Arial", 36, "bold"), fg = MEMA_BLACK, bg = MEMA_WHITE)
-        self.memoryspace_label.pack(padx = (0,120), side = LEFT)
 
-        self.title_frame.pack(pady = 20)
+        # Create a label for displaying the selected memory name
+        self.memoryspace_label = Label(self.title_frame, text=selected_memory, font=("Arial", 36, "bold"),
+                                    fg=MEMA_BLACK, bg=MEMA_WHITE)
+        self.memoryspace_label.pack(padx=(0, 120), side=LEFT)
 
-        self.memory_frame = Frame(self, bg = MEMA_WHITE)
+        # Pack the title frame with some padding
+        self.title_frame.pack(pady=20)
+
+        # Create the memory frame for displaying memory-related information
+        self.memory_frame = Frame(self, bg=MEMA_WHITE)
         self.memory_frame.pack()
-        
+
+        # Update the memory frame to display the initial memory information
         self.update_memory_frame()
+
+        # Update the buttons in the GUI
         self.update_buttons()
 
     def replay(self, event):
