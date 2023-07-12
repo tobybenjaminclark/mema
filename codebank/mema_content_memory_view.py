@@ -198,8 +198,6 @@ class content_memory_view(content_frame):
         # Bind the "<<Ended>>" event to the replay method
         self.memory_videoplayer.bind("<<Ended>>", self.replay)
         
-
-
     def next_frame(self):
         """
         Moves forward one frame, loops at self.max_frames. Reconfigures the frame label and
