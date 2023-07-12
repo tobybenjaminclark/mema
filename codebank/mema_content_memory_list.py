@@ -6,8 +6,11 @@ from mema_content_new_user_photo import *
 from mema_data_access import *
 from mema_record_content import *
 from mema_content_memory_create_label import *
+from mema_content_memory_view import *
+
 import os
 from datetime import datetime, timezone
+
 
 # GUI library
 # tkinter is the standard GUI library for Python.
@@ -34,7 +37,7 @@ class content_memory_list(content_frame):
         self.memoryspaces: list = []
         self.current_memory_index = 0
 
-        self.memory_thumbnail_frame = Frame(self)
+        self.memory_thumbnail_frame = Frame(self, bg = MEMA_WHITE)
         self.memory_thumbnail_frame.pack(expand = True, fill = "both")
         
         self.find_available_memories()
@@ -53,7 +56,7 @@ class content_memory_list(content_frame):
     def show_current_memory(self) -> None:
 
         self.memory_thumbnail_frame.destroy()
-        self.memory_thumbnail_frame = Frame(self)
+        self.memory_thumbnail_frame = Frame(self, bg = MEMA_WHITE)
 
         # Gets the selected memory name
         selected_memory: str
@@ -62,7 +65,7 @@ class content_memory_list(content_frame):
 
         # Display selected memory name
         selected_memory_label = Label(self.memory_thumbnail_frame, text=  selected_memory, font = ("Arial", 36, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
-        selected_memory_label.pack()
+        selected_memory_label.pack(pady=(100,10))
 
         # Display selected memory creation time
         creation_date = os.stat(self.memoryspaces[self.current_memory_index]).st_ctime
@@ -74,10 +77,9 @@ class content_memory_list(content_frame):
             {"1": "st", "2": "nd", "3": "rd"}.get(day[-1], "th")
         formatted_date = creation_date.strftime(f"%d{day_suffix} %B %Y at %H:%M")
 
-        print(f"Creation Date: {formatted_date}")
-
-        selected_memory_label = Label(self.memory_thumbnail_frame, text = formatted_date, font = ("Arial", 32), bg = MEMA_WHITE, fg = MEMA_BLACK)
-        selected_memory_label.pack()
+        # Add
+        selected_memory_date = Label(self.memory_thumbnail_frame, text = formatted_date, font = ("Arial", 32), bg = MEMA_WHITE, fg = MEMA_BLACK)
+        selected_memory_date.pack()
         
         # Add stuff in frame
         self.memory_thumbnail_frame.pack(expand = True, fill = "both")
@@ -130,7 +132,7 @@ class content_memory_list(content_frame):
             case "MEMORY_LIST_VIEW":
                 selected_memory:str 
                 selected_memory = self.memoryspaces[self.current_memory_index]
-                print(selected_memory)
+                self.parent.switch_content(content_memory_view, selected_memory)
             
             case "HOME_EXIT":
                 self.parent.reset_path()
