@@ -30,7 +30,11 @@ class content_memory_list(content_frame):
         self.user_id = user_id
 
         self.memoryspaces: list = []
+        self.current_memory_index = 0
 
+        self.memory_thumbnail_frame = Frame(self)
+        self.memory_thumbnail_frame.pack(expand = True, fill = "both")
+        
         self.find_available_memories()
 
         if len(self.memoryspaces) is 0:
@@ -42,8 +46,21 @@ class content_memory_list(content_frame):
         else:
             # Memoryspaces are available
             self.update_buttons()
-            self.memories_label = Label(self, text = str(self.memoryspaces), font = ("Arial", 22, "bold"), fg = MEMA_BLACK, bg = MEMA_WHITE, wraplength= 400)
-            self.memories_label.pack()         
+            self.show_current_memory()
+
+    def show_current_memory(self) -> None:
+
+        self.memory_thumbnail_frame.destroy()
+        self.memory_thumbnail_frame = Frame(self)
+
+        # Gets the selected memory name
+        selected_memory: str
+        selected_memory = self.memoryspaces[self.current_memory_index]
+        selected_memory = selected_memory.split("memoryspace")[1][1:]
+
+
+        # Add stuff in frame
+        self.memory_thumbnail_frame.pack(expand = True, fill = "both")
 
     def find_available_memories(self) -> None:
         directory_path = os.getcwd() + "/databank/userbank_" + str(self.user_id) + "/"
