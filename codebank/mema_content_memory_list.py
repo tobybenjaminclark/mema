@@ -6,6 +6,8 @@ from mema_content_new_user_photo import *
 from mema_data_access import *
 from mema_record_content import *
 from mema_content_memory_create_label import *
+import os
+from datetime import datetime, timezone
 
 # GUI library
 # tkinter is the standard GUI library for Python.
@@ -62,6 +64,21 @@ class content_memory_list(content_frame):
         selected_memory_label = Label(self.memory_thumbnail_frame, text=  selected_memory, font = ("Arial", 36, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
         selected_memory_label.pack()
 
+        # Display selected memory creation time
+        creation_date = os.stat(self.memoryspaces[self.current_memory_index]).st_ctime
+        creation_date = datetime.fromtimestamp(creation_date)
+
+        # Formats the date to DAY-suffix MONTH YEAR 'at' HOUR:MINUTE
+        day = creation_date.strftime("%d")
+        day_suffix = "th" if day[-1] not in ['1', '2', '3'] or day in ['11', '12', '13'] else \
+            {"1": "st", "2": "nd", "3": "rd"}.get(day[-1], "th")
+        formatted_date = creation_date.strftime(f"%d{day_suffix} %B %Y at %H:%M")
+
+        print(f"Creation Date: {formatted_date}")
+
+        selected_memory_label = Label(self.memory_thumbnail_frame, text = formatted_date, font = ("Arial", 32), bg = MEMA_WHITE, fg = MEMA_BLACK)
+        selected_memory_label.pack()
+        
         # Add stuff in frame
         self.memory_thumbnail_frame.pack(expand = True, fill = "both")
 
