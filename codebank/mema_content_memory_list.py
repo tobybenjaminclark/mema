@@ -58,6 +58,7 @@ class content_memory_list(content_frame):
         selected_memory = self.memoryspaces[self.current_memory_index]
         selected_memory = selected_memory.split("memoryspace")[1][1:]
 
+        # Display selected memory name
         selected_memory_label = Label(self.memory_thumbnail_frame, text=  selected_memory, font = ("Arial", 36, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
         selected_memory_label.pack()
 
@@ -65,6 +66,10 @@ class content_memory_list(content_frame):
         self.memory_thumbnail_frame.pack(expand = True, fill = "both")
 
     def find_available_memories(self) -> None:
+        """
+        Gets a list of available memory directorys in the selected users storage.
+        """
+
         directory_path = os.getcwd() + "/databank/userbank_" + str(self.user_id) + "/"
         self.memoryspaces = [f.path for f in os.scandir(directory_path) if f.is_dir()]
         print(self.memoryspaces)
@@ -104,3 +109,11 @@ class content_memory_list(content_frame):
 
             case "MEMORY_LIST_NEXT":
                 self.next_frame()
+            
+            case "MEMORY_LIST_VIEW":
+                selected_memory:str 
+                selected_memory = self.memoryspaces[self.current_memory_index]
+                print(selected_memory)
+            
+            case "HOME_EXIT":
+                self.parent.reset_path()
