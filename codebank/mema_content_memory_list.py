@@ -58,6 +58,8 @@ class content_memory_list(content_frame):
         selected_memory = self.memoryspaces[self.current_memory_index]
         selected_memory = selected_memory.split("memoryspace")[1][1:]
 
+        selected_memory_label = Label(self.memory_thumbnail_frame, text=  selected_memory, font = ("Arial", 36, "bold"), bg = MEMA_WHITE, fg = MEMA_BLACK)
+        selected_memory_label.pack()
 
         # Add stuff in frame
         self.memory_thumbnail_frame.pack(expand = True, fill = "both")
@@ -66,6 +68,10 @@ class content_memory_list(content_frame):
         directory_path = os.getcwd() + "/databank/userbank_" + str(self.user_id) + "/"
         self.memoryspaces = [f.path for f in os.scandir(directory_path) if f.is_dir()]
         print(self.memoryspaces)
+
+    def next_frame(self) -> None:
+        self.current_memory_index = (self.current_memory_index + 1) % len(self.memoryspaces)
+        self.show_current_memory()
 
     def update_buttons_no_memories(self) -> None:
         """
@@ -92,8 +98,9 @@ class content_memory_list(content_frame):
         buttons[3] = ("EXIT", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 
-    def stop_videoplayer(self) -> None:
-        pass
-
     def callback(self, callback_request: dict[str:str]) -> None:
-        pass
+        
+        match callback_request["content"]:
+
+            case "MEMORY_LIST_NEXT":
+                self.next_frame()
