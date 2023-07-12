@@ -31,15 +31,36 @@ class content_memory_list(content_frame):
 
         self.memoryspaces: list = []
 
-        self.update_buttons()
         self.find_available_memories()
 
+        if len(self.memoryspaces) is 0:
+            # No memoryspaces exit, display a message
+            self.no_spaces_label = Label(self, text = "No Memories", font = ("Arial", 36, "bold"), fg = MEMA_BLACK, bg = MEMA_WHITE)
+            self.no_spaces_label.pack()
+            self.update_buttons_no_memories()
+
+        else:
+            # Memoryspaces are available
+            self.update_buttons()
+            self.memories_label = Label(self, text = str(self.memoryspaces), font = ("Arial", 22, "bold"), fg = MEMA_BLACK, bg = MEMA_WHITE, wraplength= 400)
+            self.memories_label.pack()         
 
     def find_available_memories(self) -> None:
         directory_path = os.getcwd() + "/databank/userbank_" + str(self.user_id) + "/"
-        subfolders = [f.path for f in os.scandir(directory_path) if f.is_dir()]
-        print(subfolders)
+        self.memoryspaces = [f.path for f in os.scandir(directory_path) if f.is_dir()]
+        print(self.memoryspaces)
 
+    def update_buttons_no_memories(self) -> None:
+        """
+        Updates the button frame to show only option to back to the main menu
+        """
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = MEMA_EMPTY_BUTTON
+        buttons[1] = MEMA_EMPTY_BUTTON
+        buttons[2] = MEMA_EMPTY_BUTTON
+        buttons[3] = ("EXIT", "HOME_EXIT")
+        self.parent.set_input(buttons, False)
 
     def update_buttons(self) -> None:
         """
@@ -50,7 +71,7 @@ class content_memory_list(content_frame):
         buttons: list[(str, str)] = [0, 0, 0, 0]
         buttons[0] = ("VIEW", "MEMORY_LIST_VIEW")
         buttons[1] = ("NEXT","MEMORY_LIST_NEXT")
-        buttons[2] = (None, None)
+        buttons[2] = MEMA_EMPTY_BUTTON
         buttons[3] = ("EXIT", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 
