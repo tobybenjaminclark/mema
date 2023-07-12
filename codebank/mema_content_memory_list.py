@@ -29,7 +29,16 @@ class content_memory_list(content_frame):
         self.user_id: str
         self.user_id = user_id
 
+        self.memoryspaces: list = []
 
+        self.update_buttons()
+        self.find_available_memories()
+
+
+    def find_available_memories(self) -> None:
+        directory_path = os.getcwd() + "/databank/userbank_" + str(self.user_id) + "/"
+        subfolders = [f.path for f in os.scandir(directory_path) if f.is_dir()]
+        print(subfolders)
 
 
     def update_buttons(self) -> None:
@@ -39,10 +48,10 @@ class content_memory_list(content_frame):
         """
 
         buttons: list[(str, str)] = [0, 0, 0, 0]
-        buttons[0] = ("A", "CREATE_HOME_CAM")
-        buttons[1] = ("A Label","CREATE_HOME_LABEL")
-        buttons[2] = ("A Frame", "NEXT_FRAME")
-        buttons[3] = ("B", "HOME_EXIT")
+        buttons[0] = ("VIEW", "MEMORY_LIST_VIEW")
+        buttons[1] = ("NEXT","MEMORY_LIST_NEXT")
+        buttons[2] = (None, None)
+        buttons[3] = ("EXIT", "HOME_EXIT")
         self.parent.set_input(buttons, False)
 
     def stop_videoplayer(self) -> None:

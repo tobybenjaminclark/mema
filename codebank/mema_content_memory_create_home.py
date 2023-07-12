@@ -106,7 +106,9 @@ class content_memory_create_home(content_frame):
         self.memory_frame = Frame(self, bg=MEMA_WHITE)
 
         # Path to the current frame image (if exists)
-        image_path, video_path, text_path: str
+        image_path: str
+        video_path: str
+        text_path: str
         image_path = self.memoryspace_path + "/" + str(self.frame) + "_content.jpeg"
         video_path = image_path.replace(".jpeg", ".mp4")
         text_path = image_path.replace("_content.jpeg", "_label.txt")
