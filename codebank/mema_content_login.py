@@ -13,7 +13,10 @@ from mema_content_homepage import *
 from tkinter import *
 
 class content_login(content_frame):
-
+    """
+    Frame to handle user login
+    """
+    
     def __init__(self, parent, *args, **kwargs)-> None:
         """
         Initiazation method calls the superclass constructor, before setting up the buttons and creating the
