@@ -85,7 +85,7 @@ The fundamental objective of the Memory Machine is to **empower older adults in 
 
 A notable feature of the Memory Machine is it's **facial recognition functionality**, which removes the necessity to remember long, complicated passwords. As the target use-case is **older people**, MeMa 3.1 allows for a facial-based login system, similar to the iOS FaceID system. It's important that **memories are protected and secure**, which is a fundamental value in MeMa's Design.
 
-In summary, the **Memory Machine provides a robust and inclusive solution for storing and reliving memories**, while specifically addressing the requirements of older adults. By seamlessly incorporating `TTS``, `speech recognition``, and `facial recognition`` technologies, this device ensures *accessibility* and *ease of use*, ultimately **enabling individuals to engage with their memories in a personalized and meaningful manner**. The Memory Machine stands as a testament to the advancements in memory preservation technology, consistently evolving, improving and adapting to new ways to capture and store memories.
+In summary, the **Memory Machine provides a robust and inclusive solution for storing and reliving memories**, while specifically addressing the requirements of older adults. By seamlessly incorporating `TTS`, `speech recognition`, and `facial recognition` technologies, this device ensures *accessibility* and *ease of use*, ultimately **enabling individuals to engage with their memories in a personalized and meaningful manner**. The Memory Machine stands as a testament to the advancements in memory preservation technology, consistently evolving, improving and adapting to new ways to capture and store memories.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -98,11 +98,18 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
+**Python 3.11.4, PI & Tkinter Dependency**<br>
+Firstly, update the system repository using the following<br>
+> `sudo apt-get update`<br>
+Now do this
+
+> `sudo apt-get install python3.8`<br>
+> `sudo apt install python3-pip'`<br>
+> `sudo apt-get install python3.8-tk`
+
+**Python Packages**
+> These are listed in 
 ### Installation
 
 1. Get a free API Key at [https://example.com](https://example.com)
