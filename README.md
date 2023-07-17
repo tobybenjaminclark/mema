@@ -39,12 +39,11 @@
   <p align="center">
     project_description
     <br />
-    <a href="https://github.com/tobybenjaminclark/mema/wiki"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/tobybenjaminclark/mema">View Demo</a>
+    <a href="https://github.com/tobybenjaminclark/mema/wiki">Wiki</a>
     ·
-    <a href="https://github.com/tobybenjaminclark/mema/issues">Report Bug</a>
+    <a href="https://github.com/tobybenjaminclark/mema">Demo</a>
+    ·
+    <a href="https://github.com/tobybenjaminclark/mema/issues">Issues</a>
   </p>
 </div>
 
