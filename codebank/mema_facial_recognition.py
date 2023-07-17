@@ -235,7 +235,7 @@ class facial_recognition(Frame):
         self.video_label.image = img
 
         # Schedule the next frame update
-        self.after(20, self.display_recognition)
+        self.after(10, self.display_recognition)
 
     def __del__(self) -> None:
         self.quit()
