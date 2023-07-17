@@ -72,7 +72,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-MeMa has several dependencies that are going to be listed under this section. 
+MeMa has several dependencies that are going to be listed under this section. Further information on how to construct your own working, MeMa prototype and shell is available in the [wiki](https://github.com/tobybenjaminclark/mema/wiki), and the `.stl` files are available in `/modelbank/`. This section is only going to overview setting up the virtual prototype.
 
 **Operating System Dependencies**<br>
 MeMa 3.1 is currently available to deploy on Linux devices. Developed on [Ubuntu 22.04.2 LTS](https://releases.ubuntu.com/jammy/), this is the reccommended system. As MeMa should be used as a standalone device, it's **reccommended to use this version of Ubuntu** to avoid any errors.
