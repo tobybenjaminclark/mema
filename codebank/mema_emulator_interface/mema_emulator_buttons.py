@@ -22,6 +22,10 @@ class emulator_buttons():
         """
         Initializes the `emulator_buttons` object and creates the Tkinter application.
         """
+
+        self.show_debug_messages: bool
+        self.show_debug_messages = show_debug_messages
+
         self.master: Tk = Tk()
         self.master.title("MeMa Buttons")
         self.master.geometry("200x800")
@@ -49,7 +53,7 @@ class emulator_buttons():
         """
 
         # Print debug message (if relevant)
-        if(self.show_debug_messages): print(f"button {button_index} was pressed")
+        if(self.show_debug_messages): print(f"mema_emulator_buttons: button ({button_index}) was pressed")
 
     def create_buttons(self) -> None:
         """
