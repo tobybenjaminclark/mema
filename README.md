@@ -21,9 +21,9 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][https://github.com/tobybenjaminclark/mema/issues]
+[![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][https://uk.linkedin.com/in/toby-clark-14350815a?original_referer=https%3A%2F%2Fwww.google.com%2F]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -90,7 +90,7 @@ In summary, the **Memory Machine provides a robust and inclusive solution for st
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Setup & Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
@@ -126,22 +126,6 @@ PIP (or pip) is Pythons package manager which we will later use to install furth
 **Python Packages/Libraries**<br>
 Several libraries are required to run MeMa, these are available in `requirements.txt` in the main repository. PIP will be able to perform a **one-line install of all package dependencies** using the following command. More information about the required packages is available in the [wiki](https://github.com/tobybenjaminclark/mema/wiki).
 > `pip install -r 'requirements.txt'`
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/mema.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -230,11 +214,11 @@ Project Link: [https://github.com/github_username/mema](https://github.com/githu
 [stars-shield]: https://img.shields.io/github/stars/github_username/mema.svg?style=for-the-badge
 [stars-url]: https://github.com/github_username/mema/stargazers
 [issues-shield]: https://img.shields.io/github/issues/github_username/mema.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/mema/issues
+[issues-url]: https://github.com/tobybenjaminclark/mema/issues
 [license-shield]: https://img.shields.io/github/license/github_username/mema.svg?style=for-the-badge
 [license-url]: https://github.com/github_username/mema/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://uk.linkedin.com/in/toby-clark-14350815a?original_referer=https%3A%2F%2Fwww.google.com%2F
 [product-screenshot]: images/screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
