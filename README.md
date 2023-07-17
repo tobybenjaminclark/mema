@@ -136,6 +136,7 @@ See the [open issues](https://github.com/github_username/mema/issues) for a full
 ## Contact
 
 **Toby Benjamin Clark**
+Happy to help with any queries/implementation concerns. Please contact me by one of the below methods explaining the issue that you are facing and I will get back to you as soon as possible with assistance.
 <p align = "left">
 <a href="https://github.com/tobybenjaminclark/">GitHub</a>
 ·
