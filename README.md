@@ -48,8 +48,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-![Product Name Screen Shot](imagebank/prototype_digital/prototype_digital_preliminary_version_two.png)
+  <a href="https://github.com/tobybenjaminclark/mema">
+    <img src="imagebank/prototype_digital/prototype_digital_preliminary_version_two.png" alt="Logo" width="300" height="200">
+  </a>
 
 The **Memory Machine/MeMa** represents a device specifically engineered to serve as an extensive memory repository, catering to the *unique needs of older adults*. With a paramount focus on **accessibility** and **usability**, this innovative solution enables individuals to **store and safeguard their treasured memories** through a user-friendly interface. The Memory Machine seamlessly integrates advanced technologies, including `Text-to-Speech (TTS)`` utilizing [gTTS](https://gtts.readthedocs.io/en/latest/), [speech recognition](https://pypi.org/project/SpeechRecognition/), and [facial recognition](https://pypi.org/project/face-recognition/), thereby enhancing the overall user experience and facilitating effortless interaction with the device.
 
