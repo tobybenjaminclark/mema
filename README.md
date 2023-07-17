@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/tobybenjaminclark/mema">
-    <img src="imagebank/mema_logo.png" alt="Logo" width="300" height="150">
+    <img src="imagebank/mema_logo.png" alt="Logo" width="300" height="200">
   </a>
 
 <h3 align="center">Memory Machine (MeMa)</h3>
@@ -28,10 +28,10 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-project">Project Vision</a>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#setup-&-getting-started">Setup & Installation</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -100,6 +100,9 @@ PIP (or pip) is Pythons package manager which we will later use to install furth
 **Python Packages/Libraries**<br>
 Several libraries are required to run MeMa, these are available in `requirements.txt` in the main repository. PIP will be able to perform a **one-line install of all package dependencies** using the following command. More information about the required packages is available in the [wiki](https://github.com/tobybenjaminclark/mema/wiki).
 > `pip install -r 'requirements.txt'`
+
+### Installation
+In terms of installation, MeMa is easy to run and setup. Simply run the file at `codebank/mema_main_window.py`, this should setup and start the program. To create a new user, simply say 'new'.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
