@@ -97,19 +97,36 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+MeMa has several dependencies that are going to be listed under this section. 
 
-**Python 3.11.4, PI & Tkinter Dependency**<br>
-Firstly, update the system repository using the following<br>
+**Operating System Dependencies**<br>
+MeMa 3.1 is currently available to deploy on Linux devices. Developed on [Ubuntu 22.04.2 LTS](https://releases.ubuntu.com/jammy/), this is the reccommended system. As MeMa should be used as a standalone device, it's **reccommended to use this version of Ubuntu** to avoid any errors.
+
+There is no current support for **macOS** or **Windows** compatiable versions of MeMa, however with the current libraries this is possible to add.
+
+**Device & Hardware Dependencies**<br>
+MeMa 3.1 has several device-specific dependencies. These are pretty straight-forward, the device should contain the following:
+* **Webcam/Camera** (Higher Quality for better Facial Recognition)
+* **Microphone** (Higher Quality for better Speech Recognition)
+* **Speaker**
+
+In terms of processing-specific requirements, currently MeMa is too demanding to run on small embedded systems such as **Raspberry Pi**, and it is reccommended to run MeMa on a mini-pc inside of the operating shell.
+
+**Python 3.11.4, PI & Tkinter Dependencies**<br>
+It's important that your **system repository** is up to date, firstly run the following command to update any new package data.<br>
 > `sudo apt-get update`<br>
-Now do this
 
+Now we must install Python 3.8, Tkinter and PIP. Tkinter is a graphics framework that comes as part of the standard library for the macOS and Windows versions of Python, however the Linux release does not include this base.
+
+PIP (or pip) is Pythons package manager which we will later use to install further dependencies and libraries, such as **opencv**, **pillow** and **face_recognition**. For now, run the following 3 commands to install Python 3.8, PIP and Tkinter.
 > `sudo apt-get install python3.8`<br>
 > `sudo apt install python3-pip'`<br>
 > `sudo apt-get install python3.8-tk`
 
-**Python Packages**
-> These are listed in 
+**Python Packages/Libraries**<br>
+Several libraries are required to run MeMa, these are available in `requirements.txt` in the main repository. PIP will be able to perform a **one-line install of all package dependencies** using the following command. More information about the required packages is available in the [wiki](https://github.com/tobybenjaminclark/mema/wiki).
+> `pip install -r 'requirements.txt'`
+
 ### Installation
 
 1. Get a free API Key at [https://example.com](https://example.com)
