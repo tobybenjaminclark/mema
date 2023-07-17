@@ -88,18 +88,18 @@ In terms of processing-specific requirements, currently MeMa is too demanding to
 
 **Python 3.11.4, PI & Tkinter Dependencies**<br>
 It's important that your **system repository** is up to date, firstly run the following command to update any new package data.<br>
-> `sh sudo apt-get update`<br>
+`sudo apt-get update`<br>
 
 Now we must install Python 3.8, Tkinter and PIP. Tkinter is a graphics framework that comes as part of the standard library for the macOS and Windows versions of Python, however the Linux release does not include this base.
 
 PIP (or pip) is Pythons package manager which we will later use to install further dependencies and libraries, such as **opencv**, **pillow** and **face_recognition**. For now, run the following 3 commands to install Python 3.8, PIP and Tkinter.
-> `sh sudo apt-get install python3.8`<br>
-> `sh sudo apt install python3-pip'`<br>
-> `sh sudo apt-get install python3.8-tk`
+`sudo apt-get install python3.8`<br>
+`sudo apt install python3-pip'`<br>
+`sudo apt-get install python3.8-tk`
 
 **Python Packages/Libraries**<br>
 Several libraries are required to run MeMa, these are available in `requirements.txt` in the main repository. PIP will be able to perform a **one-line install of all package dependencies** using the following command. More information about the required packages is available in the [wiki](https://github.com/tobybenjaminclark/mema/wiki).
-> `sh pip install -r 'requirements.txt'`
+`sh pip install -r 'requirements.txt'`
 
 ### Installation
 In terms of installation, MeMa is easy to run and setup. Simply run the file at `codebank/mema_main_window.py`, this should setup and start the program. To create a new user, simply say 'new'.
