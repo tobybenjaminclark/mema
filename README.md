@@ -93,8 +93,8 @@ It's important that your **system repository** is up to date, firstly run the fo
 Now we must install Python 3.8, Tkinter and PIP. Tkinter is a graphics framework that comes as part of the standard library for the macOS and Windows versions of Python, however the Linux release does not include this base.
 
 PIP (or pip) is Pythons package manager which we will later use to install further dependencies and libraries, such as **opencv**, **pillow** and **face_recognition**. For now, run the following 3 commands to install Python 3.8, PIP and Tkinter.
-> sudo apt-get install python3.8<br>
-> sudo apt install python3-pip'<br>
+> sudo apt-get install python3.8
+> sudo apt install python3-pip
 > sudo apt-get install python3.8-tk
 
 **Python Packages/Libraries**<br>
