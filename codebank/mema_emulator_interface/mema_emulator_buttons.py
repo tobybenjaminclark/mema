@@ -1,5 +1,18 @@
+
+# GUI library
+# tkinter is the standard GUI library for Python.
+# It is used in this code for creating the graphical user interface (GUI) elements.
+# The `*` import syntax imports all the public names defined in tkinter module.
+# Documentation: https://docs.python.org/3/library/tkinter.html
 from tkinter import *
+
+# GUI Constants
+# These are used when setting parameters
 from tkinter.constants import BOTH, YES
+
+# Used to show union type hint
+# Union Type is when a type contains 2 things, in this case an Integer and a tk.Event,
+# which we can type with this library. (3.8 type-hints.)
 from typing import Union
 
 class emulator_buttons():
@@ -37,7 +50,7 @@ class emulator_buttons():
         window_height = self.master.winfo_height()
 
         self.canvas: Canvas
-        self.canvas = Canvas(self.master, height=window_height, width=window_width, bg="aqua")
+        self.canvas = Canvas(self.master, height=window_height, width=window_width, bg="white")
 
         self.create_buttons()
         self.master.bind("<Configure>", self.resize_canvas)
