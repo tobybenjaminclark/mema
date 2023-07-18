@@ -65,8 +65,11 @@ class emulator_scroller():
         self.moving = False
 
     def move_pointer(self, amount) -> None:
+
         while self.moving:
-            self.current_degree += amount
+            self.current_degree = self.current_degree +  amount
+            if(self.current_degree > 100): self.current_degree = 100
+            if(self.current_degree < 50): self.current_degree = 50
             bx, by = self.get_point_on_circle()
             print(bx, by)
             self.canvas.moveto("dial", bx-5, by-5)
