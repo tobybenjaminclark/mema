@@ -67,12 +67,13 @@ In summary, the **Memory Machine provides a robust and inclusive solution for st
 <!-- GETTING STARTED -->
 ## Setup & Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+MeMa can be setup on either
+1.  MeMa Shell (see [wiki](https://github.com/tobybenjaminclark/mema/wiki) for setup)
+2.  Linux Device with Physical Interface Emulators
 
 ### Prerequisites
 
-MeMa has several dependencies that are going to be listed under this section. Further information on how to construct your own working, MeMa prototype and shell is available in the [wiki](https://github.com/tobybenjaminclark/mema/wiki), and the `.stl` files are available in `/modelbank/`. This section is only going to overview setting up the virtual prototype.
+For both options, MeMa has several dependencies that are going to be listed under this section. Further information on how to construct your own working, MeMa Shell is available in the [wiki](https://github.com/tobybenjaminclark/mema/wiki), and the `.stl` files are available in `/modelbank/`. This section is only going to **overview setting up the virtual prototype**.
 
 **Operating System Dependencies**<br>
 MeMa 3.1 is currently available to deploy on Linux devices. Developed on [Ubuntu 22.04.2 LTS](https://releases.ubuntu.com/jammy/), this is the reccommended system. As MeMa should be used as a standalone device, it's **reccommended to use this version of Ubuntu** to avoid any errors.
@@ -85,7 +86,7 @@ MeMa 3.1 has several device-specific dependencies. These are pretty straight-for
 * **Microphone** (Higher Quality for better Speech Recognition)
 * **Speaker/Headphones** (Headphones are reccommended)
 
-In terms of processing-specific requirements, currently MeMa is too demanding to run on small embedded systems such as **Raspberry Pi**, and it is reccommended to run MeMa on a mini-pc inside of the operating shell. For a more-specific reccommended set of requirements, see below:
+In terms of processing-specific requirements, currently MeMa is too computationally demanding to run on small embedded systems such as **Raspberry Pi**, and it is reccommended to run MeMa on a mini-pc inside of the operating shell. For a more-specific reccommended set of requirements, see below:
 
 > `Recommended RAM: ` 8GB DDR4<br>
 > `Recommended CPU: ` Intel i5 (or equivalent) 4-Cores @2.4GHz<br>
@@ -117,14 +118,21 @@ In terms of installation, MeMa is easy to run and setup. Simply run the file at 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-* Make Account
-* Login
-* New Memory (image)
-* New Memory (video)
-* New Memory (label)
-* View Memory
+**Setting up an account with MeMa**<br>
+To start using **MeMa**, the user needs to create an account. The process can be initiated by saying the command `New` or selecting the `Make Account` option on the device's interface.  MeMa only needs the users **name** and a picture of their **face** to create an account.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+**Logging in to MeMa**<br>
+After creating an account, the user can log in using facial recognition. They need to **position their face in front of the camera**, and MeMa will **recognize their face and grant access to their account**. This is symbolized by a **white circle around the users face.** This system eliminates the need for remembering long and complicated passwords.
+
+**Creating Memories with MeMa**<br>
+Once logged in, the user can create new memories to store in MeMa. Within MeMa a **memory** is a *collection of associated data, such as videos, pictures and labels, centered around a past event or memory*. This is handled using **memory frames**. In MeMa, a **memory frame** a *slice* or *section* of a memory, think of it like a *segment of a photo-reel*, where the user can store a **picture** or **video** alongside a **label** or **caption**. One or more **memory frames** make up a **memory** within MeMa.
+
+>The user is able to **record live** using the devices camera and microphone, allowing the creation of **new memories** on the spot, or **digitize photograph memories**. Memories are captioned using **Speech Recognition**, the user simply talks about the memory, and MeMa will automatically transcribe and store the caption underneath the displayed memory.
+
+**Viewing Memories with MeMa**<br>
+Once memories are created and stored, the user can easily access and relive them. They can view their memories inside of MeMa, through its intuitive, easy-to-use interface. As a memory isn't just one photo, one video or one label; MeMa displays memories as **collections of data, together to emphasize remembering, reliving and reminiscing** on moments in he past.
+
+_For more examples, please refer to the [wiki](https://github.com/tobybenjaminclark/mema/wiki)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
