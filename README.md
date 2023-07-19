@@ -88,7 +88,9 @@ MeMa 3.1 has several device-specific dependencies. These are pretty straight-for
 In terms of processing-specific requirements, currently MeMa is too demanding to run on small embedded systems such as **Raspberry Pi**, and it is reccommended to run MeMa on a mini-pc inside of the operating shell. For a more-specific reccommended set of requirements, see below:
 
 > `Recommended RAM: ` 8GB DDR4<br>
-> `Recommended CPU: ` Intel i5 (or equivalent) 4-Cores @2.4GHz
+> `Recommended CPU: ` Intel i5 (or equivalent) 4-Cores @2.4GHz<br>
+> `Storage/HDD/SSD: ` 3GB of available space<br>
+>
 
 **Python 3.11.4, PI & Tkinter Dependencies**<br>
 It's important that your **system repository** is up to date, firstly run the following command to update any new package data.<br>
@@ -106,7 +108,7 @@ Several libraries are required to run MeMa, these are available in `requirements
 > pip install -r 'requirements.txt'
 
 ### Installation
-In terms of installation, MeMa is easy to run and setup. Simply run the file at `codebank/mema_main_window.py`, this should setup and start the program. To create a new user, simply say 'new'.
+In terms of installation, MeMa is easy to run and setup. Simply run the file at `codebank/mema_main_window.py` with the `--emulator` flag to show that you want to emulate the buttons. This should setup and start the program. To create a new user, simply say 'new'.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
