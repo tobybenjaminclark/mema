@@ -141,12 +141,19 @@ _For more examples, please refer to the [wiki](https://github.com/tobybenjamincl
 <!-- ROADMAP -->
 ## Features & Roadmap
 
+Current
 * Make Account
 * Login
 * New Memory (image)
 * New Memory (video)
 * New Memory (label)
 * View Memory
+
+Future
+* Exporting Memories as Videos (writing to DVD)
+* Recording of audio over memories (music etc...)
+* Full MeMa Shell
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
