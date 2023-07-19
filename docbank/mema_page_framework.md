@@ -11,4 +11,30 @@ MeMa's interface stucture is optimized around **ease of expansion** and **ease o
 > MeMa Pages are **created and hosted** within the `main_window` class, which essentially acts as an interface between the `io_handler` and the current `page`. The `main_window` is also responsible for **switching between pages** and controlling the `button_frame` and requests to the `button_frame` from the current `page`.
 
 # How to add a new page to the MeMa Framework?
-This is
+This is code:
+
+```python
+class content_new_user(content_frame):
+
+    def __init__(self, parent, *args, **kwargs)-> None:
+
+        # Calling the Superclass Constructor
+        content_frame.__init__(self, *args, **kwargs)
+
+        # Setting the parent of the Frame
+        self.parent = parent
+
+    def setup_gui(self) -> None:
+
+        # Create GUI elements here, since content_frame inherits directly
+        # from tk.Frame, we can set widget masters to self. e.g.
+        #
+        # label = Label(self, text = "Example")
+        # label.pack()
+
+    def callback(self, callback_request: dict[str:str]) -> None:
+
+        # Handle callback requests here
+    
+        pass
+```
