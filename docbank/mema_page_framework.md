@@ -11,10 +11,10 @@ MeMa's interface stucture is optimized around **ease of expansion** and **ease o
 > MeMa Pages are **created and hosted** within the `main_window` class, which essentially acts as an interface between the `io_handler` and the current `page`. The `main_window` is also responsible for **switching between pages** and controlling the `button_frame` and requests to the `button_frame` from the current `page`.
 
 # How to add a new page to the MeMa Framework?
-This is code:
+Creating a new page and adding it to MeMa is an easy-process. If you don't want to type out the functions, there is a boilerplate implementation of a MeMa page that can be expanded to any need.
 
 ```python
-class content_new_user(content_frame):
+class content_page_name(content_frame):
 
     def __init__(self, parent, *args, **kwargs)-> None:
 
@@ -24,6 +24,38 @@ class content_new_user(content_frame):
         # Setting the parent of the Frame
         self.parent = parent
 
+        # Declare any relevant use variables here.
+
+        self.update_buttons()
+        self.setup_gui()
+
+    def update_buttons(self) -> None:
+
+        # This is how to interface with the buttons frame in MeMa
+        #
+        # The index of the button represents the position so
+        # buttons[0] is at the top and buttons[3] is at the bottom.
+        #
+        # Each index has either:
+        #
+        #   1. Tuple representing the text that is displayed on the
+        #      button and the callback string.
+        #
+        #   2. MEMA_EMPTY_BUTTON, indicating the slot should be greyed
+        #      and no button should be displayed.
+        #
+        # Buttons are set using the parent.set_input(buttons, spoken)
+        # Where buttons is the array of name, callback tuples and spoken
+        # is a boolean representing whether to read the button name.
+        #
+
+        buttons: list[(str, str)] = [0, 0, 0, 0]
+        buttons[0] = ("Button One", "BUTTON_1_PRESSED")
+        buttons[1] = MEMA_EMPTY_BUTTON
+        buttons[2] = ("Button Three", "BUTTON_3_PRESSED")
+        buttons[3] = ("Button Four", "BUTTON_4_PRESSED")
+        self.parent.set_input(buttons, False)
+
     def setup_gui(self) -> None:
 
         # Create GUI elements here, since content_frame inherits directly
@@ -32,9 +64,24 @@ class content_new_user(content_frame):
         # label = Label(self, text = "Example")
         # label.pack()
 
+        pass
+
     def callback(self, callback_request: dict[str:str]) -> None:
 
-        # Handle callback requests here
-    
-        pass
+        # Handle callback requests here. More information about
+        # the callback request is available in the wiki
+
+        match callback_request["content"]:
+
+            case "BUTTON_1_PRESSED":
+                # Do something
+                pass
+
+            case "BUTTON_3_PRESSED":
+                # Do something
+                pass
+
+            case "BUTTON_4_PRESSED":
+                # Do something
+                pass
 ```
