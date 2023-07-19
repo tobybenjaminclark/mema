@@ -17,6 +17,8 @@ class emulator_scroller():
         
         self.master: Tk
         self.master = Tk()
+        self.master.title("Scroller Emulator")
+        self.master.configure(bg = "white")
 
         self.radius: int
         self.radius = 190 // 2
@@ -36,24 +38,26 @@ class emulator_scroller():
         self.canvas: Canvas
         self.canvas = Canvas(self.master, width = 200, height = 200, bg = "white")
         self.canvas.create_oval(10, 10, 190, 190, fill = "light grey")
+        self.canvas.create_oval(30, 30, 170, 170, fill = "black")
+        self.canvas.create_oval(32, 32, 168, 168, fill = "light grey")
 
         self.dial: int
         bx, by = self.get_point_on_circle()
-        self.dial = self.canvas.create_oval(bx-5,by-5,bx+5,by+5,fill="red", tags="dial")
+        self.dial = self.canvas.create_oval(bx-5,by-5,bx+5,by+5,fill="black", tags="dial")
 
         self.left_button: Button
-        self.left_button = Button(self.master)
+        self.left_button = Button(self.master, text = "<<<\nLeft", bg = "white", font = ("Arial Black", 16, "bold"))
         self.left_button.bind('<ButtonPress-1>',lambda event: self.start_pointer(-1))
         self.left_button.bind('<ButtonRelease-1>', lambda event: self.stop_moving())
-        self.left_button.pack(side = LEFT)
+        self.left_button.pack(side = LEFT, fill="both")
 
         self.canvas.pack(side = LEFT)
 
         self.right_button: Button
-        self.right_button = Button(self.master)
+        self.right_button = Button(self.master, text = ">>>\nRight", bg = "white", font = ("Arial Black", 16, "bold"))
         self.right_button.bind('<ButtonPress-1>',lambda event: self.start_pointer(1))
         self.right_button.bind('<ButtonRelease-1>', lambda event: self.stop_moving())
-        self.right_button.pack(side = LEFT)
+        self.right_button.pack(side = LEFT, fill="both")
 
         self.master.mainloop()
 
@@ -68,10 +72,10 @@ class emulator_scroller():
 
         while self.moving:
             self.current_degree = self.current_degree +  amount
-            if(self.current_degree > 100): self.current_degree = 100
-            if(self.current_degree < 50): self.current_degree = 50
+            if(self.current_degree > 350): self.current_degree = 350
+            if(self.current_degree < 10): self.current_degree = 10
             bx, by = self.get_point_on_circle()
-            print(bx, by)
+            print(bx, by, " : ", self.current_degree)
             self.canvas.moveto("dial", bx-5, by-5)
             self.master.update()
             self.master.after(10)
@@ -79,7 +83,7 @@ class emulator_scroller():
 
     def get_point_on_circle(self) -> None:
         # Convert the degree to radiansself.left_button: Button
-        radian = math.radians(self.current_degree)
+        radian = math.radians(self.current_degree + 90)
         
         # Calculate the coordinates of the point on the perimeter
         point_x = self.circle_x_position + self.radius * math.cos(radian)
