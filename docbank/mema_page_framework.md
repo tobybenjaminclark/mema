@@ -1,17 +1,19 @@
 # What is the MeMa Page Framework?
 MeMa's interface stucture is optimized around **ease of expansion** and **ease of modification**. Each `page` is it's own sub-class of the `content frame` superclass in `codebank/mema_content_frame.py`, and should be created in it's own file, similar to the [State Design Pattern](https://en.wikipedia.org/wiki/State_pattern), however instead of states, MeMa uses `pages`. This might bring the question ...
 
-#### What is a page in MeMa? Is it like a HTML Page?
+**What is a page in MeMa? Is it like a HTML Page?**
 > In MeMa, a **page** is a **frame** that displays content to the user. In order to **maintain integrity with expansion**, the MeMa Page Framework doesn't facilitate direct input through the page, as this can become inaccessible if there isn't a **direct physical button mapping.**<br><br>So, this in turn will beg the question: *How can I manage inputs?* Well, in the framework, inputs are handled through a simple `callback` function that will get called when a button gets pressed, the user says something or the dial is rotated on the machine. These are passed to the `page` through `json-style` dictionaries, representing what was done, and through what means.
 
-#### Why implement this through a framework?
+**Why implement this through a framework?**
 > The MeMa Page Framework has **several notable advantages over direct application design**, One of these is that the process of updating the buttons has been **abstracted to a single function** where you pass the new button names, callbacks and a boolean representing whether or not to read the new buttons aloud to the user.<br><br>The Framework still facilitates and caters for all [Tkinter](https://wiki.python.org/moin/TkInter) widgets, meaning that you can still access direct widget **creation, modification and deletion**. Alongside this, it helps maintain individual responsibility between pages, and ease of transition between pages. In short, **the page framework should make it fast and easy to expand on and add to the MeMa System**.
 
-#### Where is the control flow between pages handled?
+**Where is the control flow between pages handled?**
 > MeMa Pages are **created and hosted** within the `main_window` class, which essentially acts as an interface between the `io_handler` and the current `page`. The `main_window` is also responsible for **switching between pages** and controlling the `button_frame` and requests to the `button_frame` from the current `page`.
 
 # How to add a new page to the MeMa Framework?
-Creating a new page and adding it to MeMa is an easy-process. If you don't want to type out the functions, there is a boilerplate implementation of a MeMa page that can be expanded to any need.
+Creating a new page and adding it to MeMa is an easy-process. If you don't want to type out the functions, here is a **boilerplate implementation** of a MeMa page that can be expanded to any need below.
+
+Please **note** that this doesn't have imports, and will require both `codebank/mema_constants.py` and `codebank/mema_content_frame.py`. Imports aren't included in this boilerplate as they are relative and may differ dependent on where the file is located. See [here](https://docs.python.org/3/reference/import.html) for more information regarding imports in Python.
 
 ```python
 class content_page_name(content_frame):
@@ -85,3 +87,21 @@ class content_page_name(content_frame):
                 # Do something
                 pass
 ```
+
+**How can I manage button inputs?**
+This is marked in the boilerplate, but a more detailed explanation is as follows. When a `content_frame` is created, the first argument passed will always be the `parent`, which is a `main_window` instance. 
+
+```python
+buttons: list[(str, str)] = [0, 0, 0, 0]
+buttons[0] = ("Button One", "BUTTON_1_PRESSED")
+buttons[1] = MEMA_EMPTY_BUTTON
+buttons[2] = ("Button Three", "BUTTON_3_PRESSED")
+buttons[3] = ("Button Four", "BUTTON_4_PRESSED")
+self.parent.set_input(buttons, False)
+```
+
+Setting the button display is done through this class, by calling the `parent.set_input()` function. This takes 2 inputs: `buttons` and `spoken`. Buttons is a list of 4 tuples representing the buttons text and the callback, spoken is a `boolean` and represents whether the new buttons should be spoken aloud via `Text-To-Speech`
+
+The `buttons` parameter should consist of 4 tuples of type (`String`, `String`), where the first element represents the text to be displayed on the button and the second element is the string that will be passed to the callback when the button is pressed.
+
+> Please note that an empty button can be supplied by either passing a tuple of `(None, None)` or the `MEMA_EMPTY_BUTTON` constant. The button frame will detect this and leave a blank, grey space where that button slot would normally be.
