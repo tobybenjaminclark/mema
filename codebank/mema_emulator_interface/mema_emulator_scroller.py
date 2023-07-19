@@ -91,7 +91,7 @@ class emulator_scroller():
         self.canvas.create_oval(10, 10, 190, 190, fill="light grey")
         self.canvas.create_oval(30, 30, 170, 170, fill="black")
         self.canvas.create_oval(32, 32, 168, 168, fill="light grey")
-        self.canvas.pack(side=LEFT)
+        
 
     def create_dial(self) -> None:
         """
@@ -121,6 +121,10 @@ class emulator_scroller():
         self.left_button.bind('<ButtonPress-1>', lambda event: self.start_pointer(-1))
         self.left_button.bind('<ButtonRelease-1>', lambda event: self.stop_moving())
         self.left_button.pack(side=LEFT, fill="both")
+
+        # Packs the canvas (pre-requisite)
+        try: self.canvas.pack(side=LEFT)
+        except: print("mema_emulator_scroller: canvas was not created")
 
         # The button to rotate the dial right (clockwise).
         self.right_button: Button
@@ -152,7 +156,7 @@ class emulator_scroller():
 
         self.moving = False
 
-    def move_pointer(self, amount: int) -> None:
+    def move_pointer(self, amount: 1|-1) -> None:
         """
         Rotates the dial continuously in the given direction until movement is stopped.
 
