@@ -13,7 +13,11 @@ import math
 
 class emulator_scroller():
     """
-    A class to create a scroller emulator using Tkinter.
+    A class to create a scroller emulator using Tkinter. Rotates a dial in the centre of the window
+    using 2 buttons either side. Draws circle at the correct point on the radius representing the direction it is pointing.
+    When the button is pressed, it starts a loop increasing the degrees, when the button is released it is stopped,
+    that is why we are using .bind() instead of the passed kwarg 'command =', as we need to call separate functions
+    dependent on whether the button was pressed or released.
     """
 
     # Constants for the minimum and maximum degrees to limit the dial rotation.
