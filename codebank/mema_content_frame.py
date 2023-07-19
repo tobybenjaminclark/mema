@@ -20,7 +20,6 @@ class content_frame(Frame):
         """
         Callback method on the Superclass does nothing, just to prevent errors. This should be implemented in the subclass.
         """
-
         pass
 
         
