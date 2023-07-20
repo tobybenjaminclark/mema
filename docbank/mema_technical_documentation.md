@@ -10,11 +10,12 @@ Here is a description of the supplied functions within the Speech Recognition cl
 
 > <br>:warning: **Please do not call any of these functions directly**<br><br>
 
-```python
-recognize_speech_internal() -> str|None
-```
+<br>
 
->This function performs speech recognition using the Google Speech Recognition API. It listens on the microphone for speech and returns the recognized text as a `string`. If no speech is recognized or there is an error during the recognition process, it returns `None`.
+```python
+listen(input_queue: Queue, stop: bool) -> None
+```
+>Starts a thread to recognize speech. Recognized phrases are added to the parsed input queue, using the speech_recognition library.
 
 <br>
 
@@ -27,10 +28,10 @@ recognize_speech_thread(input_queue: Queue, stop: bool) -> None
 <br>
 
 ```python
-listen(input_queue: Queue, stop: bool) -> None
+recognize_speech_internal() -> str|None
 ```
 
->This function starts a thread to recognize speech. Recognized phrases are added to the parsed input queue using the speech_recognition library.
+>This function performs speech recognition using the Google Speech Recognition API. It listens on the microphone for speech and returns the recognized text as a `string`. If no speech is recognized or there is an error during the recognition process, it returns `None`.
 
 <br>
 
@@ -66,26 +67,7 @@ ERROR_HANDLER_FUNC(py_error_handler)
 
 <br>
 
-```python
-recognize_speech_internal() -> str|None
-```
 
->Uses the Speech Recognition Library to listen on the microphone and convert speech to text. Returns a string or None if no speech is recognized.
-
-<br>
-
-```python
-recognize_speech_thread(input_queue: Queue, stop:bool) -> None
-```
-
->Runs the speech recognition function inside of a `noalserr` context manager, which blocks ALSA warnings. When the function returns a phrase, it is added to the `input_queue`.
-
-<br>
-
-```python
-listen(input_queue: Queue, stop: bool) -> None
-```
->Starts a thread to recognize speech. Recognized phrases are added to the parsed input queue, using the speech_recognition library.
 
 # Text-To-Speech
 **MeMa's Text to Speech** uses the [gTTS (Google Text To Speech)](https://pypi.org/project/gTTS/) Library
