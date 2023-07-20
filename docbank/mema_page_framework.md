@@ -1,6 +1,9 @@
 # What is the MeMa Page Framework?
 MeMa's interface stucture is optimized around **ease of expansion** and **ease of modification**. Each `page` is it's own sub-class of the `content frame` superclass in `codebank/mema_content_frame.py`, and should be created in it's own file, similar to the [State Design Pattern](https://en.wikipedia.org/wiki/State_pattern), however instead of states, MeMa uses `pages`. This might bring the question ...
 
+### Common Questions & Answers
+Here are some common questions about the MeMa Page Framework, regarding how it works, and it's reasoning and advantages.
+
 **What is a page in MeMa? Is it like a HTML Page?**
 > In MeMa, a **page** is a **frame** that displays content to the user. In order to **maintain integrity with expansion**, the MeMa Page Framework doesn't facilitate direct input through the page, as this can become inaccessible if there isn't a **direct physical button mapping.**<br><br>So, this in turn will beg the question: *How can I manage inputs?* Well, in the framework, inputs are handled through a simple `callback` function that will get called when a button gets pressed, the user says something or the dial is rotated on the machine. These are passed to the `page` through `json-style` dictionaries, representing what was done, and through what means.
 
@@ -88,7 +91,7 @@ class content_page_name(content_frame):
                 pass
 ```
 
-**How can I manage button inputs?**
+### How can I manage button inputs?
 This is marked in the boilerplate, but a more detailed explanation is as follows. When a `content_frame` is created, the first argument passed will always be the `parent`, which is a `main_window` instance. 
 
 ```python
@@ -106,11 +109,15 @@ The `buttons` parameter should consist of 4 tuples of type (`String`, `String`),
 
 > Please note that an empty button can be supplied by either passing a tuple of `(None, None)` or the `MEMA_EMPTY_BUTTON` constant. The button frame will detect this and leave a blank, grey space where that button slot would normally be.
 
-**How can I transition between pages in the MeMa Framework?**<br>
+### How can I transition between pages in the MeMa Framework?
 Changing the screens content is an integral part of any application. The **MeMa Framework** has abstracted this proccess down to a **single function call** inside of the `main_application`/`parent`. Simply call `.switch_content(type, *args)` on the parent of the current page. This function supports `arguments` so that data can easily be transferred between pages. Here's a working example from `codebank/mema_content_memory_create_name.py`:
 
 ```python
 self.parent.switch_content(content_memory_create_home, mempath)
 ```
 
-> In this snippet, `content_memory_create_home` is the new page to be created, however we **do not pass in an instance of the class**, instead we pass the `type` instead. The **class is instantiated inside of** `main_window` **during the handling process.**
+In this snippet, `content_memory_create_home` is the new page to be created, however we **do not pass in an instance of the class**, instead we pass the `type` instead. The **class is instantiated inside of** `main_window` **during the handling process.** 
+
+> Please note that returning back to the main menu may cause a **circular dependency** within the codebase and there is a special command to do this, to avoid the circular dependency, this is `self.parent.reset_path()`, which resets the page back to the main menu.
+
+> Another note regarding page transitions is to always handle cleanup before calling `parent.reset_path` or `parent.switch_content` internal to the class. Contrary to popular belief, the `del` and `__del__` keywords in python aren't called when an object is explicitly deleted. We reccommend declaring a **specific destructor method** that will be called immediately before switching page.
