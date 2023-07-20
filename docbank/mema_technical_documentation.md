@@ -1,16 +1,14 @@
-# Accessibility Interface & Features
 
-## Facial Recognition
-**MeMa's Facial Recognition** uses the **[cv2](https://pypi.org/project/opencv-python/)** and **[face_recognition](https://pypi.org/project/face-recognition/)** library. The facial-recognition code was built upon  [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py).
-
-## Speech Recognition
+# Speech Recognition
 **MeMa's Speech Recognition** uses the [SpeechRecognition](https://pypi.org/project/SpeechRecognition/) library. The module at `codebank/mema_speech_recognition` provides a wrapper around the speech recognition library, which allows capturing audio from a microphone and converting it to text. The script makes use of the `speech_recognition` library (aliased as `sr`) for the speech recognition functionality. It also utilizes other Python modules for handling C data types, creating context managers, and managing threads, but this was **mainly done to mute [ASLA](https://www.alsa-project.org/wiki/Main_Page) Errors from spamming the terminal**, don't worry too much about that.
 
+### How to use Speech Recognition within your program
+Integrating **speech recognition** into your program is easy thanks to the [Mema Page Framework](https://github.com/tobybenjaminclark/mema/wiki/MeMa-Page-Framework), which will automatically transcribe and supply any spoken content through the `callback` function. This allows developers to avoid the stress of having to directly interface and use the speech recognition functional interface (below). More information on how to detect speech recognition requests and allocate for them is available in the [Mema Page Framework Wiki](https://github.com/tobybenjaminclark/mema/wiki/MeMa-Page-Framework)
 
 ### Speech Recognition Functional Interface
 Here is a description of the supplied functions within the Speech Recognition class. **These should not be used directly, instead through the `callback` function on the mema page instance.** This is just here in-case someone needs to modify the internal workings of the speech recognition process.
 
-> :warning: **Please do not call any of these functions directly**
+> <br>:warning: **Please do not call any of these functions directly**<br><br>
 
 ```python
 recognize_speech_internal() -> str|None
@@ -89,5 +87,8 @@ listen(input_queue: Queue, stop: bool) -> None
 ```
 >Starts a thread to recognize speech. Recognized phrases are added to the parsed input queue, using the speech_recognition library.
 
-## Text-To-Speech
+# Text-To-Speech
 **MeMa's Text to Speech** uses the [gTTS (Google Text To Speech)](https://pypi.org/project/gTTS/) Library
+
+# Facial Recognition
+**MeMa's Facial Recognition** uses the **[cv2](https://pypi.org/project/opencv-python/)** and **[face_recognition](https://pypi.org/project/face-recognition/)** library. The facial-recognition code was built upon  [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py).
