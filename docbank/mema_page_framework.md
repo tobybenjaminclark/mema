@@ -105,3 +105,12 @@ Setting the button display is done through this class, by calling the `parent.se
 The `buttons` parameter should consist of 4 tuples of type (`String`, `String`), where the first element represents the text to be displayed on the button and the second element is the string that will be passed to the callback when the button is pressed.
 
 > Please note that an empty button can be supplied by either passing a tuple of `(None, None)` or the `MEMA_EMPTY_BUTTON` constant. The button frame will detect this and leave a blank, grey space where that button slot would normally be.
+
+**How can I transition between pages in the MeMa Framework?**<br>
+Changing the screens content is an integral part of any application. The **MeMa Framework** has abstracted this proccess down to a **single function call** inside of the `main_application`/`parent`. Simply call `.switch_content(type, *args)` on the parent of the current page. This function supports `arguments` so that data can easily be transferred between pages. Here's a working example from `codebank/mema_content_memory_create_name.py`:
+
+```python
+self.parent.switch_content(content_memory_create_home, mempath)
+```
+
+> In this snippet, `content_memory_create_home` is the new page to be created, however we **do not pass in an instance of the class**, instead we pass the `type` instead. The **class is instantiated inside of** `main_window` **during the handling process.**
