@@ -2,7 +2,7 @@
 # Speech Recognition
 **MeMa's Speech Recognition** uses the [SpeechRecognition](https://pypi.org/project/SpeechRecognition/) library. The module at `codebank/mema_speech_recognition` provides a wrapper around the speech recognition library, which allows capturing audio from a microphone and converting it to text. The script makes use of the `speech_recognition` library (aliased as `sr`) for the speech recognition functionality. It also utilizes other Python modules for handling C data types, creating context managers, and managing threads, but this was **mainly done to mute [ASLA](https://www.alsa-project.org/wiki/Main_Page) Errors from spamming the terminal**, don't worry too much about that.
 
-### How to use Speech Recognition within your program
+### How to use Speech Recognition within your page
 Integrating **speech recognition** into your program is easy thanks to the [Mema Page Framework](https://github.com/tobybenjaminclark/mema/wiki/MeMa-Page-Framework), which will automatically transcribe and supply any spoken content through the `callback` function. This allows developers to avoid the stress of having to directly interface and use the speech recognition functional interface (below). More information on how to detect speech recognition requests and allocate for them is available in the [Mema Page Framework Wiki](https://github.com/tobybenjaminclark/mema/wiki/MeMa-Page-Framework)
 
 ### Speech Recognition Functional Interface
@@ -75,6 +75,11 @@ ERROR_HANDLER_FUNC(py_error_handler)
 
 # Text-to-Speech
 **MeMa's Text to Speech** uses the [gTTS (Google Text To Speech)](https://pypi.org/project/gTTS/) Library, The module provides functions to generate speech from input text and play it aloud using the [playsound](https://pypi.org/project/playsound/) library. The TTS is played asynchronously on a separate thread to allow concurrent execution of other parts of the program.
+
+### How to use Text-to-Speech within your Page
+Using the Mema TTS system is as simple as an `import` and a `function call`. Simply type `from mema_text_to_speech import * ` at the top of your program (this may differ dependent on file location), and then you can use the `speak` command directly. Just pass the text that you want spoken to the command, and it will be read aloud.
+
+> Please note that to read aloud the text when setting up a new button frame, this can be passed as the second argument in the `parent.update_buttons()` method call. The `spoken` argument, if `true` will automatically read aloud the new button names.
 
 ### Text-To-Speech Functional Interface
 
