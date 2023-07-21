@@ -70,18 +70,11 @@ ERROR_HANDLER_FUNC(py_error_handler)
 
 <br>
 
-
-
-# Text-To-Speech
-
-
 # Facial Recognition
 **MeMa's Facial Recognition** uses the **[cv2](https://pypi.org/project/opencv-python/)** and **[face_recognition](https://pypi.org/project/face-recognition/)** library. The facial-recognition code was built upon  [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py).
 
 # Text-to-Speech
 **MeMa's Text to Speech** uses the [gTTS (Google Text To Speech)](https://pypi.org/project/gTTS/) Library, The module provides functions to generate speech from input text and play it aloud using the [playsound](https://pypi.org/project/playsound/) library. The TTS is played asynchronously on a separate thread to allow concurrent execution of other parts of the program.
-
-It uses  to generate the spoken text and then 
 
 ### Text-To-Speech Functional Interface
 
@@ -101,9 +94,9 @@ speak_thread(text: str) -> None
 
 >:warning: This shouldn't be called directly, instead call the above `speak()` command.
 
-### Text-To-Speech Notes
-The [gTTS](https://pypi.org/project/gTTS/) library requires an internet connection to convert text to speech, as it relies on Google's Text-to-Speech service.
+### Text-To-Speech Sidenotes
+* The [gTTS](https://pypi.org/project/gTTS/) library requires an internet connection to convert text to speech, as it relies on Google's Text-to-Speech service. To **make this work offline**, switch to [pyttsx3](https://pypi.org/project/pyttsx3/).
 
-The **TTS** playback is executed asynchronously using [threads](https://docs.python.org/3/library/threading.html), allowing the rest of the program to continue running without waiting for speech playback to finish.
+* The **TTS** playback is executed asynchronously using [threads](https://docs.python.org/3/library/threading.html), allowing the rest of the program to **continue running without waiting** for speech playback to finish.
 
-The TTS module includes error handling for cases where the file generation or playback might fail. Any exceptions encountered during this process will be caught and printed, but the TTS functionality will not interrupt the rest of the program's execution.
+* The **TTS** module includes **error handling** for cases where the file generation or playback might fail. Any exceptions encountered during this process will be **caught and printed**, but the TTS functionality **will not interrupt** the rest of the program's execution.
