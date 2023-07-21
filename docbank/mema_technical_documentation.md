@@ -8,7 +8,7 @@ Integrating **speech recognition** into your program is easy thanks to the [Mema
 ### Speech Recognition Functional Interface
 Here is a description of the supplied functions within the Speech Recognition class. **These should not be used directly, instead through the `callback` function on the mema page instance.** This is just here in-case someone needs to modify the internal workings of the speech recognition process.
 
-> <br>:warning: **Please do not call any of these functions directly**<br><br>
+> <br>:warning: **Please do not call any of these functions directly**, instead use the `callback` function on your current page to allow speech recognition. (See [Mema Page Framework Wiki](https://github.com/tobybenjaminclark/mema/wiki/MeMa-Page-Framework))<br><br>
 
 <br>
 
@@ -34,6 +34,9 @@ recognize_speech_internal() -> str|None
 >This function performs speech recognition using the Google Speech Recognition API. It listens on the microphone for speech and returns the recognized text as a `string`. If no speech is recognized or there is an error during the recognition process, it returns `None`.
 
 <br>
+
+### Speech Recognition [ASLA](https://www.alsa-project.org/wiki/Main_Page) Warnings
+It's probably quite intimidating to look at this file because of the complicated, long-winded but working implementation to block [ASLA](https://www.alsa-project.org/wiki/Main_Page) from spamming the `stdout` with lot's of warnings. These really aren't integral to the programs function and just exist to essentially only silence [ASLA](https://www.alsa-project.org/wiki/Main_Page). If these are causing errors then it may be worth looking into this area.<br>
 
 ```python
 noalsaerr() -> None
@@ -70,7 +73,37 @@ ERROR_HANDLER_FUNC(py_error_handler)
 
 
 # Text-To-Speech
-**MeMa's Text to Speech** uses the [gTTS (Google Text To Speech)](https://pypi.org/project/gTTS/) Library
+
 
 # Facial Recognition
 **MeMa's Facial Recognition** uses the **[cv2](https://pypi.org/project/opencv-python/)** and **[face_recognition](https://pypi.org/project/face-recognition/)** library. The facial-recognition code was built upon  [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py).
+
+# Text-to-Speech
+**MeMa's Text to Speech** uses the [gTTS (Google Text To Speech)](https://pypi.org/project/gTTS/) Library, The module provides functions to generate speech from input text and play it aloud using the [playsound](https://pypi.org/project/playsound/) library. The TTS is played asynchronously on a separate thread to allow concurrent execution of other parts of the program.
+
+It uses  to generate the spoken text and then 
+
+### Text-To-Speech Functional Interface
+
+```python
+speak(text: str) -> None
+```
+
+> The `speak()` function provides a higher-level interface to the TTS capabilities. It converts the provided text into speech and plays it asynchronously on a separate thread using speak_thread(). The function handles error checking for an empty input string.
+
+<br>
+
+```python
+speak_thread(text: str) -> None
+```
+
+>This function generates speech from the provided input text using the [gTTS](https://pypi.org/project/gTTS/) library and plays it using [playsound](https://pypi.org/project/playsound/). The speech generation and playback occur in a separate thread to ensure concurrent execution, asynchronous to the main program.
+
+>:warning: This shouldn't be called directly, instead call the above `speak()` command.
+
+### Text-To-Speech Notes
+The [gTTS](https://pypi.org/project/gTTS/) library requires an internet connection to convert text to speech, as it relies on Google's Text-to-Speech service.
+
+The **TTS** playback is executed asynchronously using [threads](https://docs.python.org/3/library/threading.html), allowing the rest of the program to continue running without waiting for speech playback to finish.
+
+The TTS module includes error handling for cases where the file generation or playback might fail. Any exceptions encountered during this process will be caught and printed, but the TTS functionality will not interrupt the rest of the program's execution.

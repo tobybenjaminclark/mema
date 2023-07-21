@@ -13,6 +13,8 @@ Here are some common questions about the MeMa Page Framework, regarding how it w
 **Where is the control flow between pages handled?**
 > MeMa Pages are **created and hosted** within the `main_window` class, which essentially acts as an interface between the `io_handler` and the current `page`. The `main_window` is also responsible for **switching between pages** and controlling the `button_frame` and requests to the `button_frame` from the current `page`.
 
+<br>
+
 # How to add a new page to the MeMa Framework?
 Creating a new page and adding it to MeMa is an easy-process. If you don't want to type out the functions, here is a **boilerplate implementation** of a MeMa page that can be expanded to any need below.
 
