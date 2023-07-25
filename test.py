@@ -106,9 +106,6 @@ def create_memoryspace_video(memoryspace_path, output_path):
     if out is not None:
         out.release()
 
-
-
-
 if __name__ == "__main__":
     memoryspace_path = "databank/userbank_1/memoryspace_memory_in_the_park"  # Replace with the path to your memoryspace directory
     output_path = "output_video.mp4"
