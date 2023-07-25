@@ -101,6 +101,8 @@ Initializes the `facial_recognition` frame, starts video capture from the defaul
   - `callback`: A function to handle the recognized face names, the recognized face name gets passed to this.
   - `*args, **kwargs`: Additional arguments and keyword arguments to pass to the superclass constructor, can be modified to accept what is requested.
 
+<br>
+
 ### Facial Recognition Methods
 
 1. ```load_face_encodings(self)```
@@ -124,10 +126,14 @@ Initializes the `facial_recognition` frame, starts video capture from the defaul
 7. ```quit(self)```
     <br>Stops the facial recognition process and releases the webcam. It is called when the class is destroyed.
 
+<br>
+
 ### Destruction & Webcam Releasee
 The class destructor `__del__(self)` calls the `quit()` method to stop the facial recognition process and release the webcam. It's important to call this method before switching to the parent, as there are current misconceptions about the `del` keyword in Python3. `del` does not call the associated delete (`__repr__`) method, instead this is called during `garbage collection`. Essentially, call the `.quit()` command before envoking `switch_content` or `reset_path`.
 
 > :warning: **Failure to envoke the `quit()` command before exiting the current frame will misconfigure webcam streams and may break further pages that use this.**
+
+<br>
 
 ## Facial Recognition Sidenotes
 The face recognition process uses face images stored in the `databank` directory. Each user's face is represented by a separate folder containing a `header.json` file with user details and a `face.jpg` image containing the user's face. The recognized face names are passed to the specified `callback` function for further handling. Please refer to the provided documentation links for more details on the libraries used in this code.
