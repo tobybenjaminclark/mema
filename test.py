@@ -79,71 +79,138 @@ def get_labels(frame_paths: list[str]) -> dict[str, str]:
 
     return labels
 
-def create_black_screen_with_label(label, frame_size):
-    # Create a black screen with the label displayed at the center
-    blank_image = 0 * 255 * np.ones(shape=[frame_size[1], frame_size[0], 3], dtype=np.uint8)
-    
+def create_black_screen_with_label(label: str, frame_size: tuple[int, int]) -> np.ndarray:
+    """
+    Create a black screen with the label displayed at the center. This returns a numpy array representing the black
+    screen with the label displayed at the center. It takes the frame size (resolution) and label text as parameters.
+    """
+
+    # Create a black screen with the label displayed at the center.
+    # This lokos complicated, but it essentially is just a big array of zeroes, this makes the background black.
+    blank_image: np.NDArray[np._SCT@np.zeros]
+    blank_image = np.zeros(shape=[frame_size[1], frame_size[0], 3], dtype=np.uint8)
+
+    # Text is the label/caption to be displayed
+    text: str
     text = label
+
+    # Font to be displayed (Cv2 Constant)
+    font: int
     font = cv2.FONT_HERSHEY_SIMPLEX
+
+    # Font Scale
+    font_scale: float
     font_scale = 2.5
+
+    # Font Thickness
+    font_thickness: int
     font_thickness = 6
-    
+
+    # Get the size of the text and calculate its position to center it.
     (text_width, text_height), _ = cv2.getTextSize(text, font, font_scale, font_thickness)
+
+    # Text Screen Position
+    text_x: int
     text_x = int((frame_size[0] - text_width) / 2)
+
+    text_y: int
     text_y = int((frame_size[1] + text_height) / 2)
-    
-    cv2.putText(blank_image, text, (text_x, text_y), font, font_scale, (255, 255, 255), font_thickness)
-    
+
+    # Draw the text on the black screen.
+    cv2.putText(blank_image, text, (text_x, text_y), font, font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+
     return blank_image
 
-def create_memoryspace_video(memoryspace_path, output_path):
+def create_memoryspace_video(memoryspace_path: str, output_path: str) -> None:
+    """
+    Create a memoryspace video from the frames in the given memoryspace_path and save it to the output_path.
+    Each frame is displayed with its corresponding label centered at the bottom for a fixed duration.
+
+    Parameters:
+        memoryspace_path (str): The path to the memoryspace directory containing image and video frames.
+        output_path (str): The path where the resulting memoryspace video will be saved.
+    """
+    # Get the paths of image and video frames from the memoryspace directory
+    frame_paths: list[str]
     frame_paths = get_frame_paths(memoryspace_path)
+
+    # Sort frame paths based on their numeric order (assuming filenames have frame numbers)
     frame_paths.sort(key=lambda x: int(os.path.splitext(os.path.basename(x))[0].split("_")[0]))
+
+    # Get the labels for each frame using the frame paths
+    labels: dict[str, str]
     labels = get_labels(frame_paths)
 
-    frame_size = None
-    fps = 30.0
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = None
+    # Variable to store frame size
+    frame_size: tuple[int, int]
+    frame_size = None  
 
+    # Frames per second for the output video
+    fps: float
+    fps = 30.0  
+
+    # Video codec for the output video (Not sure the type of this?)
+    fourcc : any
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
+
+    # VideoWriter object for writing the output video
+    out: cv2.VideoWriter
+    out = None  
+
+    # Iterate through each frame in the sorted frame_paths list
     for frame_path in frame_paths:
+
+        # Get the corresponding label for the frame
         frame_number, _ = os.path.splitext(os.path.basename(frame_path))
         frame_number = frame_number.split("_")[0]
-        print(frame_number)
-        label = labels.get(frame_number, "")
-        print(label)
+        label: str = labels.get(frame_number, "")  
+
+        # Check if the frame is an image or video and load it accordingly
         if frame_path.endswith(".mp4"):
             cap = cv2.VideoCapture(frame_path)
             ret, frame = cap.read()
         else:
             frame = cv2.imread(frame_path)
 
+        # If frame_size is not set, set it to the size of the first frame and initialize VideoWriter
         if frame_size is None:
             frame_size = (frame.shape[1], frame.shape[0])
             out = cv2.VideoWriter(output_path, fourcc, fps, frame_size)
 
         # Create a black screen with the label for LABEL_DURATION seconds
-        blank_frame = create_black_screen_with_label(label, frame_size)
-        label_duration_frames = int(fps * LABEL_DURATION)
+        blank_frame: np.ndarray = create_black_screen_with_label(label, frame_size)
+        label_duration_frames: int = int(fps * LABEL_DURATION)
+        
+        # Write the black screen with the label to the output video for LABEL_DURATION seconds
         for _ in range(label_duration_frames):
             out.write(blank_frame)
 
-        # Resize frame to the standard size
+        # Resize the frame to the standard size
         frame = cv2.resize(frame, frame_size)
 
         # Add label text to the frame
         text = label
         font = cv2.FONT_HERSHEY_SIMPLEX
-        font_scale = 2.5
-        font_thickness = 6
+        font_scale: float = 2.5
+        font_thickness: int = 6
 
+        # Get Text Size
         (text_width, text_height), _ = cv2.getTextSize(text, font, font_scale, font_thickness)
-        text_x = int((frame.shape[1] - text_width) / 2)
-        text_y = frame.shape[0] - int(text_height * 1.5)  # Place text at the bottom center
 
+        # Place text at the bottom center
+        text_x: int
+        text_x = int((frame.shape[1] - text_width) / 2)
+        text_y: int
+        text_y = = frame.shape[0] - int(text_height * 1.5)  
+
+        # Write the label text on the frame
         cv2.putText(frame, text, (text_x, text_y), font, font_scale, (255, 255, 255), font_thickness)
 
+        # Write the frame to the output video for FRAME_CONSTANT seconds
+        duration: int
         duration = int(fps * FRAME_CONSTANT)
+
+        # Write to outfile
         for _ in range(duration):
             out.write(frame)
 
@@ -151,7 +218,7 @@ def create_memoryspace_video(memoryspace_path, output_path):
         if frame_path.endswith(".mp4"):
             cap.release()
 
-    # Release the VideoWriter
+    # Release the VideoWriter object
     if out is not None:
         out.release()
 
