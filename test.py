@@ -5,28 +5,77 @@ import numpy as np
 FRAME_CONSTANT = 5  # Duration in seconds to display each frame
 LABEL_DURATION = 1
 
-def get_frame_paths(memoryspace_path):
-    frame_paths = []
+def get_frame_paths(memoryspace_path: str) -> list[str]:
+    """
+    Get paths of image and video files that contain 'content' in their filename from the specified memoryspace. This essentially
+    collects the videos and images in a memorybank, and returns them as a list of paths (strings)
+    """
+    frame_paths: list[str]
+    frame_paths = []  # Initialize an empty list to store the paths of matching files.
+
+    # os.walk generates the file names in a directory tree
+    # root (str): The current directory being visited
+    # dirs (List[str]): A list of subdirectories in the current directory
+    # files (List[str]): A list of files in the current directory 
     for root, _, files in os.walk(memoryspace_path):
+
+        # Iterate through the files in the current directory.
         for file in files:
+            
+            # Check if the file ends with .jpeg, .jpg, or .mp4 AND contains 'content' in its filename.
             if file.endswith((".jpeg", ".jpg", ".mp4")) and "content" in file:
+                
+                # Construct the full path of the file by joining the current root directory with the filename.
+                frame_path: str
                 frame_path = os.path.join(root, file)
+                
+                # Append the file path to the list of frame_paths.
                 frame_paths.append(frame_path)
-
+                
+    # Return the list of file paths for image and video files containing 'content' in their filenames.
     return frame_paths
+    
 
-def get_labels(frame_paths):
-    labels = {}
+
+def get_labels(frame_paths: list[str]) -> dict[str, str]:
+    """
+    Process label files for each frame in the given list of frame_paths and return a dictionary
+    containing frame numbers as keys and their corresponding labels as values.
+    """
+
+    # Initialize an empty dictionary to store frame numbers and labels.
+    labels: dict[str, str]
+    labels = {}  
+
     print("Processing Labels")
+    
+    # For each frame 
     for frame_path in frame_paths:
+
+        # Extract the frame number from the file name by removing the extension and splitting by underscore.
         frame_number, _ = os.path.splitext(os.path.basename(frame_path))
         frame_number = frame_number.split("_")[0]
+
+        # Create the path for the corresponding label file based on the frame number.
         label_path = os.path.join(os.path.dirname(frame_path), f"{frame_number}_label.txt")
+
+        # Check existence, then open.
         if os.path.exists(label_path):
-            with open(label_path, 'r') as f:
-                label = f.read().strip()
-                labels[frame_number] = label
-                print(f"\tFrame: '{frame_number}' is '{label}'")
+            
+            # Open the label file
+            label_file = open(label_path, 'r')
+
+            # Read the label from the label file and strip any leading/trailing whitespaces.
+            label = label_file.read().strip()
+
+            # Store the frame number as the key and its corresponding label as the value in the 'labels' dictionary.
+            labels[frame_number] = label
+
+            # Print the processing status for this frame.
+            print(f"\tFrame: '{frame_number}' is '{label}'")
+
+            # Close that label file
+            label_file.close()
 
     return labels
 
