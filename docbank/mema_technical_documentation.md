@@ -172,3 +172,46 @@ speak_thread(text: str) -> None
 * The **TTS** playback is executed asynchronously using [threads](https://docs.python.org/3/library/threading.html), allowing the rest of the program to **continue running without waiting** for speech playback to finish.
 
 * The **TTS** module includes **error handling** for cases where the file generation or playback might fail. Any exceptions encountered during this process will be **caught and printed**, but the TTS functionality **will not interrupt** the rest of the program's execution.
+
+<br>
+
+# Video Generation & Export
+This Python script, named "Memoryspace Video Creator," is designed to create a video from a collection of image and video frames contained in a memoryspace directory. Each frame is displayed along with its corresponding label centered at the bottom for a fixed duration. The resulting video is saved to the specified output path. **It does not handle the burning of the generated memorymovie to the disc.**.
+
+### Video Generation Functional Interface
+
+```python
+create_memoryspace_video(memoryspace_path: str, output_path: str) -> None
+```
+> This function creates a memoryspace video from the frames in the given `memoryspace_path` and saves it to the `output_path`. Each frame is displayed with its corresponding label centered at the bottom for a fixed duration.
+>- `memoryspace_path` (str): The path to the memoryspace directory containing image and video frames.
+>- `output_path` (str): The path where the resulting memoryspace video will be saved.<br>
+> <br>
+
+<br>
+
+```python
+get_frame_paths(memoryspace_path: str) -> list[str]
+```
+> This function takes a `memoryspace_path` as input, which is the path to the memoryspace directory containing image and video frames. It collects the paths of image and video files that contain 'content' in their filename from the specified memoryspace and returns them as a list of strings (file paths).
+
+<br>
+
+```python
+get_labels(frame_paths: list[str]) -> dict[str, str]
+```
+> This function processes label files for each frame in the given list of `frame_paths` and returns a dictionary containing frame numbers as keys and their corresponding labels as values.
+
+<br>
+
+```python
+create_black_screen_with_label(label: str, frame_size: tuple[int, int]) -> np.ndarray
+```
+> This function creates a black screen with the `label` displayed at the center. It returns a numpy array representing the black screen with the label displayed at the center. The `frame_size` is a tuple of two integers representing the resolution (width and height) of the frame.
+
+<br>
+
+### Video Generation Sidenotes
+The script's main part is located at the end and is executed when the script is run as the main program. It sets the `memoryspace_path` and `output_path`, and then calls the `create_memoryspace_video` function to create the memoryspace video.
+
+**Note:** The `mema_constants` module is assumed to be available and contains constant values for the `MEMA_EXPORT_LABEL_DURATION` and `MEMA_EXPORT_FRAME_CONSTANT`.

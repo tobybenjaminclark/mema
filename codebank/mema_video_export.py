@@ -25,9 +25,11 @@ def get_frame_paths(memoryspace_path: str) -> list[str]:
     Get paths of image and video files that contain 'content' in their filename from the specified memoryspace. This essentially
     collects the videos and images in a memorybank, and returns them as a list of paths (strings)
     """
-    frame_paths: list[str]
-    frame_paths = []  # Initialize an empty list to store the paths of matching files.
 
+    # Initialize an empty list to store the paths of matching files.
+    frame_paths: list[str]
+    frame_paths = []  
+    
     # os.walk generates the file names in a directory tree
     # root (str): The current directory being visited
     # dirs (List[str]): A list of subdirectories in the current directory
@@ -60,7 +62,7 @@ def get_labels(frame_paths: list[str]) -> dict[str, str]:
 
     # Initialize an empty dictionary to store frame numbers and labels.
     labels: dict[str, str]
-    labels = {}  
+    labels = {}     
 
     print("Processing Labels")
     
