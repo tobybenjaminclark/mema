@@ -49,3 +49,8 @@ MEMA_BUTTON_FONT:tuple[str,int,str] = ("Arial Black", 32, "bold")
 global MEMA_EMPTY_BUTTON
 MEMA_EMPTY_BUTTON: tuple[str|None, str|None]
 MEMA_EMPTY_BUTTON = (None, None)
+
+# Settings for mema video export
+global MEMA_EXPORT_FRAME_CONSTANT, MEMA_EXPORT_LABEL_DURATION
+MEMA_EXPORT_FRAME_CONSTANT = 5
+MEMA_EXPORT_LABEL_DURATION = 1

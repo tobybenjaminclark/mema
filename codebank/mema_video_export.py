@@ -1,9 +1,24 @@
+# Operating system interaction library
+# The 'os' module provides functions for interacting with the operating system.
+# It is used in this code for file and directory manipulation, such as listing files in a directory and checking file existence.
+# Documentation: https://docs.python.org/3/library/os.html
 import os
+
+# OpenCV library
+# The 'cv2' module is part of the OpenCV (Open Source Computer Vision) library, which is used for computer vision tasks.
+# It provides functionality for image and video processing, including reading video frames, resizing images, and adding text to frames.
+# OpenCV is used in this code for creating and manipulating video streams from image frames.
+# Documentation: https://docs.opencv.org/
 import cv2
+
+# Numerical operations library
+# The 'numpy' library provides functionality for numerical computations and array manipulation in Python.
+# It is used in this code for various numerical operations on arrays, such as resizing frames and processing image data.
+# Documentation: https://numpy.org/doc/
 import numpy as np
 
-FRAME_CONSTANT = 5  # Duration in seconds to display each frame
-LABEL_DURATION = 1
+# Generic MeMa Import
+from mema_constants import *
 
 def get_frame_paths(memoryspace_path: str) -> list[str]:
     """
@@ -179,7 +194,7 @@ def create_memoryspace_video(memoryspace_path: str, output_path: str) -> None:
 
         # Create a black screen with the label for LABEL_DURATION seconds
         blank_frame: np.ndarray = create_black_screen_with_label(label, frame_size)
-        label_duration_frames: int = int(fps * LABEL_DURATION)
+        label_duration_frames: int = int(fps * MEMA_EXPORT_LABEL_DURATION)
         
         # Write the black screen with the label to the output video for LABEL_DURATION seconds
         for _ in range(label_duration_frames):
@@ -208,7 +223,7 @@ def create_memoryspace_video(memoryspace_path: str, output_path: str) -> None:
 
         # Write the frame to the output video for FRAME_CONSTANT seconds
         duration: int
-        duration = int(fps * FRAME_CONSTANT)
+        duration = int(fps * MEMA_EXPORT_FRAME_CONSTANT)
 
         # Write to outfile
         for _ in range(duration):
