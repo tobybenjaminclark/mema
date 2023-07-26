@@ -148,6 +148,7 @@ Current
 * New Memory (video)
 * New Memory (label)
 * View Memory
+* Export Memory to Video
 
 Future
 * Exporting Memories as Videos (writing to DVD)
