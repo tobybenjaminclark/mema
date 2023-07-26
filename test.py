@@ -201,7 +201,7 @@ def create_memoryspace_video(memoryspace_path: str, output_path: str) -> None:
         text_x: int
         text_x = int((frame.shape[1] - text_width) / 2)
         text_y: int
-        text_y = = frame.shape[0] - int(text_height * 1.5)  
+        text_y = frame.shape[0] - int(text_height * 1.5)  
 
         # Write the label text on the frame
         cv2.putText(frame, text, (text_x, text_y), font, font_scale, (255, 255, 255), font_thickness)
