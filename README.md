@@ -38,8 +38,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#features-&-roadmap">Roadmap</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#roadmap">Features & Roadmap</a></li>
+    <li><a href="#contact">Contact Points</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -142,13 +142,14 @@ _For more examples, please refer to the [wiki](https://github.com/tobybenjamincl
 ## Features & Roadmap
 
 Current
-* Make Account
-* Login
-* New Memory (image)
-* New Memory (video)
-* New Memory (label)
-* View Memory
-* Export Memory to Video
+* **Account Creation** and **Management**.
+* **Facial-Recognition Login** System
+* Memory **Creation** and **Editing**
+* Recording **Video**
+* Recording **Images**
+* Recording **Labels**
+* **Viewing Memories**
+* **Video Generation** from **Memories**
 
 Future
 * Exporting Memories as Videos (writing to DVD)
@@ -160,7 +161,7 @@ Future
 
 
 <!-- CONTACT -->
-## Contact
+## Contact Points
 
 **Toby Benjamin Clark**<br>
 Happy to help with any queries/implementation concerns. Please contact me by one of the below methods explaining the issue that you are facing and I will get back to you as soon as possible with assistance.
