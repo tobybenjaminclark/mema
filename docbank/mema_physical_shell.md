@@ -10,4 +10,7 @@ There are 2 supplied mema models in the repository, a **whole-piece** model and 
 
 > :warning: If your 3D printer **does not support a large build plate**, you can break the model down furhter using [Blender](https://www.blender.org/). ([Tutorial](https://www.youtube.com/watch?v=moPDPB4MY2U)) Blender is a free, open-source, general purpose, 3D Modelling Software that can be used to split down a 3D model.
 
+### 4-Component Shell Guide
+![image](github.com/tobybenjaminclark/mema/imagebank/specifications/mema_diagram_physical_shell_print.png)
+
 # Internal Hardware
