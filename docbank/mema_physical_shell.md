@@ -2,7 +2,7 @@
 The MeMa Physical Shell is a physical deployment for the Memory Machine. It consists of a **3D Printed Shell** and **Internal Hardware**. This guide can be split up into essentially 2 sections, how to print the shell and how to connect the prototype.
 
 <p align="center">
-  <img src="https://github.com/tobybenjaminclark/mema/blob/main/imagebank/specifications/mema_diagram_physical_shell_topologies.png" />
+  <img src="https://github.com/tobybenjaminclark/mema/blob/main/imagebank/specifications/mema_diagram_physical_shell_angles.png" />
 </p>
 
 # 3D Printing the MeMa Shell
