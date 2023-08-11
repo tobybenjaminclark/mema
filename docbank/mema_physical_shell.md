@@ -11,6 +11,11 @@ There are 2 supplied mema models in the repository, a **whole-piece** model and 
 > :warning: If your 3D printer **does not support a large build plate**, you can break the model down furhter using [Blender](https://www.blender.org/). ([Tutorial](https://www.youtube.com/watch?v=moPDPB4MY2U)) Blender is a free, open-source, general purpose, 3D Modelling Software that can be used to split down a 3D model.
 
 ### 4-Component Shell Guide
-![image](https://github.com/tobybenjaminclark/mema/imagebank/specifications/mema_diagram_physical_shell_print.png)
+* This was the **tried and tested** method of printing the MeMa3 shell. It is **highly recommended** to print MeMa using this technique.
+* The models available to print this are available in `modelbank/`
+* This guide will provide settings for the [**Flashforge Creator-3**](https://www.flashforge.com/product-detail/1) 3D Printer, please tweak these settings according to your own individual setup
+<p align="center">
+  <img src="https://github.com/tobybenjaminclark/mema/blob/main/imagebank/specifications/mema_diagram_physical_shell_print.png" />
+</p>
 
 # Internal Hardware
