@@ -1,7 +1,9 @@
 # What is the MeMa Physical Prototype?
 The MeMa Physical Shell is a physical deployment for the Memory Machine. It consists of a **3D Printed Shell** and **Internal Hardware**. This guide can be split up into essentially 2 sections, how to print the shell and how to connect the prototype.
 
-
+<p align="center">
+  <img src="https://github.com/tobybenjaminclark/mema/blob/main/imagebank/specifications/mema_diagram_physical_shell_topologies.png" />
+</p>
 
 # 3D Printing the MeMa Shell
 The **MeMA 3D-Shell** was printed using [**PLA Plastic**](https://en.wikipedia.org/wiki/3D_printing_filament) on a [**Flashforge Creator-3**](https://www.flashforge.com/product-detail/1). The test-shell was printed using [GEEETECH Filament](https://www.geeetech.com/), with a nozzle temperature of 220°c and a build plate temperature of 65°c. However, these should be tweaked to your devices. settings. It is also reccommended to perform a test print beforehand, to avoid wasting large amounts of filament.
@@ -39,7 +41,7 @@ When printing MeMa, we used a total of **2 Reels (2kg)** of **GEEETECH PLA** Fil
 <br>
 
 ##### **4-Component Shell Reference Sheet**
-> :warning: **These settings should only be used for the 4-compartment large shell**. This is because other parts of the MeMa shell require more integrity and strength, hence requiring different infil types and percentages.
+> :warning: **These settings should only be used for the 4-compartment large shell**. This is because other parts of the MeMa shell require more integrity and strength, hence requiring different infil types and percentages. These should be visible in their dedicated, separate sections.
 <div align="center">
   <table class="center">
     <thead>
