@@ -1,12 +1,12 @@
 # Generic MeMa Imports
-from mema_content_frame import *
-from mema_facial_recognition import *
-from mema_text_to_speech import *
-from mema_content_new_user_photo import *
-from mema_data_access import *
-from mema_record_content import *
-from mema_content_memory_create_label import *
-from mema_content_memory_view import *
+from codebank.mema_content_frame import *
+from codebank.mema_facial_recognition import *
+from codebank.mema_text_to_speech import *
+from codebank.mema_content_new_user_photo import *
+from codebank.mema_data_access import *
+from codebank.mema_record_content import *
+from codebank.mema_content_memory_create_label import *
+from codebank.mema_content_memory_view import *
 
 import os
 from datetime import datetime, timezone

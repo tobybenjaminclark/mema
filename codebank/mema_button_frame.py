@@ -1,7 +1,7 @@
 # Generic MeMa Imports
-from mema_constants import *
-from mema_speech_recognition import *
-from mema_text_to_speech import *
+from codebank.mema_constants import *
+from codebank.mema_speech_recognition import *
+from codebank.mema_text_to_speech import *
 
 # GUI library
 # tkinter is the standard GUI library for Python.

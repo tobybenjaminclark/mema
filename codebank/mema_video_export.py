@@ -18,7 +18,7 @@ import cv2
 import numpy as np
 
 # Generic MeMa Import
-from mema_constants import *
+from codebank.mema_constants import *
 
 def get_frame_paths(memoryspace_path: str) -> list[str]:
     """

@@ -1,5 +1,5 @@
 # General MeMa Import
-from mema_constants import *
+from codebank.mema_constants import *
 
 # Library for speech recognition
 # The `speech_recognition` library (aliased as `sr`) provides functionality for speech recognition.

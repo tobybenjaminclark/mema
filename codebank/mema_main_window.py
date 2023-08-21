@@ -28,6 +28,11 @@ class main_window(Tk):
         self.io_queue = Queue()
         self.io_handler: io_handler = io_handler(self.button_frame, self.io_queue)
 
+    def start(self):
+        """
+        Starts the memory machine, called after external io_handler setup stuff (see memory_machine.py)
+        """
+        
         self.switch_content(content_login)
 
         # Mainloop (Overwritten as a method)

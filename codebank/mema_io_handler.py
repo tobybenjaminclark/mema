@@ -1,8 +1,8 @@
 from queue import Queue
 from threading import Thread
 
-from mema_button_frame import *
-from mema_speech_recognition import *
+from codebank.mema_button_frame import *
+from codebank.mema_speech_recognition import *
 
 class io_handler():
 
@@ -51,6 +51,13 @@ class io_handler():
 
         # Stops speech recognition thread
         self.stop_speech_recognition_thread = True
+
+    def get_button_input_queue(self) -> Queue:
+        """
+        Gets a reference to the button input queue used for external configuration
+        """
+
+        return self.button_input_queue
 
     def create_button_frame(self) -> None:
         """
