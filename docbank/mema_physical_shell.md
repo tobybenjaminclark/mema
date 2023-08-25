@@ -88,3 +88,33 @@ When printing MeMa, we used a total of **2 Reels (2kg)** of **GEEETECH PLA** Fil
 </div>
 
 # Internal Hardware
+MeMa requires a certain amount of processing power to run effectively. It also requires a few more external hardware components, that will be described in this section.
+
+#### Processing and Interfaces (What to run MeMa on)
+The Physical MeMa prototype was constructed using a **miniature PC** as the processing centre. In the future, this code could be modified to run on a **micro-controller** such as a **raspberry pi**. However, currently this is limited due to MeMa's **facial-recognition technology**.
+
+I will now go on to list the **processing requirements** of MeMa, essentially listing the reccommended system specifications to run MeMa on. Please note that the **codebase** can be modified and **further optimized** to run on systems with less processing power or RAM.
+
+> **Recommended RAM:** 8GB DDR4<br>
+> **Recommended CPU:** Intel i5 (or equivalent) 4-Cores @2.4GHz<br>
+> **Storage/HDD/SSD:** 3GB of available space<br>
+>
+<br>
+
+#### DVD/Disc External Peripheral
+In terms of the **DVD-Drive** we used an external USB DVD Drive that supports both **reading** and **writing** to a disc. This was **15cm by 15cm**, however we had to shave a small part of the front of the disc drive off the tray to easily open through the MeMa Slot.
+
+> :warning: Please note that the issue of alternate DVD Drive sizes can be **rectified by modifying the supplied MeMa Model**, dependent on your DVD Drive model and dimensions, however MeMa's design is **centred around forward-tray DVD Drives**, rather than ones that flip open allowing for top-down disc insertion. To do this, I would reccommend editing the model using **Blender** and the provided `.blend` files.
+
+# External Hardware (MeMa Tablet)
+The MeMa Tablet is the communication interface between the MeMa internal and the user, it provides **4 digital inputs**, a **display** and a **scaler input**. We constructed it using a **Bluefruit Feather Arduino** and some basic electronics.
+
+> External Display & Connecting Cables
+> Bluefruit Feather Arduino Microcontroller (supports USB)
+> 4x Digital Buttons & 4x 10oHm resistors
+> 1x Potentiometer (turning knob input)
+> Wires & Solder
+> 3D Printed MeMa Tablet Shell (see separate guide for this)
+
+### How to construct the MeMa Tablet
+Paragraph with diagrams
