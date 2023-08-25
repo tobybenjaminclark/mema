@@ -123,3 +123,6 @@ In this snippet, `content_memory_create_home` is the new page to be created, how
 > Please note that returning back to the main menu may cause a **circular dependency** within the codebase and there is a special command to do this, to avoid the circular dependency, this is `self.parent.reset_path()`, which resets the page back to the main menu.
 
 > Another note regarding page transitions is to always handle cleanup before calling `parent.reset_path` or `parent.switch_content` internal to the class. Contrary to popular belief, the `del` and `__del__` keywords in python aren't called when an object is explicitly deleted. We reccommend declaring a **specific destructor method** that will be called immediately before switching page.
+
+# Existing Content in the MeMa Page Framework
+This section will overview the state of the current codebase and should be updated if any changes are made. 
