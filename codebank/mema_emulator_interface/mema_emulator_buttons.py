@@ -47,7 +47,7 @@ class emulator_buttons():
         self.show_debug_messages: bool
         self.show_debug_messages = show_debug_messages
 
-        self.master: Tk = Tk()
+        self.master: Toplevel = Toplevel()
         self.master.title("MeMa Buttons")
         self.master.geometry("200x800")
 
@@ -65,7 +65,6 @@ class emulator_buttons():
 
         self.create_buttons()
         self.master.bind("<Configure>", self.resize_canvas)
-        self.master.mainloop()
 
     def callback(self, event: Union[Event, int], button_index: int) -> None:
         """
