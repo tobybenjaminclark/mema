@@ -173,7 +173,7 @@ Happy to help with any queries/implementation concerns. Please contact me by one
 <a href="mailto:tobybenjaminclark@gmail.com">Email</a>
 </p>
 
-Project Link: [https://github.com/github_username/mema](https://github.com/github_username/mema)
+Project Link: [https://github.com/tobybenjaminclark/mema](https://github.com/tobybenjaminclark/mema)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
