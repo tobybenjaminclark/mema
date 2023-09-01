@@ -1,5 +1,5 @@
 # General MeMa Imports
-from mema_constants import *
+from codebank.mema_constants import *
 
 # gTTS is Google's Text-To-Speech Library, you can install using pip --install gTTS
 # gTTS is used to play text aloud on the MeMa.

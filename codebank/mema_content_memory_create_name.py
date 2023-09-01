@@ -1,9 +1,9 @@
 # Generic MeMa Imports
-from mema_content_frame import *
-from mema_content_memory_create_home import *
-from mema_text_to_speech import *
-from mema_data_access import *
-from mema_constants import *
+from codebank.mema_content_frame import *
+from codebank.mema_content_memory_create_home import *
+from codebank.mema_text_to_speech import *
+from codebank.mema_data_access import *
+from codebank.mema_constants import *
 
 # GUI library
 # tkinter is the standard GUI library for Python.

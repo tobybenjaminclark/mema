@@ -1,11 +1,11 @@
 # Generic MeMa Imports
-from mema_content_frame import *
-from mema_facial_recognition import *
-from mema_text_to_speech import *
-from mema_content_new_user_photo import *
-from mema_data_access import *
-from mema_record_content import *
-from mema_content_memory_create_label import *
+from codebank.mema_content_frame import *
+from codebank.mema_facial_recognition import *
+from codebank.mema_text_to_speech import *
+from codebank.mema_content_new_user_photo import *
+from codebank.mema_data_access import *
+from codebank.mema_record_content import *
+from codebank.mema_content_memory_create_label import *
 
 # sys is a module that provides access to some variables used or maintained by the interpreter and to functions that interact with the interpreter
 # It is used in this code for error logging, achieved through writing to the stderr stream

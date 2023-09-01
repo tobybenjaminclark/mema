@@ -1,9 +1,10 @@
 # Generic MeMa Imports
-from mema_constants import *
-from mema_button_frame import *
-from mema_content_frame import *
-from mema_content_login import *
-from mema_io_handler import *
+from codebank.mema_constants import *
+from codebank.mema_button_frame import *
+from codebank.mema_content_frame import *
+from codebank.mema_content_login import *
+from codebank.mema_io_handler import *
+from codebank.mema_emulator_interface.mema_emulator_buttons import *
 
 # GUI library
 # tkinter is the standard GUI library for Python.
@@ -11,6 +12,16 @@ from mema_io_handler import *
 # The `*` import syntax imports all the public names defined in tkinter module.
 # Documentation: https://docs.python.org/3/library/tkinter.html
 from tkinter import *
+
+# Concurrency Library
+# Used to run emulator alongside the main window (if enabled)
+from threading import current_thread
+
+def setup_and_connect_emulator(mema: "main_window") -> None:
+
+    button_queue: Queue
+    button_queue = mema.io_handler.get_button_input_queue()
+    emulator = emulator_buttons(button_queue, False)
 
 class main_window(Tk):
 
@@ -20,13 +31,20 @@ class main_window(Tk):
         """
 
         # Call Superclass Constructor & setup
-        Tk.__init__(self, *args, **kwargs)
+        Tk.__init__(self)
         self.configure_tk_instance()
 
         # Handles Speech & Button presses
         self.io_queue: Queue
         self.io_queue = Queue()
         self.io_handler: io_handler = io_handler(self.button_frame, self.io_queue)
+
+        print(kwargs)
+
+        if "emulator" in kwargs and kwargs["emulator"] is True:
+            print("[memory_machine] : starting and linking emulation interface.")
+            setup_and_connect_emulator(self)
+            #Thread(target=setup_and_connect_emulator, daemon=True, args=(self)).start()
 
         self.switch_content(content_login)
 
@@ -111,5 +129,6 @@ class main_window(Tk):
         self.destroy()
         quit()
 
-x = main_window()
-quit()
+if __name__ == "__main__":
+    x = main_window()
+    quit()

@@ -15,6 +15,14 @@ from tkinter.constants import BOTH, YES
 # which we can type with this library. (3.8 type-hints.)
 from typing import Union
 
+# Queue library to import a queue data structure
+# thread safe queue to communicate button presses onto the main mema
+# thread.
+from queue import Queue
+
+# Generic MeMa Imports
+from codebank.mema_constants import *
+
 class emulator_buttons():
     """
     The `emulator_buttons` class creates a Tkinter application that displays a set of scalable buttons as circles on a canvas.
@@ -31,7 +39,7 @@ class emulator_buttons():
         resize_canvas(event): Callback function to regenerate the canvas when the window is resized.
     """
 
-    def __init__(self, show_debug_messages: bool = False) -> None:
+    def __init__(self, callback_queue: Queue, show_debug_messages: bool = False) -> None:
         """
         Initializes the `emulator_buttons` object and creates the Tkinter application.
         """
@@ -39,9 +47,12 @@ class emulator_buttons():
         self.show_debug_messages: bool
         self.show_debug_messages = show_debug_messages
 
-        self.master: Tk = Tk()
+        self.master: Toplevel = Toplevel()
         self.master.title("MeMa Buttons")
         self.master.geometry("200x800")
+
+        self.callback_queue: Queue
+        self.callback_queue = callback_queue
 
         window_width: int
         window_width = self.master.winfo_width()
@@ -54,7 +65,6 @@ class emulator_buttons():
 
         self.create_buttons()
         self.master.bind("<Configure>", self.resize_canvas)
-        self.master.mainloop()
 
     def callback(self, event: Union[Event, int], button_index: int) -> None:
         """
@@ -67,6 +77,13 @@ class emulator_buttons():
 
         # Print debug message (if relevant)
         if(self.show_debug_messages): print(f"mema_emulator_buttons: button ({button_index}) was pressed")
+
+        # Formulate request to send to IO Handler Thread
+        response: dict[str:any] = {}
+        response['input_type'] = MEMA_RESPONSES.BUTTON
+        response['content'] = button_index
+
+        self.callback_queue.put(response)
 
     def create_buttons(self) -> None:
         """

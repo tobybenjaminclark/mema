@@ -1,5 +1,5 @@
 # Generic MeMa Imports
-from mema_constants import *
+from codebank.mema_constants import *
 
 # GUI library
 # tkinter is the standard GUI library for Python.

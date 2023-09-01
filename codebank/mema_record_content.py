@@ -1,5 +1,5 @@
 # Generic MeMa Import
-from mema_content_frame import *
+from codebank.mema_content_frame import *
 
 # Numerical operations library
 # numpy (short for Numerical Python) provides functionality for numerical computations and array manipulation.

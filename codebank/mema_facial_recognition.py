@@ -1,5 +1,5 @@
 # Generic MeMa Import
-from mema_constants import *
+from codebank.mema_constants import *
 
 # Facial recognition library
 # face_recognition is a library for face recognition tasks.
